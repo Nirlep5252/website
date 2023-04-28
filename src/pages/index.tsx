@@ -5,14 +5,14 @@ import SocialLink from "@/components/sociallink";
 export default function Home() {
   return (
     <>
-      <div className="main-container h-screen w-screen flex items-center justify-evenly">
-        <div className="intro-container w-1/3 relative">
-          <div className="hey text-3xl text-gray-300 font-poppins">
+      <div className="main-container m-auto h-screen w-screen sm:w-3/4 flex-col sm:flex-row flex items-center justify-around">
+        <div className="intro-container w-10/12 sm:w-full relative">
+          <div className="hey text-2xl lg:text-3xl text-gray-300 font-poppins">
             hey, i'm
           </div>
-          <div className="h-32"></div>
+          <div className="h-20 md:h-24 lg:h-32"></div>
           <Nirlep />
-          <div className="z-10 about text-lg font-poppins text-gray-300">
+          <div className="z-10 about md:text-base text-sm lg:text-lg font-poppins text-gray-300">
             I'm a Computer Science student at Nirma University. <br />I love
             working on open source <UwULink href="/projects" text="projects" />,
             building web apps and APIs. <br />
@@ -20,7 +20,7 @@ export default function Home() {
             have been up to recently.
           </div>
         </div>
-        <div className="links-container flex items-center justify-center flex-col gap-2 w-1/12">
+        <div className="links-container flex items-center justify-center sm:flex-col gap-2 w-1/12">
           <SocialLink
             externalLink="https://github.com/nirlep5252"
             text="Github"
