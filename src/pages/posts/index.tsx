@@ -78,6 +78,10 @@ export async function getStaticProps() {
     }
   }
 
+  posts.sort((a, b) => {
+    return b.time - a.time;
+  })
+
   return {
     props: {
       posts,
