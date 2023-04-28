@@ -2,26 +2,117 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Red+Rose:wght@300;400;500;600;700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --bg: #202020;
+  --nir-delay: 25ms;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-start-rgb: 24, 24, 24;
+    --background-end-rgb: 24, 24, 24;
+    --bg: #202020;
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: white;
+  background: var(--bg);
+}
+
+.font-bruno-ace {
+  font-family: 'Bruno Ace SC', sans-serif;
+}
+.font-josefin-sans {
+  font-family: 'Josefin Sans', sans-serif;
+}
+.font-red-rose {
+  font-family: 'Red Rose', cursive;
+}
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+.font-roboto-slab {
+  font-family: 'Roboto Slab', serif;
+}
+
+.text-10xl {
+  font-size: 150px;
+}
+
+.uwu-link:hover .underline {
+  width: 100%;
+}
+.social-text {
+  transition: all .2s ease;
+  width: 0px;
+  height: 0px;
+  visibility: hidden;
+  opacity: 0;
+}
+.social-link:hover .social-text {
+  width: 4rem;
+  height: 100%;
+  visibility: visible;
+  opacity: 1;
+}
+
+#N {
+  animation: nirlep .5s ease-in-out;
+  animation-delay: calc(var(--nir-delay) * 1);
+}
+#I {
+  animation: nirlep .5s ease-in-out;
+  animation-delay: calc(var(--nir-delay) * 2);
+}
+#R {
+  animation: nirlep .5s ease-in-out;
+  animation-delay: calc(var(--nir-delay) * 3);
+}
+#L {
+  animation: nirlep .5s ease-in-out;
+  animation-delay: calc(var(--nir-delay) * 4);
+}
+#E {
+  animation: nirlep .5s ease-in-out;
+  animation-delay: calc(var(--nir-delay) * 5);
+}
+#P {
+  animation: nirlep .5s ease-in-out;
+  animation-delay: calc(var(--nir-delay) * 6);
+}
+
+@keyframes nirlep {
+  0% {
+    opacity: 0;
+    margin-top: 85px;
+  }
+  50% {
+    opacity: 1;
+    margin-top: 0px;
+    scale: 1.5;
+    margin-right: 40px;
+  }
+  100% {
+    margin-right: 0px;
+  }
+}
+
+.mdx-styles h1 {
+  @apply text-4xl font-bold my-2;
+}
+.mdx-styles h2 {
+  @apply text-2xl font-bold my-1;
+}
+.mdx-styles h3 {
+  @apply text-xl font-bold my-1;
+}
+.mdx-styles h4 {
+  @apply text-lg font-semibold my-1;
 }
