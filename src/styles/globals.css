@@ -116,3 +116,26 @@ body {
 .mdx-styles h4 {
   @apply text-lg font-semibold my-1;
 }
+
+.mdx-styles hr {
+  @apply my-3 bg-white bg-opacity-30 h-0.5 border-none;
+}
+.mdx-styles p {
+  @apply text-lg text-gray-300;
+}
+
+.post-back-btn:focus {
+  animation: shrink .2s ease;
+}
+
+@keyframes shrink {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

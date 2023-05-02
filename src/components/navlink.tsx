@@ -9,7 +9,7 @@ interface NavLinkProps {
 
 export default function NavLink(props: NavLinkProps) {
   return (
-    <Link className="z-50" href={props.href}>
+    <Link className="z-50 navlink" href={props.href}>
       <span className={`rounded-full px-5 py-2 z-50 bg-transparent}`}>
         {props.icon !== null ? props.icon : <></>}
         {props.text}

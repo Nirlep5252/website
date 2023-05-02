@@ -1,11 +1,13 @@
 import UwULink from "@/components/link";
 import Nirlep from "@/components/nirlep";
+import SEO from "@/components/seo";
 import SocialLink from "@/components/sociallink";
 
 export default function Home() {
   return (
     <>
       <div className="main-container m-auto h-screen w-screen sm:w-3/4 flex-col sm:flex-row flex items-center justify-around">
+        <SEO title="Nirlep" />
         <div className="intro-container w-10/12 sm:w-full relative">
           <div className="hey text-2xl lg:text-3xl text-gray-300 font-poppins">
             hey, i'm
@@ -16,11 +18,11 @@ export default function Home() {
             I'm a Computer Science student at Nirma University. <br />I love
             working on open source <UwULink href="/projects" text="projects" />,
             building web apps and APIs. <br />
-            Check out my <UwULink href="/posts" text="posts" /> to know what I
+            Check out my <UwULink external={false} href="/posts" text="posts" /> to know what I
             have been up to recently.
           </div>
         </div>
-        <div className="links-container flex items-center justify-center sm:flex-col gap-2 w-1/12">
+        <div className="links-container px-10 flex items-center justify-center sm:flex-col gap-2 w-1/12">
           <SocialLink
             externalLink="https://github.com/nirlep5252"
             text="Github"

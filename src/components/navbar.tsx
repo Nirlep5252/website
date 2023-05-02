@@ -1,4 +1,3 @@
-"use client"
 import { usePathname } from "next/navigation";
 import NavLink from "./navlink";
 import React from "react";
@@ -6,6 +5,7 @@ import React from "react";
 export default function Navbar() {
     let path = usePathname();
 
+    "use client"
     React.useEffect(() => {
         path = "/" + path.split("/")[1];
         const activeBg = document.getElementById("active-bg");

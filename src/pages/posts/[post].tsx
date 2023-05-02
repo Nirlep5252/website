@@ -3,6 +3,8 @@ import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { MDXRemote } from "next-mdx-remote";
 import Link from "next/link";
+import UwULink from "@/components/link";
+import SEO from "@/components/seo";
 
 interface Meta {
   title: string;
@@ -19,12 +21,18 @@ interface Props {
 }
 
 export default function Post(props: Props) {
+
+  const components = {
+    a: (props: any) => <UwULink {...props} text={props.children} external={true} />
+  }
+
   return (
     <div className="mdx-container flex justify-center">
+      <SEO title={props.post.meta.title} />
       <div className="mdx-styles w-3/5 m-auto absolute mt-32">
         <div className="title-section flex items-center gap-4 relative mb-12">
           <Link
-            className="border border-transparent rounded-full flex items-center justify-center hover:bg-gray-400 hover:bg-clip-padding hover:backdrop-filter hover:backdrop-blur-sm hover:bg-opacity-10 hover:border-gray-100 transition-all duration-200 ease-linear px-2 py-2"
+            className="border border-transparent rounded-full flex items-center justify-center hover:bg-gray-400 hover:bg-clip-padding hover:backdrop-filter hover:backdrop-blur-sm hover:bg-opacity-10 hover:border-gray-100 transition-all duration-200 ease-linear px-2 py-2 post-back-btn"
             href={`/posts/`}
           >
             <svg
@@ -50,7 +58,7 @@ export default function Post(props: Props) {
             {new Date(props.post.meta.time).toDateString()}
           </div>
         </div>
-        <MDXRemote {...props.post.mdxSource} />
+        <MDXRemote {...props.post.mdxSource} components={components} />
       </div>
     </div>
   );
