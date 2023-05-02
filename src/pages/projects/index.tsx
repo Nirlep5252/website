@@ -20,7 +20,7 @@ function Project(props: ProjectProps) {
         {props.tags.map((tag, idx) => (
           <div
             key={idx}
-            className="project-tag text-black bg-gray-200 rounded-full px-3 py-1 text-sm mr-2"
+            className="project-tag rounded-full px-3 py-1 text-sm mr-2 border border-transparent flex items-center justify-center bg-gray-400 hover:bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 hover:border-gray-100 transition-all duration-200 ease-linear"
           >
             {tag}
           </div>
