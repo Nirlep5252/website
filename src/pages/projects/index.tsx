@@ -1,4 +1,3 @@
-import Link from "next/link";
 import SEO from "@/components/seo";
 
 interface ProjectProps {
@@ -29,7 +28,7 @@ function Project(props: ProjectProps) {
       <div className="project-links absolute flex gap-2 right-4 top-4">
         {props.github ? (
           <a
-            className="border border-transparent rounded-full flex items-center justify-center hover:bg-gray-400 hover:bg-clip-padding hover:backdrop-filter hover:backdrop-blur-sm hover:bg-opacity-10 hover:border-gray-100 transition-all duration-200 ease-linear px-2 py-2 post-back-btn"
+            className="border border-transparent rounded-full flex items-center justify-center hover:bg-gray-400 hover:bg-clip-padding hover:backdrop-filter hover:backdrop-blur-sm hover:bg-opacity-10 hover:border-gray-100 transition-all duration-200 ease-linear px-2 py-2 back-btn"
             href={props.github}
             target="_blank"
           >
@@ -101,7 +100,7 @@ export default function Projects() {
   return (
     <div className="w-screen flex justify-center">
       <SEO title="Projects" />
-      <div className="projects-container flex gap-4 flex-col mt-40 absolute w-8/12 m-auto">
+      <div className="projects-container flex gap-4 flex-col mt-40 absolute w-2/3 m-auto">
         <div className="projects-top">
           <div className="text-5xl font-bold">My Projects</div>
           <div className="text-lg font-light">

@@ -14,7 +14,7 @@ export default function BackBtn() {
               scale: 1,
             },
             {
-              scale: 0.9
+              scale: 0.8
             },
             {
               scale: 1,

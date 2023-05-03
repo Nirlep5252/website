@@ -1,3 +1,53 @@
 ---
 time: 1683088240644
 ---
+
+## Problem Explanation
+
+<hr />
+
+Here, we are given a number `n` and we need to apply the following operations on it:
+
+- **number is odd?** : multiply by 3 and add 1
+- **number is even?** : divide by 2
+
+And we need to apply those until the number `n` becomes `1`. <br />
+
+This can be solved by a simple while loop and implementing the operations. <br /> <br />
+
+## Code
+
+<hr />
+
+**Python**
+```python
+n = int(input())
+
+while n > 1:
+  print(n, end=" ")
+  n = (n * 3 + 1) if n % 2 else (n // 2)
+
+print(1)
+```
+
+<br />
+
+**C++**
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+  long long n;
+  cin >> n;
+
+  while (n > 1) {
+    cout << n << " ";
+    n = (n % 2) ? (n * 3 + 1) : (n / 2);
+  }
+
+  cout << 1 << endl;
+
+  return 0;
+}
+```

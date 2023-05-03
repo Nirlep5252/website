@@ -20,7 +20,7 @@ export default function Navbar() {
             const top = activeLinkRects.top - firstLinkRects.top;
             const left = activeLinkRects.left - firstLinkRects.left;
 
-            activeBg.style.top = `${top}px`;
+            activeBg.style.top = `${top - 1}px`;
             activeBg.style.left = `${left}px`;
         } else if (activeBg !== null) {
             activeBg.style.width = "0px";
@@ -30,7 +30,7 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className="fixed left-1/2 flex z-50 -translate-x-1/2 mx-auto items-center justify-center w-fit mt-6 h-9 rounded-full">
+            <nav className="fixed left-1/2 flex z-50 -translate-x-1/2 mx-auto items-center justify-center w-fit mt-6 h-9 rounded-full bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 border border-transparent bg transition-all duration-200 ease-linear">
                 <div id="active-bg" className="bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 border border-gray-100 h-9 rounded-full z-0 absolute bg transition-all duration-200 ease-linear flex items-center justify-center"></div>
                 <NavLink text="home" href="/" />
                 <NavLink text="posts" href="/posts" />

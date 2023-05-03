@@ -13,28 +13,30 @@ interface Problem {
   };
 }
 
+export const titleify = (str: string) => {
+  let final = "";
+  for (const s of str.split("-")) {
+    final += s[0].toUpperCase() + s.slice(1) + " ";
+  }
+
+  return final;
+};
+
 export default function CSES(props: {
   problems: {
     [key: string]: Problem[];
   };
 }) {
-  const titleify = (str: string) => {
-    let final = "";
-    for (const s of str.split("-")) {
-      final += s[0].toUpperCase() + s.slice(1) + " ";
-    }
-
-    return final;
-  };
-
   return (
     <>
       <div className="w-screen flex justify-center">
         <SEO title="CSES" />
-        <div className="cses-container flex gap-4 flex-col mt-40 absolute w-8/12 m-auto">
+        <div className="cses-container flex gap-4 flex-col mt-40 absolute w-3/5 m-auto">
           <div className="cses-top">
-            <div className="text-5xl font-bold flex items-center gap-4"><BackBtn /> <span className="mb-2">CSES</span></div>
-            <div className="text-lg font-light mt-3">
+            <div className="text-5xl font-bold flex items-center gap-4">
+              <BackBtn /> <span className="mb-2">CSES</span>
+            </div>
+            <div className="text-lg font-light mt-8">
               The{" "}
               <UwULink
                 text={"CSES Problemset"}
@@ -58,7 +60,7 @@ export default function CSES(props: {
                   {props.problems[category].map((problem, idx) => (
                     <div key={idx} className="post w-full">
                       <Link
-                        href={`/adventures/cses/${problem.name}`}
+                        href={`/adventures/cses/${category}/${problem.name}`}
                         className="w-full flex items-center gap-2 border border-transparent rounded-full hover:bg-gray-400 hover:bg-clip-padding hover:backdrop-filter hover:backdrop-blur-sm hover:bg-opacity-10 hover:border-gray-100 transition-all duration-200 ease-linear px-4 py-1 relative"
                       >
                         <div className="icon">
@@ -126,7 +128,6 @@ export const getStaticProps = async () => {
     problems[category].sort((a, b) => a.metadata.time - b.metadata.time);
   }
 
-  console.log(problems);
   return {
     props: {
       problems,

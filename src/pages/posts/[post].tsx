@@ -2,10 +2,14 @@ import { promises as fs } from "fs";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { MDXRemote } from "next-mdx-remote";
-import Link from "next/link";
 import UwULink from "@/components/link";
 import SEO from "@/components/seo";
 import BackBtn from "@/components/back";
+import React from "react";
+
+// import "prismjs/components/prism-cpp"
+// import "prismjs/components/prism-python"
+// import "prismjs/components/prism-rust"
 
 interface Meta {
   title: string;
@@ -21,16 +25,18 @@ interface Props {
   notFound: boolean;
 }
 
-export default function Post(props: Props) {
+export const components = {
+  a: (props: any) => (
+    <UwULink {...props} text={props.children} external={true} />
+  ),
+};
 
-  const components = {
-    a: (props: any) => <UwULink {...props} text={props.children} external={true} />
-  }
+export default function Post(props: Props) {
 
   return (
     <div className="mdx-container flex justify-center">
       <SEO title={props.post.meta.title} />
-      <div className="mdx-styles w-3/5 m-auto absolute mt-32">
+      <div className="mdx-styles w-3/5 m-auto absolute mt-40">
         <div className="title-section flex items-center gap-4 relative mb-12">
           <BackBtn />
           <div className="text-5xl mb-2 font-bold flex items-center justify-center">
