@@ -11,8 +11,8 @@ export default function UwULink(props: LinkProps) {
   const classNames = `${props.classes} relative uwu-link text-white font-semibold`;
   const e = (
     <>
-      {props.text}
-      <span className="underline h-0.5 bg-red-500 absolute -bottom-0.5 left-0 w-2/5 transition-all duration-200 ease-linear"></span>
+      <span className="z-0 underline h-0.5 bg-red-500 absolute -bottom-0.5 left-0 transition-all duration-200 ease-linear"></span>
+      <span className="z-10">{props.text}</span>
     </>
   );
   return (

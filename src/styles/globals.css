@@ -47,6 +47,10 @@ body {
 }
 
 .uwu-link:hover .underline {
+  height: 100%;
+}
+.uwu-link .underline {
+  z-index: -1;
   width: 100%;
 }
 .social-text {
@@ -143,4 +147,8 @@ body {
 .project {
   min-width: 350px;
   max-width: 450px;
+}
+
+.glassmorphism {
+  @apply bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 hover:border-gray-200 transition-all duration-200 border border-transparent p-4;
 }
