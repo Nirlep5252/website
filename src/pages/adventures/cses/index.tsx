@@ -3,6 +3,7 @@ import Link from "next/link";
 import { promises as fs } from "fs";
 import SEO from "@/components/seo";
 import { serialize } from "next-mdx-remote/serialize";
+import BackBtn from "@/components/back";
 
 interface Problem {
   name: string;
@@ -32,8 +33,8 @@ export default function CSES(props: {
         <SEO title="CSES" />
         <div className="cses-container flex gap-4 flex-col mt-40 absolute w-8/12 m-auto">
           <div className="cses-top">
-            <div className="text-5xl font-bold">CSES</div>
-            <div className="text-lg font-light mt-2">
+            <div className="text-5xl font-bold flex items-center gap-4"><BackBtn /> <span className="mb-2">CSES</span></div>
+            <div className="text-lg font-light mt-3">
               The{" "}
               <UwULink
                 text={"CSES Problemset"}

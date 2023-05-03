@@ -128,7 +128,7 @@ body {
   @apply text-lg text-gray-300;
 }
 
-.post-back-btn:focus {
+.back-btn:focus {
   animation: shrink .2s ease;
 }
 
