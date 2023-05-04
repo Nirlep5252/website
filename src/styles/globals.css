@@ -55,7 +55,7 @@ body {
 }
 
 .uwu-link:hover .underline {
-  height: 100%;
+  height: 110%;
 }
 .uwu-link .underline {
   z-index: -1;
