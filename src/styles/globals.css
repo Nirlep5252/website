@@ -174,7 +174,7 @@ body {
 }
 .mdx-styles code {
   font-family: monospace;
-  @apply bg-white bg-opacity-5 px-2 rounded-md text-white;
+  @apply bg-white bg-opacity-5 py-0.5 px-2 rounded-md text-white;
 }
 .mdx-styles pre code {
   font-family: "Fira Code", monospace;
