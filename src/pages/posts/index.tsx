@@ -1,3 +1,4 @@
+"use server"
 import Link from "next/link";
 import { promises as fs } from "fs";
 import { serialize } from "next-mdx-remote/serialize";

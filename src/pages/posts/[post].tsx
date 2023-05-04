@@ -1,3 +1,4 @@
+"use server"
 import { promises as fs } from "fs";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";

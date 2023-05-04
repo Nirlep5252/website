@@ -1,3 +1,4 @@
+"use server"
 import UwULink from "@/components/link";
 import Link from "next/link";
 import { promises as fs } from "fs";

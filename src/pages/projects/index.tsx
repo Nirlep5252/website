@@ -1,3 +1,4 @@
+"use server"
 import SEO from "@/components/seo";
 
 interface ProjectProps {

@@ -1,3 +1,4 @@
+"use server"
 import BackBtn from "@/components/back";
 import { promises as fs } from "fs";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";

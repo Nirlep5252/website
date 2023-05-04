@@ -1,3 +1,4 @@
+"use server"
 import UwULink from "@/components/link";
 import Nirlep from "@/components/nirlep";
 import SEO from "@/components/seo";

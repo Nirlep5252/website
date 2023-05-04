@@ -1,3 +1,4 @@
+"use server"
 import SEO from "@/components/seo";
 import { promises as fs } from "fs";
 import Link from "next/link";
