@@ -8,6 +8,7 @@ import SEO from "@/components/seo";
 import BackBtn from "@/components/back";
 import React from "react";
 import CodeTabs from "@/components/codetabs";
+import Image from "next/image";
 
 // import "prismjs/components/prism-cpp"
 // import "prismjs/components/prism-python"
@@ -31,7 +32,10 @@ export const components = {
   a: (props: any) => (
     <UwULink {...props} text={props.children} external={true} />
   ),
-  CodeTabs
+  CodeTabs,
+  img: (props: any) => (
+    <Image {...props} />
+  )
 };
 
 export default function Post(props: Props) {
