@@ -37,7 +37,7 @@ export default function CSESProblem(props: {
             </div>
           </div>
 
-          <div className="problem-blog mt-6">
+          <div className="problem-blog mt-2">
             <div className="problem-blog-content mdx-styles">
               <MDXRemote {...props.problem.source} components={components} />
             </div>

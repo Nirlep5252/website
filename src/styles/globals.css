@@ -12,6 +12,14 @@
   --nir-delay: 25ms;
 }
 
+*::-webkit-scrollbar {
+  width: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #444;
+  @apply rounded-full;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -112,7 +120,7 @@ body {
   @apply text-4xl font-bold my-2;
 }
 .mdx-styles h2 {
-  @apply text-2xl font-bold my-1;
+  @apply text-2xl font-bold my-5;
 }
 .mdx-styles h3 {
   @apply text-xl font-bold my-1;
@@ -156,10 +164,17 @@ body {
 }
 
 .glassmorphism {
-  @apply bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 hover:border-gray-200 transition-all duration-200 border border-transparent p-4;
+  @apply bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 transition-all duration-200 border border-transparent;
 }
 
-code {
-  font-family: 'Fira Code', monospace;
-  @apply bg-white bg-opacity-5 px-1 rounded-md;
+.hover-glassmorphism {
+  @apply hover:bg-white bg-clip-padding backdrop-filter hover:backdrop-blur-xl hover:bg-opacity-10 transition-all duration-200 border border-transparent;
+}
+.mdx-styles code {
+  font-family: monospace;
+  @apply bg-white bg-opacity-5 px-2 rounded-md text-white;
+}
+.mdx-styles pre code {
+  font-family: "Fira Code", monospace;
+  @apply p-4;
 }

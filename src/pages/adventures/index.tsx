@@ -21,7 +21,7 @@ export default function Adventures(props: {
 
           <div className="adventures">
             <Link href="/adventures/cses">
-              <div className="cses-problemset glassmorphism rounded-2xl">
+              <div className="cses-problemset glassmorphism p-4 hover:border-gray-200 rounded-2xl">
                 <div className="adventure-title text-3xl font-bold flex justify-between">
                   <span>The CSES Problemset</span>
                   <span>{props.sols.length} / 300</span>
