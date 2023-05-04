@@ -9,14 +9,14 @@ export default function Home() {
     <>
       <div className="main-container m-auto h-screen w-screen sm:w-3/4 flex-col sm:flex-row flex items-center justify-around">
         <SEO title="Nirlep" />
-        <div className="intro-container w-10/12 sm:w-full relative">
+        <div className="intro-container w-10/12 sm:w-full relative sm:mt-0 mt-20">
           <div className="hey text-2xl lg:text-3xl text-gray-300 font-poppins">
-            hey, i'm
+            hey, i&apos;m
           </div>
           <div className="h-20 md:h-24 lg:h-32"></div>
           <Nirlep />
-          <div className="z-10 about md:text-base text-sm lg:text-lg font-poppins text-gray-300">
-            I'm a Computer Science student at Nirma University. <br />I love
+          <div className="z-10 about md:text-base text-md lg:text-lg font-poppins text-gray-300">
+            I&apos;m a Computer Science student at Nirma University. <br />I love
             working on open source <UwULink href="/projects" text="projects" />,
             building web apps and APIs. <br />
             Check out my <UwULink external={false} href="/posts" text="posts" /> to know what I

@@ -44,10 +44,10 @@ export default function CSES(props: {
                 href={"https://cses.fi/problemset/list"}
                 external={true}
               />{" "}
-              is a collection of competitive programming problems that I'm
+              is a collection of competitive programming problems that I&apos;m
               trying to solve. <br />
               This page contains my approaches, solutions and explanations to
-              the problems I've solved.
+              the problems I&apos;ve solved.
             </div>
           </div>
 

@@ -16,7 +16,7 @@ function Project(props: ProjectProps) {
       <div className={`project-description font-thin mt-1 ${props.github || props.website ? "w-9/12" : ""} leading-none`}>
         {props.description}
       </div>
-      <div className="absolute bottom-4 left-4 project-tags flex">
+      <div className="absolute bottom-4 left-4 project-tags flex flex-wrap">
         {props.tags.map((tag, idx) => (
           <div
             key={idx}

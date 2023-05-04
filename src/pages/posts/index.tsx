@@ -20,7 +20,7 @@ export default function Posts(props: Props) {
   return (
     <div className="w-screen flex justify-center">
       <SEO title="Posts" />
-      <div className="posts-container flex gap-4 flex-col mt-40 absolute w-3/5 m-auto">
+      <div className="posts-container flex gap-4 flex-col mt-40 absolute sm:w-3/5 m-auto">
         <div className="posts-top">
           <div className="text-5xl font-bold">Recent Posts</div>
           <div className="text-lg font-light">I write random stuff here</div>

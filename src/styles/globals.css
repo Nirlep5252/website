@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Fira+Code:wght@300;400;500;600;700&family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Red+Rose:wght@300;400;500;600;700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Fira+Code:wght@300;400;500;600;700&family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Red+Rose:wght@300;400;500;600;700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -35,19 +35,19 @@ body {
 }
 
 .font-bruno-ace {
-  font-family: 'Bruno Ace SC', sans-serif;
+  font-family: "Bruno Ace SC", sans-serif;
 }
 .font-josefin-sans {
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
 }
 .font-red-rose {
-  font-family: 'Red Rose', cursive;
+  font-family: "Red Rose", cursive;
 }
 .font-poppins {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .font-roboto-slab {
-  font-family: 'Roboto Slab', serif;
+  font-family: "Roboto Slab", serif;
 }
 
 .text-10xl {
@@ -62,7 +62,7 @@ body {
   width: 100%;
 }
 .social-text {
-  transition: all .2s ease;
+  transition: all 0.2s ease;
   width: 0px;
   height: 0px;
   visibility: hidden;
@@ -75,29 +75,31 @@ body {
   opacity: 1;
 }
 
-#N {
-  animation: nirlep .5s ease-in-out;
-  animation-delay: calc(var(--nir-delay) * 1);
-}
-#I {
-  animation: nirlep .5s ease-in-out;
-  animation-delay: calc(var(--nir-delay) * 2);
-}
-#R {
-  animation: nirlep .5s ease-in-out;
-  animation-delay: calc(var(--nir-delay) * 3);
-}
-#L {
-  animation: nirlep .5s ease-in-out;
-  animation-delay: calc(var(--nir-delay) * 4);
-}
-#E {
-  animation: nirlep .5s ease-in-out;
-  animation-delay: calc(var(--nir-delay) * 5);
-}
-#P {
-  animation: nirlep .5s ease-in-out;
-  animation-delay: calc(var(--nir-delay) * 6);
+@media (min-width: 1000px) {
+  #N {
+    animation: nirlep 0.5s ease-in-out;
+    animation-delay: calc(var(--nir-delay) * 1);
+  }
+  #I {
+    animation: nirlep 0.5s ease-in-out;
+    animation-delay: calc(var(--nir-delay) * 2);
+  }
+  #R {
+    animation: nirlep 0.5s ease-in-out;
+    animation-delay: calc(var(--nir-delay) * 3);
+  }
+  #L {
+    animation: nirlep 0.5s ease-in-out;
+    animation-delay: calc(var(--nir-delay) * 4);
+  }
+  #E {
+    animation: nirlep 0.5s ease-in-out;
+    animation-delay: calc(var(--nir-delay) * 5);
+  }
+  #P {
+    animation: nirlep 0.5s ease-in-out;
+    animation-delay: calc(var(--nir-delay) * 6);
+  }
 }
 
 @keyframes nirlep {
@@ -143,7 +145,7 @@ body {
 }
 
 .back-btn:focus {
-  animation: shrink .2s ease;
+  animation: shrink 0.2s ease;
 }
 
 @keyframes shrink {
