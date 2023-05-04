@@ -20,8 +20,8 @@ export default function Posts(props: Props) {
   return (
     <div className="w-screen flex justify-center">
       <SEO title="Posts" />
-      <div className="posts-container flex gap-4 flex-col mt-40 absolute sm:w-3/5 m-auto">
-        <div className="posts-top">
+      <div className="posts-container flex gap-4 flex-col mt-40 absolute w-full sm:w-3/5 m-auto">
+        <div className="posts-top sm:ml-0 ml-6">
           <div className="text-5xl font-bold">Recent Posts</div>
           <div className="text-lg font-light">I write random stuff here</div>
         </div>
@@ -48,8 +48,8 @@ export default function Posts(props: Props) {
                       />
                     </svg>
                   </div>
-                  <div className="post-title text-xl flex items-center justify-center mb-0.5">{post.title}</div>
-                  <div className="absolute right-4">{postDate.toDateString()}</div>
+                  <div className="post-title text-sm sm:text-xl flex items-center justify-center mb-0.5">{post.title}</div>
+                  <div className="absolute text-sm sm:text-base right-4">{postDate.toDateString()}</div>
                 </Link>
               </div>
             );

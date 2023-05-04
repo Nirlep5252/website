@@ -11,10 +11,10 @@ export default function Adventures(props: {
       <SEO title="Adventures" />
 
       <div className="w-screen flex justify-center">
-        <div className="adventures-container flex gap-4 flex-col mt-40 absolute w-3/5 m-auto">
+        <div className="adventures-container flex gap-4 flex-col mt-40 absolute w-11/12 sm:w-3/5 m-auto">
           <div className="adventures-top">
-            <div className="text-5xl font-bold">My Adventures</div>
-            <div className="text-lg font-light">
+            <div className="text-4xl lg:text-5xl font-bold">My Adventures</div>
+            <div className="text-md lg:text-lg font-light">
               Random stuff related to programming, technology and life in
               general.
             </div>
@@ -23,7 +23,7 @@ export default function Adventures(props: {
           <div className="adventures">
             <Link href="/adventures/cses">
               <div className="cses-problemset glassmorphism p-4 hover:border-gray-200 rounded-2xl">
-                <div className="adventure-title text-3xl font-bold flex justify-between">
+                <div className="adventure-title text-2xl lg:text-3xl font-bold flex justify-between">
                   <span>The CSES Problemset</span>
                   <span>{props.sols.length} / 300</span>
                 </div>

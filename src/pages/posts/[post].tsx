@@ -39,13 +39,13 @@ export default function Post(props: Props) {
   return (
     <div className="mdx-container flex justify-center">
       <SEO title={props.post.meta.title} />
-      <div className="mdx-styles w-3/5 m-auto absolute mt-40">
+      <div className="mdx-styles w-11/12 sm:w-3/5 m-auto absolute mt-40">
         <div className="title-section flex items-center gap-4 relative mb-12">
           <BackBtn />
-          <div className="text-5xl mb-2 font-bold flex items-center justify-center">
+          <div className="text-xl lg:text-3xl sm:text-5xl mb-2 font-bold flex sm:flex-row flex-col items-center justify-center">
             {props.post.meta.title}
           </div>
-          <div className="time-posted absolute right-2 text-gray-200">
+          <div className="time-posted lg:absolute right-2 text-gray-200">
             {new Date(props.post.meta.time).toDateString()}
           </div>
         </div>

@@ -9,7 +9,7 @@ export default function Home() {
     <>
       <div className="main-container m-auto h-screen w-screen sm:w-3/4 flex-col sm:flex-row flex items-center justify-around">
         <SEO title="Nirlep" />
-        <div className="intro-container w-10/12 sm:w-full relative sm:mt-0 mt-20">
+        <div className="intro-container w-11/12 sm:w-full relative sm:mt-0 mt-20">
           <div className="hey text-2xl lg:text-3xl text-gray-300 font-poppins">
             hey, i&apos;m
           </div>

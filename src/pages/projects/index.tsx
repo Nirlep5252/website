@@ -101,7 +101,7 @@ export default function Projects() {
   return (
     <div className="w-screen flex justify-center">
       <SEO title="Projects" />
-      <div className="projects-container flex gap-4 flex-col mt-40 absolute w-2/3 m-auto">
+      <div className="projects-container flex gap-4 flex-col mt-40 absolute w-11/12 sm:w-2/3 m-auto">
         <div className="projects-top">
           <div className="text-5xl font-bold">My Projects</div>
           <div className="text-lg font-light">

@@ -32,7 +32,7 @@ export default function CSES(props: {
     <>
       <div className="w-screen flex justify-center">
         <SEO title="CSES" />
-        <div className="cses-container flex gap-4 flex-col mt-40 absolute w-3/5 m-auto">
+        <div className="cses-container flex gap-4 flex-col mt-40 absolute w-11/12 sm:w-3/5 m-auto">
           <div className="cses-top">
             <div className="text-5xl font-bold flex items-center gap-4">
               <BackBtn /> <span className="mb-2">CSES</span>

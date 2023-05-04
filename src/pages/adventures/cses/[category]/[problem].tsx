@@ -30,7 +30,7 @@ export default function CSESProblem(props: {
     <>
       <SEO title={`CSES - ${titleify(props.problem.name)}`} />
       <div className="w-screen flex justify-center">
-        <div className="cses-container flex gap-4 flex-col mt-40 absolute w-3/5 m-auto">
+        <div className="cses-container flex gap-4 flex-col mt-40 absolute w-11/12 sm:w-3/5 m-auto">
           <div className="cses-top">
             <div className="text-5xl font-bold flex items-center gap-4">
               <BackBtn />{" "}

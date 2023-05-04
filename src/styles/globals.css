@@ -141,7 +141,7 @@ body {
   @apply list-disc list-inside py-2 ml-2 text-gray-300;
 }
 .mdx-styles {
-  @apply mb-10;
+  @apply mb-10 pb-10;
 }
 
 .back-btn:focus {
