@@ -10,10 +10,6 @@ import React from "react";
 import CodeTabs from "@/components/codetabs";
 import Image from "next/image";
 
-// import "prismjs/components/prism-cpp"
-// import "prismjs/components/prism-python"
-// import "prismjs/components/prism-rust"
-
 interface Meta {
   title: string;
   time: number;

@@ -1,0 +1,108 @@
+---
+time: 1683261634645
+---
+
+## Explanation
+
+<hr />
+
+In this problem, we are given a number `n` and we need to find the number of ways 2 knights can be placed on a `k x k` chessboard such that they do not attack each other. Here, k lies from `1` to `n`.
+
+<br />
+
+Now, let's try to solve this problem for a `8 x 8` chessboard first, then we'll generalize the solution. 
+
+<br />
+
+- If the first knight is placed on a corner, there are `2` positions at which the other knight *cannot* be placed.
+- If it is placed adjacent to a corner, there are `3` positions at which the other knight *cannot* be placed.\
+... for the rest of the pattern please check the image below.
+
+<br />
+
+<img className="m-auto" height="500px" width="500px" src="https://i.imgur.com/oXny4PF.png" />
+
+<br />
+
+So here the total number of possibilities will be:
+
+For `8 x 8` grid, n will be `8`.
+
+- For the `2` cells: `4 * (n ** 2 - 3)`
+- For the `3` cells: `8 * (n ** 2 - 4)`
+- For the `4` cells: `4 * (n - 3) * (n ** 2 - 5)`
+- For the `6` cells: `4 * (n - 4) * (n ** 2 - 7)`
+- For the rest of the cells: `((n - 4) ** 2) * (n ** 2 - 9)`
+
+The total number will be the summation of all these divided by 2. Because we are counting each possibility twice.
+
+## Code 
+
+<hr />
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+n = int(input())
+
+for i in range(1, n + 1):
+    ans = 0
+
+    ans += 4 * (i ** 2 - 3)
+    ans += 8 * (i ** 2 - 4)
+    ans += 4 * (i - 3) * (i ** 2 - 5)
+    ans += 4 * (i - 4) * (i ** 2 - 7)
+    ans += ((i - 4) ** 2) * (i ** 2 - 9)
+
+    print(ans // 2)
+```
+
+```rust
+use std::io;
+
+fn main() {
+    let mut n = String::new();
+    io::stdin().read_line(&mut n).unwrap();
+    let n: usize = n.trim().parse().unwrap();
+
+    for i in 1..=n {
+        let mut ans = 0;
+
+        ans += 4 * (i * i - 3);
+        ans += 8 * (i * i - 4);
+        ans += 4 * (i - 3) * (i * i - 5);
+        ans += 4 * (i - 4) * (i * i - 7);
+        ans += ((i - 4) * (i - 4)) * (i * i - 9);
+
+        ans /= 2;
+
+        println!("{ans}");
+    }
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    long long n;
+    cin >> n;
+
+    for (long long i = 1; i <= n; i++) {
+        long long ans = 0;
+
+        ans += 4 * (i * i - 3);
+        ans += 8 * (i * i - 4);
+        ans += 4 * (i - 3) * (i * i - 5);
+        ans += 4 * (i - 4) * (i * i - 7);
+        ans += ((i - 4) * (i - 4)) * (i * i - 9);
+
+        ans /= 2;
+
+        cout << ans << endl;
+    }
+}
+```
+
+</CodeTabs>
