@@ -1,0 +1,150 @@
+---
+time: 1683298404909
+---
+
+## Explanation
+
+<hr />
+
+In this problem, we are provided a number `n` and we need to divide the array from `1` to `n` into two parts such that the sum of the elements in the first part is equal to the sum of the elements in the second part or print `NO` if it isn't possible.
+
+<br />
+
+We can do this by checking if the value `(n * (n + 1)) / 2` is divisible by `2`. If it is, then we output `YES` otherwise we will output `NO`.
+
+<br />
+
+If the sum is divisible by `2`, then first we will find the first part of the array. We will intialize the variable `sum` with the value `(n * (n + 1)) / 4`. Then we will check if `sum` is greater than `n`. If it is, then we will subtract `n` from `sum` and add `n` to the first part of the array, also we will reduce `n` by `1`.
+
+## Code 
+
+<hr />
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+n = int(input())
+s = (n * (n + 1)) // 2
+
+if s % 2 == 0:
+    print("YES")
+    s //= 2
+
+    arr1 = set()
+    while s >= n:
+        arr1.add(n)
+        s -= n
+        n -= 1
+
+    if s > 0:
+        arr1.add(s)
+
+    print(len(arr1))
+    print(*arr1)
+
+    arr2 = set(range(1, n + 1)) - arr1
+    print(len(arr2))
+    print(*arr2)
+else:
+    print("NO")
+```
+
+```rust
+use std::io;
+use std::collections::HashSet;
+
+fn main() {
+    let mut n = String::new();
+    io::stdin().read_line(&mut n).unwrap();
+    let mut n: usize = n.trim().parse().unwrap();
+    let _n = n.clone();
+
+    let mut s = (n * (n + 1)) / 2;
+
+    if s % 2 == 0 {
+        println!("YES");
+
+        let mut v1 = HashSet::new();
+        s /= 2;
+
+        while s >= n {
+            v1.insert(n);
+            s -= n;
+            n -= 1;
+        }
+
+        if s > 0 {
+            v1.insert(s);
+        }
+
+        println!("{}", v1.len());
+        for i in v1.iter() {
+            print!("{} ", i);
+        }
+        println!("");
+
+        println!("{}", _n - v1.len());
+        for i in 1..=_n {
+            if !v1.contains(&i) {
+                print!("{} ", i);
+            }
+        }
+        println!("");
+
+    } else {
+        println!("NO");
+    }
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    int n;
+    cin >> n;
+    int _n = n;
+    long long sum = (1LL * n * (n + 1)) / 2;
+
+    if (sum % 2 == 0) {
+        cout << "YES\n";
+        sum /= 2;
+
+        set<int> a, b;
+
+        while (sum >= n) {
+            a.insert(n);
+            sum -= n;
+            n--;
+        }
+
+        if (sum > 0)
+            a.insert(sum);
+
+        for (int i = 1; i <= _n; i++) {
+            if (a.find(i) == a.end()) {
+                b.insert(i);
+            }
+        }
+
+        cout << a.size() << "\n";
+        for (auto x : a) {
+            cout << x << " ";
+        }
+        cout << "\n";
+
+        cout << b.size() << "\n";
+        for (auto x : b) {
+            cout << x << " ";
+        }
+        cout << "\n";
+    } else {
+        cout << "NO\n";
+    }
+
+    return 0;
+}
+```
+
+</CodeTabs>
