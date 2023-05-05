@@ -1,0 +1,80 @@
+---
+time: 1683304821893
+---
+
+## Explanation
+
+<hr />
+
+Here, we are provided with 2 piles of coins, containing `a` and `b` coins. Now, we can remove `1` coin from any pile and `2` coins from the other pile. 
+We need to find whether it is possible to empty both of the piles by doing the above step any number of times.
+
+<br />
+
+Now, on each move, we are removing a total of `3` coins. So, if the total number of coins is not divisible by `3`, then it is not possible to empty both the piles.
+
+<br />
+
+Also, if one pile contains more than twice the coins from the other pile, then the smaller pile will be emptied before the bigger one. Hence, it is not possible to empty both the piles.
+
+<br />
+
+Otherwise, it is possible to empty both the piles.
+
+## Code
+
+<hr />
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+for _ in range(int(input())):
+    a, b = map(int, input().split())
+    print("YES" if (a + b) % 3 == 0 and min(a, b) * 2 >= max(a, b) else "NO")
+```
+
+```rust
+use std::io;
+
+fn main() {
+    let mut t = String::new();
+    io::stdin().read_line(&mut t).unwrap();
+    let t: usize = t.trim().parse().unwrap();
+
+    for _ in 0..t {
+        let mut v = String::new();
+        io::stdin().read_line(&mut v).unwrap();
+        let v: Vec<i32> = v
+            .split_whitespace()
+            .map(|x| x.parse().unwrap())
+            .collect();
+
+        let (a, b) = (v[0], v[1]);
+
+        if (a + b) % 3 == 0 && std::cmp::min(a, b) * 2 >= std::cmp::max(a, b) {
+            println!("YES");
+        } else {
+            println!("NO");
+        }
+    }
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int a, b;
+        cin >> a >> b;
+
+        cout << (((a + b) % 3 == 0 && min(a, b) * 2 >= max(a, b)) ? "YES" : "NO") << endl;
+    }
+}
+```
+
+</CodeTabs>
