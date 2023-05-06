@@ -1,0 +1,79 @@
+---
+time: 1683383743194
+---
+
+## Explanation
+
+<hr />
+
+A kid's game huh. Harder than you think. Here, we are required to move the left stack to the right stack and use the middle stack as the helper stack.
+<br />
+We can do this recursively by moving the top `n - 1` disks from the left stack to the middle stack, then moving the bottom disk to the right stack, then moving the `n - 1` disks from the middle stack to the right stack.
+
+## Code
+
+<hr />
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+def move(start: int, helper: int, end: int, disks: int):
+    if disks == 1:
+        print(start, end)
+    else:
+        move(start, end, helper, disks - 1)
+        move(start, helper, end, 1)
+        move(helper, start, end, disks - 1)
+
+n = int(input())
+print(2 ** n - 1)
+move(1, 2, 3, n)
+```
+
+```rust
+use std::io;
+
+fn make_move(start: usize, helper: usize, end: usize, count: usize) {
+    if count == 1 {
+        println!("{} {}", start, end);
+    } else {
+        make_move(start, end, helper, count - 1);
+        make_move(start, helper, end, 1);
+        make_move(helper, start, end, count - 1);
+    }
+}
+
+fn main() {
+    let mut s = String::new();
+    io::stdin().read_line(&mut s).unwrap();
+    let n = s.trim().parse::<usize>().unwrap();
+
+    println!("{}", 2usize.pow(n as u32) - 1);
+    make_move(1, 2, 3, n);
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void make_move(int start, int helper, int end, int count) {
+    if (count == 1) {
+        cout << start << " " << end << endl;
+        return;
+    }
+    make_move(start, end, helper, count - 1);
+    cout << start << " " << end << endl;
+    make_move(helper, start, end, count - 1);
+}
+
+int main () {
+    int n;
+    cin >> n;
+
+    cout << (1 << n) - 1 << endl;
+    make_move(1, 2, 3, n);
+}
+```
+
+</CodeTabs>
