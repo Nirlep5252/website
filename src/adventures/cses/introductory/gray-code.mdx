@@ -1,0 +1,101 @@
+---
+time: 1683378879428
+---
+
+## Explanation
+
+<hr />
+
+This problem is tricky. The key is to find the pattern.
+<br />
+```cpp
+n = 0: 0
+n = 1: 0, 1
+n = 2: 00, 01, 11, 10
+n = 3: 000, 001, 011, 010, 110, 111, 101, 100
+```
+<br />
+For example, when `n = 3`, we can get the result based on `n = 2`.
+<br />
+```cpp
+00, 01, 11, 10 -> 100, 101, 111, 110 (add 2 ** 2) -> 110, 111, 101, 100 (reverse)
+```
+<br />
+Now, the answer for `n = 3` is the answer for `n = 2` and its reverse plus `2 ** 2`.
+
+## Code
+
+<hr />
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+from typing import List
+
+def gray_code(i: int) -> List[int]:
+    if i == 1:
+        return [0, 1]
+    return gray_code(i - 1) + [2 ** (i - 1) + x for x in reversed(gray_code(i - 1))]
+
+n = int(input())
+print(*[bin(e)[2::].zfill(n) for e in gray_code(n)], sep="\n")
+```
+
+```rust
+use std::io;
+
+fn gray_code(i: usize) -> Vec<usize> {
+    if i == 1 {
+        vec![0, 1]
+    } else {
+        let mut v = gray_code(i - 1);
+        let mut v_new = vec![];
+        for e in &v {
+            v_new.push(*e + 2_usize.pow((i - 1) as u32));
+        }
+
+        v_new.reverse();
+        v.extend(v_new);
+        v
+    }
+}
+
+fn main() {
+    let mut s = String::new();
+    io::stdin().read_line(&mut s).unwrap();
+    let n = s.trim().parse::<usize>().unwrap();
+
+    let v = gray_code(n);
+    for e in v {
+        println!("{:0width$b}", e, width = n);
+    }
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> gray_code(int n) {
+    if (n == 1)
+        return {0, 1};
+
+    vector<int> v = gray_code(n - 1);
+    for (int i = v.size() - 1; i >= 0; i--) {
+        v.push_back(pow(2, n - 1) + v[i]);
+    }
+    return v;
+}
+
+int main () {
+    int n;
+    cin >> n;
+
+    vector<int> v = gray_code(n);
+    for (auto i : v) {
+        cout << bitset<16>(i).to_string().substr(16 - n) << endl;
+    }
+}
+```
+
+</CodeTabs>
