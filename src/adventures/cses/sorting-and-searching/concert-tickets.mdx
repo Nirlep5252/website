@@ -1,0 +1,95 @@
+---
+time: 1683616931547
+---
+
+## Explanation
+
+<hr />
+
+Here, we are given `n` tickets each having a certain price. Now, one by one, customers arrive who have a maximum price limit. We need to sell them a ticket just below their maximum price or print `-1` if it's not possible to do so.
+
+<br />
+
+We can solve this using a `multiset` (C++) or `BTreeSet`+`HashMap` (Rust) and `upper_bound` (C++) or `range` (Rust).
+
+## Code
+
+<hr />
+
+<CodeTabs langs={["Rust", "C++"]}>
+
+```rust
+use std::collections::BTreeSet;
+use std::collections::HashMap;
+use std::io;
+
+fn main() {
+    let v = scan_vec();
+    let (n, _) = (v[0], v[1]);
+
+    let tickets = scan_vec();
+    let customers = scan_vec();
+
+    let mut tickets_set = BTreeSet::new();
+    let mut tickets_count = HashMap::new();
+    for i in 0..n {
+        tickets_set.insert(tickets[i]);
+        *tickets_count.entry(tickets[i]).or_insert(0) += 1;
+    }
+
+    for customer in customers {
+        if let Some(t) = tickets_set.range(..=customer).last() {
+            let ticket = *t;
+            println!("{}", ticket);
+
+            *tickets_count.get_mut(&ticket).unwrap() -= 1;
+            if tickets_count[&ticket] == 0 {
+                tickets_set.remove(&ticket);
+            }
+        } else {
+            println!("-1");
+        }
+    }
+}
+
+fn scan_vec() -> Vec<usize> {
+    let mut inp = String::new();
+    io::stdin().read_line(&mut inp).unwrap();
+    inp.trim()
+        .split(" ")
+        .map(|x| x.parse().unwrap())
+        .collect::<Vec<usize>>()
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    int n, m;
+    cin >> n >> m;
+
+    multiset<int> tickets;
+    while (n--) {
+        int x;
+        cin >> x;
+        tickets.insert(x);
+    }
+
+    while (m--) {
+        int x;
+        cin >> x;
+
+        auto ans = tickets.upper_bound(x);
+        if (ans == tickets.begin()) {
+            cout << -1 << endl;
+        } else {
+            cout << *(--ans) << endl;
+            tickets.erase(ans);
+        }
+    }
+}
+```
+
+</CodeTabs>
