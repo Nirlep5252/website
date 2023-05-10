@@ -15,13 +15,19 @@ export default function CodeTabs(props: {
         <div className="code-tabs flex glassmorphism w-fit rounded-full">
           {props.langs.map((lang) => {
             return (
-              <>
-                <div key={lang} onClick={() => {
+              <div
+                key={lang}
+                onClick={() => {
                   setActive(props.langs.indexOf(lang));
-                }} className={`hover-glassmorphism border cursor-pointer py-1.5 px-3 rounded-full ${props.langs[active] === lang ? "glassmorphism border-gray-200" : ""}`}>
-                  {lang}
-                </div>
-              </>
+                }}
+                className={`hover-glassmorphism border cursor-pointer py-1.5 px-3 rounded-full ${
+                  props.langs[active] === lang
+                    ? "glassmorphism border-gray-200"
+                    : ""
+                }`}
+              >
+                {lang}
+              </div>
             );
           })}
         </div>
