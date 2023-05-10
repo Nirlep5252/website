@@ -1,0 +1,133 @@
+---
+time: 1683736012220
+---
+
+## Explanation
+
+<hr />
+
+Here, we are given `n` sticks and we can either increase or decrease a stick's length by `1` which is counted as one operator. We need to find the minimum number of operators required to make all the sticks of equal length.
+
+<br />
+
+This can be done using median of the array. We can find the median of the array and then calculate the number of operators required to make all the sticks equal to the median. The number of operators required will be the sum of absolute difference of each stick with the median.
+
+<br />
+
+If 2 medians exist then we can calculate the number of operators required for both the medians and then output the minimum of the two.
+
+## Code
+
+<hr />
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+n = int(input())
+arr = sorted(list(map(int, input().split())))
+
+if n % 2 == 0:
+    m1 = arr[n // 2 - 1]
+    m2 = arr[n // 2]
+
+    cost1 = 0
+    cost2 = 0
+    for e in arr:
+        cost1 += abs(e - m1)
+        cost2 += abs(e - m2)
+
+    print(min(cost1, cost2))
+else:
+    m = arr[n // 2]
+
+    cost = 0
+    for e in arr:
+        cost += abs(e - m)
+    print(cost)
+```
+
+```rust
+use std::io;
+
+fn main() {
+    let n = scan::<usize>();
+    let mut arr = scan_vec::<isize>();
+    arr.sort();
+
+    if n % 2 == 0 {
+        let median1 = arr[n / 2 - 1];
+        let median2 = arr[n / 2];
+
+        let mut cost1 = 0;
+        let mut cost2 = 0;
+
+        for i in 0..n {
+            cost1 += (arr[i] - median1).abs();
+            cost2 += (arr[i] - median2).abs();
+        }
+
+        println!("{}", std::cmp::min(cost1, cost2));
+    } else {
+        let median = arr[n / 2];
+        let mut cost = 0;
+
+        for i in 0..n {
+            cost += (arr[i] - median).abs();
+        }
+        println!("{}", cost);
+    }
+}
+
+fn scan<T: std::str::FromStr>() -> T {
+    let mut inp = String::new();
+    io::stdin().read_line(&mut inp).unwrap();
+    inp.trim().parse().ok().unwrap()
+}
+
+fn scan_vec<T: std::str::FromStr>() -> Vec<T> {
+    let mut inp = String::new();
+    io::stdin().read_line(&mut inp).unwrap();
+    inp.trim()
+        .split_whitespace()
+        .map(|e| e.parse().ok().unwrap())
+        .collect()
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    int n;
+    cin >> n;
+
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) cin >> arr[i];
+    sort(arr.begin(), arr.end());
+
+    if (n % 2 == 0) {
+        int median1 = arr[n / 2];
+        int median2 = arr[n / 2 - 1];
+
+        long long cost1 = 0, cost2 = 0;
+        for (int i = 0; i < n; i++) {
+            cost1 += abs(arr[i] - median1);
+            cost2 += abs(arr[i] - median2);
+        }
+
+        cout << min(cost1, cost2) << endl;
+    } else {
+        int median = arr[n / 2];
+
+        long long cost = 0;
+        for (int i = 0; i < n; i++) {
+            cost += abs(arr[i] - median);
+        }
+
+        cout << cost << endl;
+    }
+}
+```
+
+</CodeTabs>
