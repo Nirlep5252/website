@@ -1,0 +1,106 @@
+---
+time: 1683692482279
+---
+
+## Explanation
+
+<hr />
+
+In this problem, `n` customers enter and leave a store at different times. We want to find the maximum number of customers in the store at any given time.
+
+<br />
+
+This can be done by storing the entering times as a tuple/pair of `(enter_time, 1)` and the leaving times as a tuple/pair of `(leave_time, -1)`. Then, we sort the list of tuples/pairs by the first element of each tuple/pair. This way, we can iterate through the list of tuples/pairs and keep track of the number of customers in the store at any given time.
+
+## Code
+
+<hr />
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+import sys
+input = sys.stdin.readline
+
+customers = []
+for _ in range(int(input())):
+    enter, leave = map(int, input().split())
+    customers.append((enter, 1))
+    customers.append((leave, -1))
+customers.sort()
+
+count = 0
+max_count = 0
+for _, delta in customers:
+    count += delta
+    max_count = max(max_count, count)
+
+print(max_count)
+```
+
+```rust
+use std::io;
+
+fn main() {
+    let mut customers = vec![];
+    for _ in 0..scan::<usize>() {
+        let c = scan_vec::<usize>();
+        customers.push((c[0], 1));
+        customers.push((c[1], -1));
+    }
+    customers.sort();
+
+    let mut count = 0;
+    let mut max_count = 0;
+    for (_, c) in customers {
+        count += c;
+        max_count = std::cmp::max(max_count, count);
+    }
+
+    println!("{max_count}");
+}
+
+fn scan<T: std::str::FromStr>() -> T {
+    let mut inp = String::new();
+    io::stdin().read_line(&mut inp).unwrap();
+    inp.trim().parse().ok().unwrap()
+}
+
+fn scan_vec<T: std::str::FromStr>() -> Vec<T> {
+    let mut inp = String::new();
+    io::stdin().read_line(&mut inp).unwrap();
+    inp.trim()
+        .split_whitespace()
+        .map(|e| e.parse().ok().unwrap())
+        .collect()
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    vector<pair<int, int>> customers;
+    int n;
+    cin >> n;
+
+    while (n--) {
+        int a, b;
+        cin >> a >> b;
+        customers.push_back({a, 1});
+        customers.push_back({b, -1});
+    }
+    sort(customers.begin(), customers.end());
+
+    int count = 0, max_count = 0;
+    for (auto customer : customers) {
+        count += customer.second;
+        max_count = max(max_count, count);
+    }
+
+    cout << max_count << endl;
+}
+```
+
+</CodeTabs>
