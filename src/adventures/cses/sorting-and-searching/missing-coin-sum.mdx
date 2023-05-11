@@ -1,0 +1,100 @@
+---
+time: 1683774911222
+---
+
+## Explanation
+
+<hr />
+
+Here, we are given `n` coins and we need to find the smallest value of the sum that *cannot* be created using a subset of the coins.
+
+<br />
+
+This can be done using a greedy algorithm. We can sort the coins in ascending order and then iterate through them. At each step, we can check if the current coin is greater than the current sum plus 1. If it is, then we have found the smallest value that cannot be created using a subset of the coins.
+
+<br />
+
+For example, if we have the coins `[1, 2, 3, 8, 9]`, then we can iterate through them as follows:
+
+- `1` is less than or equal to `0 + 1`, so we can create `1` using a subset of the coins. (we increment s by `1`)
+- `2` is less than or equal to `1 + 1`, so we can create `2` using a subset of the coins. (we increment s by `2`)
+- `3` is less than or equal to `3 + 1`, so we can create `3` using a subset of the coins. (we increment s by `3`)
+- `8` is greater than `6 + 1`, so we cannot create `4` using a subset of the coins. Therefore, `4` is the smallest value that cannot be created using a subset of the coins.
+
+## Code
+
+<hr />
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+n = int(input())
+arr = sorted(list(map(int, input().split())))
+
+s = 0
+for e in arr:
+    if e > s + 1:
+        break
+    s += e
+
+print(s + 1)
+```
+
+```rust
+use std::io;
+
+fn main() {
+    let _ = scan::<usize>();
+    let mut arr = scan_vec::<isize>();
+    arr.sort();
+
+    let mut s = 0;
+    for e in arr {
+        if e > s + 1 {
+            break;
+        }
+        s += e;
+    }
+
+    println!("{}", s + 1);
+}
+
+fn scan<T: std::str::FromStr>() -> T {
+    let mut inp = String::new();
+    io::stdin().read_line(&mut inp).unwrap();
+    inp.trim().parse().ok().unwrap()
+}
+
+fn scan_vec<T: std::str::FromStr>() -> Vec<T> {
+    let mut inp = String::new();
+    io::stdin().read_line(&mut inp).unwrap();
+    inp.trim()
+        .split_whitespace()
+        .map(|e| e.parse().ok().unwrap())
+        .collect()
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    int n;
+    cin >> n;
+
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) cin >> arr[i];
+    sort(arr.begin(), arr.end());
+
+    long long sum = 0;
+    for (auto e : arr) {
+        if (e > sum + 1) break;
+        sum += e;
+    }
+
+    cout << sum + 1 << endl;
+}
+```
+
+</CodeTabs>
