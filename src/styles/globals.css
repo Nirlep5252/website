@@ -140,6 +140,9 @@ body {
 .mdx-styles ul {
   @apply list-disc list-inside py-2 ml-2 text-gray-300;
 }
+.mdx-styles ol {
+  @apply list-decimal list-inside py-2 ml-2 text-gray-300;
+}
 .mdx-styles {
   @apply mb-10 pb-10;
 }
