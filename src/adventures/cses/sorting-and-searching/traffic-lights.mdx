@@ -1,0 +1,117 @@
+---
+time: 1683860717658
+---
+
+## Explanation
+
+<hr />
+
+Here, we have `x` positions on a street. At first, there are no lights on any positions and the maximum distance without lights is `x`. Now, lights are added to some positions. Now, we need to find out the maximum distance without lights.
+
+<br />
+
+This can be done using a sorted set to maintain the lights positions, a sorted set to maintain the differences and a map for its counts. Firstly, when a light is added we will try to find a light on its left and right. Then we will remove the difference `right - left` from the set. Also we will add `curr_light - left` and `right - curr_light` to the set. We will also update the map and the positions set accordingly.
+
+<br />
+
+After each light, we will just output the maximum element of the differences set.
+
+## Code
+
+<hr />
+
+<CodeTabs langs={["Rust", "C++"]}>
+
+```rust
+use std::collections::BTreeSet;
+use std::collections::HashMap;
+use std::io;
+
+fn main() {
+    let inp = scan_vec::<usize>();
+    let (x, _) = (inp[0], inp[1]);
+    let lights = scan_vec::<usize>();
+
+    let mut positions = BTreeSet::new();
+    let mut diffs = BTreeSet::new();
+    let mut counts = HashMap::new();
+
+    positions.insert(0);
+    positions.insert(x);
+
+    diffs.insert(x);
+    counts.insert(x, 1);
+
+    for &light in lights.iter() {
+        let left = positions.range(..=light).last().unwrap();
+        let right = positions.range(light..).next().unwrap();
+
+        let prev_diff = right - left;
+        let diff1 = light - left;
+        let diff2 = right - light;
+
+        let count = counts.entry(prev_diff).or_insert(0);
+        *count -= 1;
+        if *count == 0 {
+            diffs.remove(&prev_diff);
+        }
+
+        *counts.entry(diff1).or_insert(0) += 1;
+        *counts.entry(diff2).or_insert(0) += 1;
+        diffs.insert(diff1);
+        diffs.insert(diff2);
+        positions.insert(light);
+
+        print!("{} ", diffs.iter().last().unwrap());
+    }
+    println!("");
+}
+
+fn scan_vec<T: std::str::FromStr>() -> Vec<T> {
+    let mut inp = String::new();
+    io::stdin().read_line(&mut inp).unwrap();
+    inp.trim()
+        .split_whitespace()
+        .map(|e| e.parse().ok().unwrap())
+        .collect()
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int x, n;
+    cin >> x >> n;
+
+    set<int> positions;
+    multiset<int> diffs;
+
+    positions.insert(0);
+    positions.insert(x);
+    diffs.insert(x);
+
+    while (n--) {
+        int light;
+        cin >> light;
+
+        auto left = positions.lower_bound(light);
+        auto right = positions.upper_bound(light);
+        left = prev(left);
+
+        diffs.erase(diffs.find(*right - *left));
+        diffs.insert(light - *left);
+        diffs.insert(*right - light);
+        positions.insert(light);
+
+        cout << *diffs.rbegin() << " ";
+    }
+    cout << endl;
+}
+```
+
+</CodeTabs>
