@@ -1,0 +1,110 @@
+---
+time: 1683863414872
+---
+
+## Explanation
+
+<hr />
+
+Here, there are `n` children in a circle and we need to remove children alternatively. The first child is left and the 2nd is remove, 3rd is left and so on... 
+
+<br />
+
+This can be done using a set. We can add all the children in the set and then remove the children alternatively.
+
+## Code
+
+<hr />
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+n = int(input())
+
+numbers = set(range(n))
+ans = []
+alt = False
+
+while len(numbers) > 1:
+    to_remove = []
+    for num in numbers:
+        alt = not alt
+        if not alt:
+            ans.append(num + 1)
+            to_remove.append(num)
+    for num in to_remove:
+        numbers.remove(num)
+
+print(*ans, numbers.pop() + 1)
+```
+
+```rust
+use std::io;
+use std::collections::BTreeSet;
+
+fn main() {
+    let n: usize = scan();
+
+    let mut children: BTreeSet<usize> = (1..=n).collect();
+    let mut ans = vec![];
+
+    let mut alt = true;
+    while children.len() > 1 {
+        let mut to_remove = vec![];
+        for child in children.clone() {
+            if !alt {
+                to_remove.push(child);
+                ans.push(child);
+            }
+            alt = !alt;
+        }
+
+        for child in to_remove.iter() {
+            children.remove(child);
+        }
+    }
+
+    ans.push(*children.iter().next().unwrap());
+    println!("{}", ans.iter().map(|x| x.to_string()).collect::<Vec<String>>().join(" "));
+}
+
+fn scan<T: std::str::FromStr>() -> T {
+    let mut inp = String::new();
+    io::stdin().read_line(&mut inp).unwrap();
+    inp.trim().parse().ok().unwrap()
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int n;
+    cin >> n;
+
+    set<int> children;
+    for (int i = 1; i <= n; i++) children.insert(i);
+
+    bool alt = true;
+    while (children.size() > 1) {
+        vector<int> to_remove;
+        for (auto child : children) {
+            if (!alt) {
+                cout << child << " ";
+                to_remove.push_back(child);
+            }
+            alt = !alt;
+        }
+
+        for (auto child : to_remove) children.erase(child);
+    }
+
+    cout << *children.begin() << endl;
+}
+```
+
+</CodeTabs>
