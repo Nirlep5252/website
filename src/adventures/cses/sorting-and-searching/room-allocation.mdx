@@ -1,0 +1,185 @@
+---
+time: 1685420251483
+---
+
+## Explanation
+
+<hr />
+
+Here, `n` customers arrive and they occupy a room they are given and stay from `a` to `b`. We need to allocate rooms such that each customer stays in one room and we also need to output the maximum number of rooms occupied at a single time. 
+
+<br />
+
+We can do this by first sorting the customers and then creating a `multiset` or `set + map` of leaving times of the customers who are still in a room. We will also create a `map` of the rooms allocated to each customer, and we will maintain a count variable to keep track of the maximum number of rooms occupied at a single time.
+
+<br />
+
+Now, we will iterate over the customers and for each customer, we will use `lower_bound` or `range` method to check whether any customer having leaving time before the enterring time of this customer, whose room we can assign to this customer. 
+
+<br />
+
+If we find such customer then we will remove that customer from the `multiset` or `set + map` and update the room of the current customer in the `map` and if we don't find such customer then we will increment the count variable and update the room of the current customer in the `map`.
+
+<br />
+
+At the end, we will output the count variable and room that we assigned for each customer.
+
+## Code
+
+<hr />
+
+<CodeTabs langs={["Rust", "C++"]}>
+
+```rust
+use std::{
+    collections::{BTreeSet, HashMap},
+    io,
+};
+
+fn main() {
+    let mut leaving_times = BTreeSet::new();
+    let mut leaving_cnt = HashMap::new();
+    let mut rooms = HashMap::new();
+    let mut room_cnt = 0;
+
+    let n = scan::<usize>();
+    let mut ans = vec![0; n];
+
+    let mut customers = vec![];
+    for i in 0..n {
+        let (a, b) = {
+            let tmp = scan_vec::<usize>();
+            (tmp[0], tmp[1])
+        };
+        customers.push((a, b, i));
+    }
+    customers.sort();
+
+    for customer in customers {
+        let (a, b, i) = customer;
+
+        if leaving_times.is_empty() {
+            room_cnt += 1;
+            rooms.entry(b).or_insert(vec![]).push(room_cnt);
+            ans[i] = room_cnt;
+
+            *leaving_cnt.entry(b).or_insert(0) += 1;
+            leaving_times.insert(b);
+            continue;
+        }
+
+        let person_to_kick = leaving_times.range(..a).next_back();
+
+        if person_to_kick.is_none() {
+            room_cnt += 1;
+            rooms.entry(b).or_insert(vec![]).push(room_cnt);
+            ans[i] = room_cnt;
+
+            *leaving_cnt.entry(b).or_insert(0) += 1;
+            leaving_times.insert(b);
+        } else {
+            let person_to_kick = *person_to_kick.unwrap();
+            let room = rooms.get_mut(&person_to_kick).unwrap().pop().unwrap();
+            ans[i] = room;
+
+            *leaving_cnt.entry(person_to_kick).or_insert(0) -= 1;
+            if leaving_cnt[&person_to_kick] == 0 {
+                leaving_times.remove(&person_to_kick);
+            }
+
+            rooms.entry(b).or_insert(vec![]).push(room);
+            *leaving_cnt.entry(b).or_insert(0) += 1;
+            leaving_times.insert(b);
+        }
+    }
+
+    println!("{}", room_cnt);
+    println!(
+        "{}",
+        ans.iter()
+            .map(|x| x.to_string())
+            .collect::<Vec<_>>()
+            .join(" ")
+    );
+}
+
+fn scan_vec<T: std::str::FromStr>() -> Vec<T> {
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).unwrap();
+    input
+        .trim()
+        .split_whitespace()
+        .map(|x| x.parse().ok().unwrap())
+        .collect()
+}
+
+fn scan<T: std::str::FromStr>() -> T {
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).unwrap();
+    input.trim().parse().ok().unwrap()
+}
+```
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+
+int main () {
+    int n;
+    std::cin >> n;
+
+    std::multiset<int> leaving_times;
+    std::map<int, std::vector<int>> rooms;
+    std::vector<int> ans(n);
+    int max_rooms = 0;
+
+    std::vector<std::tuple<int, int, int>> customers;
+    for (int i = 0; i < n; i++) {
+        int a, b;
+        std::cin >> a >> b;
+        customers.push_back(std::make_tuple(a, b, i));
+    }
+    std::sort(customers.begin(), customers.end());
+
+    for (auto [a, b, i] : customers) {
+        if (!leaving_times.size()) {
+            leaving_times.insert(b);
+            max_rooms = std::max(max_rooms, 1);
+            ans[i] = 1;
+            rooms[b].push_back(1);
+            continue;
+        }
+
+        auto it = leaving_times.lower_bound(a);
+        if (it == leaving_times.begin()) {
+            leaving_times.insert(b);
+            max_rooms = std::max(max_rooms, (int) leaving_times.size());
+
+            int new_room = leaving_times.size();
+            rooms[b].push_back(new_room);
+            ans[i] = new_room;
+        } else {
+            it--;
+            int new_room = rooms[*it].back();
+            rooms[*it].pop_back();
+
+            leaving_times.erase(it);
+            leaving_times.insert(b);
+
+            rooms[b].push_back(new_room);
+            ans[i] = new_room;
+        }
+    }
+
+    std::cout << max_rooms << std::endl;
+    for (auto room : ans)
+        std::cout << room << " ";
+    std::cout << std::endl;
+    return 0;
+}
+```
+
+</CodeTabs>
