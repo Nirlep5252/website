@@ -11,7 +11,7 @@ interface ProjectProps {
 
 function Project(props: ProjectProps) {
   return (
-    <div className="project relative bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 hover:border-gray-200 transition-all duration-200 border border-transparent rounded-2xl p-4 h-44">
+    <div className="project relative bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 hover:border-gray-200 transition-all duration-200 border border-transparent rounded-2xl p-4 h-44 w-full lg:w-fit">
       <div className="project-title text-3xl font-bold">{props.title}</div>
       <div className={`project-description font-thin mt-1 ${props.github || props.website ? "w-9/12" : ""} leading-none`}>
         {props.description}

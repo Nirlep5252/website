@@ -19,6 +19,10 @@
   background: #444;
   @apply rounded-full;
 }
+/* * { */
+/*   cursor: none; */
+/* } */
+
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -56,6 +60,9 @@ body {
 
 .uwu-link:hover .underline {
   height: 110%;
+}
+.uwu-link:hover .text {
+  color: black;
 }
 .uwu-link .underline {
   z-index: -1;

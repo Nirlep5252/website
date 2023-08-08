@@ -5,7 +5,7 @@ export default function BackBtn() {
 
   return (
     <div
-      className="border border-transparent rounded-full flex items-center justify-center hover:bg-gray-400 hover:bg-clip-padding hover:backdrop-filter hover:backdrop-blur-sm hover:bg-opacity-10 hover:border-gray-100 transition-all duration-200 ease-linear px-2 py-2 back-btn cursor-pointer"
+      className="border border-transparent rounded-full flex items-center justify-center hover:bg-gray-400 hover:bg-clip-padding hover:backdrop-filter hover:backdrop-blur-sm hover:bg-opacity-10 hover:border-gray-100 transition-all duration-200 ease-linear px-2 py-2 back-btn cursor-pointer hoverable"
       onClick={(e) => {
         console.log(e.target);
         e.currentTarget.animate(
