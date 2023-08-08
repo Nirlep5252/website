@@ -86,13 +86,14 @@ export default function Cursor() {
       height: size * 16,
       width: size * 16,
       backgroundColor: "white",
-      mixBlendMode: "difference"
     }
   }
   return (
     <motion.div
       className={`cursor bg-transparent border-2 border-white
-                  rounded-full fixed top-0 left-0 select-none z-50 touch-none pointer-events-none`}
+                  rounded-full fixed top-0 left-0 select-none
+                  z-50 touch-none pointer-events-none
+                  ${mouseVariant == 'hover' ? "mix-blend-difference" : ""}`}
       variants={cursorVariants}
       animate={mouseVariant}
     />
