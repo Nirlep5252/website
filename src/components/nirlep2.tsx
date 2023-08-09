@@ -57,7 +57,7 @@ export default function Main({ scroll }: { scroll: number }) {
         }}
         initial={"hidden"}
         animate={"visible"}
-      >hey i'm</motion.div>
+      >hey i&apos;m</motion.div>
       <motion.div
         className="nirlep2 text-[100px] lg:text-[200px] md:text-[170px] font-bold font-roboto-slab select-none hoverable leading-none -mt-4"
         variants={{
