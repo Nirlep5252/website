@@ -1,9 +1,10 @@
 import { usePathname } from "next/navigation";
 import NavLink from "./navlink";
 import React from "react";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
-    let path = usePathname();
+    let path = useRouter().pathname;
 
     "use client"
     React.useEffect(() => {
