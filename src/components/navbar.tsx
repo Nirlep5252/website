@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { motion, Variants } from 'framer-motion'
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { Cancel01Icon, Hamburger01Icon } from '@/components/icons'
 
 const links: {
   name: string
@@ -39,9 +40,9 @@ export function Navbar() {
         onMouseDown={() => {
           setIsOpen(!isOpen)
         }}
-        className='hamburger cursor-pointer absolute right-6 top-6 z-50'
+        className='hamburger cursor-pointer absolute right-10 top-10 z-50'
       >
-        {isOpen ? 'close' : 'open'}
+        {isOpen ? <Cancel01Icon size={30} /> : <Hamburger01Icon size={30} />}
       </motion.div>
       <motion.div
         animate={isOpen ? 'open' : 'closed'}
@@ -61,18 +62,17 @@ export function Navbar() {
       >
         {links.map((link) => {
           return (
-            <motion.div
-              whileHover={{
-                translateX: '20px',
-              }}
-              onClick={() => setIsOpen(!isOpen)}
-              className={`text-9xl ${path === link.href ? 'font-bold' : ''}`}
-              key={link.href}
-            >
-              <Link href={link.href} className='nav-link'>
+            <Link href={link.href} className='nav-link' key={link.href}>
+              <motion.div
+                whileHover={{
+                  translateX: '20px',
+                }}
+                onClick={() => setIsOpen(!isOpen)}
+                className={`text-9xl ${path === link.href ? 'font-bold' : ''}`}
+              >
                 {link.name}
-              </Link>
-            </motion.div>
+              </motion.div>
+            </Link>
           )
         })}
       </motion.div>

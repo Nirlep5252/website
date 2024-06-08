@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Roboto_Slab } from 'next/font/google'
 import './globals.css'
 import { Navbar } from '@/components/navbar'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Roboto_Slab({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'nirlep // home',
