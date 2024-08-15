@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from "react";
 import { motion } from "framer-motion";
@@ -14,25 +14,25 @@ export default function Cursor() {
   React.useEffect(() => {
     const mouseMove = (e: MouseEvent) => {
       setMousePos([e.clientX, e.clientY]);
-    }
+    };
 
-    window.addEventListener("mousemove", mouseMove)
+    window.addEventListener("mousemove", mouseMove);
     return () => {
-      window.removeEventListener("mousemove", mouseMove)
-    }
-  }, [])
+      window.removeEventListener("mousemove", mouseMove);
+    };
+  }, []);
 
   React.useEffect(() => {
     const mouseDown = () => setSize(12);
     const mouseUp = () => setSize(6);
 
-    window.addEventListener("mousedown", mouseDown)
-    window.addEventListener("mouseup", mouseUp)
+    window.addEventListener("mousedown", mouseDown);
+    window.addEventListener("mouseup", mouseUp);
     return () => {
-      window.removeEventListener("mousedown", mouseDown)
-      window.removeEventListener("mouseup", mouseUp)
-    }
-  }, [])
+      window.removeEventListener("mousedown", mouseDown);
+      window.removeEventListener("mouseup", mouseUp);
+    };
+  }, []);
 
   React.useEffect(() => {
     const setHover = () => setMouseVariant("hover");
@@ -40,38 +40,38 @@ export default function Cursor() {
 
     setDefault();
 
-    let anchors = window.document.querySelectorAll('a');
-    let buttons = window.document.querySelectorAll('button');
-    let hoverables = window.document.querySelectorAll('.hoverable');
+    let anchors = window.document.querySelectorAll("a");
+    let buttons = window.document.querySelectorAll("button");
+    let hoverables = window.document.querySelectorAll(".hoverable");
 
-    anchors?.forEach(element => {
+    anchors?.forEach((element) => {
       element.addEventListener("mouseenter", setHover);
       element.addEventListener("mouseleave", setDefault);
     });
-    buttons?.forEach(element => {
+    buttons?.forEach((element) => {
       element.addEventListener("mouseenter", setHover);
       element.addEventListener("mouseleave", setDefault);
     });
-    hoverables?.forEach(element => {
+    hoverables?.forEach((element) => {
       element.addEventListener("mouseenter", setHover);
       element.addEventListener("mouseleave", setDefault);
     });
 
     return () => {
-      anchors?.forEach(element => {
+      anchors?.forEach((element) => {
         element.removeEventListener("mouseenter", setHover);
         element.removeEventListener("mouseleave", setDefault);
       });
-      buttons?.forEach(element => {
+      buttons?.forEach((element) => {
         element.removeEventListener("mouseenter", setHover);
         element.removeEventListener("mouseleave", setDefault);
       });
-      hoverables?.forEach(element => {
+      hoverables?.forEach((element) => {
         element.removeEventListener("mouseenter", setHover);
         element.removeEventListener("mouseleave", setDefault);
       });
-    }
-  }, [pathname])
+    };
+  }, [pathname]);
 
   const cursorVariants = {
     default: {
@@ -79,7 +79,7 @@ export default function Cursor() {
       y: mousePos[1] - size * 2,
       height: size * 4,
       width: size * 4,
-      background: "transparent"
+      background: "transparent",
     },
     hover: {
       x: mousePos[0] - size * 8,
@@ -87,16 +87,16 @@ export default function Cursor() {
       height: size * 16,
       width: size * 16,
       backgroundColor: "white",
-    }
-  }
+    },
+  };
   return (
     <motion.div
       className={`cursor border-2 border-white
                   rounded-full fixed top-0 left-0 select-none
                   z-50 touch-none pointer-events-none
-                  ${mouseVariant == 'hover' ? "mix-blend-difference" : ""}`}
+                  ${mouseVariant == "hover" ? "mix-blend-difference" : ""}`}
       variants={cursorVariants}
       animate={mouseVariant}
     />
-  )
+  );
 }

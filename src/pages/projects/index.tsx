@@ -1,5 +1,7 @@
-"use server"
+"use server";
+import UwULink from "@/components/link";
 import SEO from "@/components/seo";
+import React from "react";
 
 interface ProjectProps {
   title: string;
@@ -9,18 +11,20 @@ interface ProjectProps {
   tags: string[];
 }
 
-function Project(props: ProjectProps) {
+function Project(props: ProjectProps): React.ReactNode {
   return (
-    <div className="project relative bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 hover:border-gray-200 transition-all duration-200 border border-transparent rounded-2xl p-4 h-44 w-full lg:w-fit">
+    <div className="project relative bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 hover:border-gray-200 transition-all duration-200 border border-transparent rounded-2xl p-4 w-full lg:w-[32%]">
       <div className="project-title text-3xl font-bold">{props.title}</div>
-      <div className={`project-description font-thin mt-1 ${props.github || props.website ? "w-9/12" : ""} leading-none`}>
+      <div
+        className={`project-description font-light leading-tight text-gray-200 mt-2 h-12 ${props.github || props.website ? "w-[80%]" : ""} leading-none`}
+      >
         {props.description}
       </div>
-      <div className="absolute bottom-4 left-4 project-tags flex flex-wrap">
+      <div className="bottom-4 left-4 project-tags flex overflow-x-scroll overflow-y-hidden no-scroll h-10">
         {props.tags.map((tag, idx) => (
           <div
             key={idx}
-            className="project-tag rounded-full px-3 py-1 text-sm mr-2 border border-transparent flex items-center justify-center bg-gray-400 hover:bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 hover:border-gray-100 transition-all duration-200 ease-linear"
+            className="project-tag rounded-full px-3 py-1 text-sm mr-2 mt-2 border border-transparent flex items-center justify-center bg-gray-400 hover:bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 hover:border-gray-100 transition-all duration-200 ease-linear"
           >
             {tag}
           </div>
@@ -105,15 +109,55 @@ export default function Projects() {
         <div className="projects-top">
           <div className="text-5xl font-bold">My Projects</div>
           <div className="text-lg font-light">
-            Inhumane creations that unfortunately exist.
+            Here are some of the projects I have worked on. You can find more on
+            my{" "}
+            <UwULink
+              href="https://github.com/nirlep5252"
+              text="Github"
+              external
+            >
+              GitHub
+            </UwULink>
+            .
           </div>
         </div>
 
         <div className="projects flex flex-wrap gap-2">
           <Project
+            title="MashCode"
+            description="Competitive programming platform, focused on LIVE 1v1s. "
+            tags={[
+              "ReactJS",
+              "TailwindCSS",
+              "Python",
+              "FastAPI",
+              "PostgreSQL",
+              "Websockets",
+              "Docker",
+            ]}
+            github="https://github.com/Nirlep5252/MashCode"
+          />
+          <Project
+            title="Brilliant++"
+            description="AI powered education platform."
+            tags={[
+              "NextJS",
+              "TypeScript",
+              "PostgreSQL",
+              "Prisma",
+              "tRPC",
+              "TailwindCSS",
+              "Gemini",
+              "Cloudinary",
+              "Docker",
+            ]}
+            github="https://github.com/Nirlep5252/Brilliant-Plus-Plus"
+            website="https://brilliant-plus-plus.vercel.app/"
+          />
+          <Project
             title="EpicBot"
             description="A simple, multipurpose Discord bot."
-            tags={["Python", "discord.py", "MongoDB"]}
+            tags={["Python", "discord.py", "MongoDB", "Chatbot", "Pillow"]}
             github="https://github.com/nirlep5252/epicbot"
           />
           <Project
@@ -124,24 +168,57 @@ export default function Projects() {
             website="https://pypi.org/project/codeforces/"
           />
           <Project
-            title="EpicBot Images"
-            description="A Python module that creates memes and several cool effects from images."
-            tags={["Python", "Image Manipulation", "Pillow", "Wand"]}
-            website="https://pypi.org/project/epicbot-images/"
-            github="https://github.com/Nirlep5252/epicbot-images"
+            title="Fun"
+            description="A funny little interpreted programming language heavily inspired by Lox."
+            tags={["Java", "Interpreter", "Lox"]}
+            github="https://github.com/Nirlep5252/fun"
           />
           <Project
-            title="This website"
+            title="Portfolio"
             description="My personal website, built with NextJS and TailwindCSS."
             tags={["NextJS", "TailwindCSS"]}
             website="/"
             github="https://github.com/nirlep5252/website"
           />
           <Project
-            title="Universal Chat"
-            description="A hackathon project that allows you to chat accross platforms using a middleware API converter."
-            tags={["ExpressJS", "GraphQL", "SOAP", "REST", "MongoDB"]}
-            website="https://devfolio.co/projects/universalchat-a51c"
+            title="Thoughtful Threads"
+            description="A simple blog website, built with NextJS and TailwindCSS."
+            tags={["NextJS", "Prisma", "AuthJS", "PostgreSQL", "TailwindCSS"]}
+            github="https://github.com/Nirlep5252/thoughtful-threads"
+            website="https://thoughtful-threads.vercel.app/"
+          />
+          <Project
+            title="URL Shortener API"
+            description="A Simple basic URL shortener API."
+            tags={["Python", "FastAPI", "PostgreSQL"]}
+            github="https://github.com/Nirlep5252/url-shortener-api"
+          />
+          <Project
+            title="Doggytype"
+            description="A typing test terminal application inspired from Monkeytype."
+            tags={["Rust", "CLI"]}
+            github="https://github.com/nirlep5252/doggytype"
+          />
+          <Project
+            title="EpicShot"
+            description="A screenshot tool for Linux, built with Rust."
+            tags={["Rust", "XCB", "X11", "Linux"]}
+            github="https://github.com/Nirlep5252/EpicShot"
+            website="https://crates.io/crates/epicshot"
+          />
+          <Project
+            title="EpicBot Images"
+            description="A Python module that creates memes and several cool effects from images."
+            tags={["Python", "Pillow", "Wand"]}
+            website="https://pypi.org/project/epicbot-images/"
+            github="https://github.com/Nirlep5252/epicbot-images"
+          />
+          <Project
+            title="Scheduling Algos"
+            description="A simple web app to visualize various scheduling algorithms."
+            tags={["ReactJS"]}
+            github="https://github.com/Nirlep5252/scheduling-algorithms"
+            website="https://scheduling.nirlep.dev/"
           />
         </div>
       </div>
