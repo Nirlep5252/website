@@ -11,7 +11,7 @@ interface ProjectProps {
   tags: string[];
 }
 
-function Project(props: ProjectProps): React.ReactNode {
+function Project(props: ProjectProps) {
   return (
     <div className="project relative bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 hover:border-gray-200 transition-all duration-200 border border-transparent rounded-2xl p-4 w-full lg:w-[32%]">
       <div className="project-title text-3xl font-bold">{props.title}</div>
