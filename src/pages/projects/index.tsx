@@ -115,9 +115,7 @@ export default function Projects() {
               href="https://github.com/nirlep5252"
               text="Github"
               external
-            >
-              GitHub
-            </UwULink>
+            />
             .
           </div>
         </div>
