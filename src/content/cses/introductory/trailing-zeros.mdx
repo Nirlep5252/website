@@ -1,0 +1,61 @@
+---
+time: 1683302683920
+---
+
+## Explanation
+
+
+
+Here, we are given a number `n` and we are required to find out the number of trailing zeros in `n!`.
+
+
+
+This can be found by counting the number of times `5` appears in the prime factorization of `n!`.\
+And the answer to that is `floor(n/5) + floor(n/25) + floor(n/125) + ...`
+
+## Code
+
+
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+n = int(input())
+print(sum(n // (5 ** i) for i in range(1, 14)))
+```
+
+```rust
+use std::io;
+
+fn main() {
+    let mut n = String::new();
+    io::stdin().read_line(&mut n).unwrap();
+    let n: usize = n.trim().parse().unwrap();
+
+    let mut ans = 0;
+    for i in 1..=13 {
+        ans += n / ((5 as usize).pow(i));
+    }
+
+    println!("{}", ans);
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    int n;
+    cin >> n;
+
+    int ans = 0;
+    for (int i = 1; i <= 13; i++) {
+        ans += n / pow(5, i);
+    }
+
+    cout << ans << endl;
+}
+```
+
+</CodeTabs>

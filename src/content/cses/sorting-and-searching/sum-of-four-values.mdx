@@ -1,0 +1,143 @@
+---
+time: 1685537811300
+---
+
+## Explanation
+
+
+
+Here, we are given an array of `n` integers and we are told to find 4 numbers whose sum equals to `target`.
+
+
+
+We can do this by getting all the possible sums of two elements and storing them with their indices. Now we have reduced this problem into **Sum Of Two Values**.
+
+
+
+We'll find two values from the sums of two values whose sum equals `target` and their indices don't overlap.
+
+## Code
+
+
+
+<CodeTabs langs={["Rust", "C++"]}>
+
+```rust
+use std::io;
+
+fn main() {
+    let (n, target) = {
+        let tmp = scan_vec::<i32>();
+        (tmp[0] as usize, tmp[1])
+    };
+    let nums = scan_vec::<i32>();
+    let mut sums = vec![];
+
+    for i in 0..n {
+        for j in i + 1..n {
+            sums.push((nums[i] + nums[j], i + 1, j + 1));
+        }
+    }
+    sums.sort();
+
+    if sums.is_empty() {
+        println!("IMPOSSIBLE");
+        return;
+    }
+
+    if let Some(ans) = sum_of_two_values(target, &sums) {
+        println!("{} {} {} {}", ans.0, ans.1, ans.2, ans.3);
+    } else {
+        println!("IMPOSSIBLE");
+    }
+}
+
+fn sum_of_two_values(
+    target: i32,
+    nums: &Vec<(i32, usize, usize)>,
+) -> Option<(usize, usize, usize, usize)> {
+    let mut left = 0;
+    let mut right = nums.len() - 1;
+
+    while left < right {
+        let (s1, i, j) = nums[left];
+        let (s2, k, l) = nums[right];
+        let sum = s1 + s2;
+        if sum == target {
+            if i != k && i != l && j != k && j != l {
+                return Some((i, j, k, l));
+            } else {
+                right -= 1;
+            }
+        } else if sum < target {
+            left += 1;
+        } else {
+            right -= 1;
+        }
+    }
+    None
+}
+
+fn scan_vec<T: std::str::FromStr>() -> Vec<T> {
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).unwrap();
+    input
+        .trim()
+        .split_whitespace()
+        .map(|x| x.parse().ok().unwrap())
+        .collect()
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+tuple<int, int, int, int> sum_of_two_values(
+    vector<tuple<int, int, int>> *arr,
+    int target
+) {
+    int left = 0;
+    int right = arr->size() - 1;
+    while (left < right) {
+        auto [s1, i, j] = (*arr)[left];
+        auto [s2, k, l] = (*arr)[right];
+
+        int sum = s1 + s2;
+        if (sum == target) {
+            if (i != k && i != l && j != k && j != l)
+                return make_tuple(i, j, k, l);
+            right--;
+        }
+        else if (sum < target) left++;
+        else right--;
+    }
+    return make_tuple(-1, -1, -1, -1);
+}
+
+int main () {
+    int n, target;
+    cin >> n >> target;
+
+    vector<int> nums(n);
+    for (int i = 0; i < n; i++)
+        cin >> nums[i];
+
+    vector<tuple<int, int, int>> sums;
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            sums.push_back(make_tuple(nums[i] + nums[j], i + 1, j + 1));
+        }
+    }
+    sort(sums.begin(), sums.end());
+    auto [i, j, k, l] = sum_of_two_values(&sums, target);
+
+    if (i == -1) {
+        cout << "IMPOSSIBLE" << endl;
+    } else {
+        cout << i << " " << j << " " << k << " " << l << endl;
+    }
+}
+```
+
+</CodeTabs>

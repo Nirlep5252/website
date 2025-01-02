@@ -1,0 +1,132 @@
+---
+time: 1683695285088
+---
+
+## Explanation
+
+
+
+Here, we are given an array of `n` integers and we need to find 2 integers who sum is `x`.
+
+
+
+This can be done by first storing all the indices of each element in a hashmap, then sorting the array and iterating through each element, checking whether `x - arr[i]` exists in the hashmap. If it does, then we can print the indices of the 2 elements.
+
+## Code
+
+
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+from collections import defaultdict
+from sys import stdin
+
+input = stdin.readline
+
+n, x = map(int, input().split())
+arr = list(map(int, input().split()))
+
+
+indices = defaultdict(lambda: [])
+
+for i, e in enumerate(arr):
+    if x - e < 0:
+        continue
+    indices[e].append(i)
+
+arr.sort()
+for e in arr:
+    if x - e < 0:
+        continue
+    if indices[x - e]:
+        for i in indices[e]:
+            for j in indices[x - e]:
+                if i != j:
+                    print(i + 1, j + 1)
+                    exit()
+
+print("IMPOSSIBLE")
+```
+
+```rust
+use std::collections::HashMap;
+use std::io;
+
+fn main() {
+    let inp = scan_vec::<usize>();
+    let (_n, x) = (inp[0], inp[1]);
+    let mut a = scan_vec::<usize>();
+
+    let mut indices: HashMap<usize, Vec<usize>> = HashMap::new();
+    for (i, e) in a.iter().enumerate() {
+        if x < *e {
+            continue;
+        }
+        indices.entry(*e).or_insert(vec![]).push(i);
+    }
+
+    a.sort();
+    for e in &a {
+        if x < *e {
+            continue;
+        }
+        if indices.contains_key(&(x - e)) {
+            for i in &indices[&e] {
+                for j in &indices[&(x - e)] {
+                    if *i != *j {
+                        println!("{} {}", i + 1, j + 1);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    println!("IMPOSSIBLE");
+}
+
+fn scan_vec<T: std::str::FromStr>() -> Vec<T> {
+    let mut inp = String::new();
+    io::stdin().read_line(&mut inp).unwrap();
+    inp.trim()
+        .split_whitespace()
+        .map(|e| e.parse().ok().unwrap())
+        .collect()
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    int n, x;
+    cin >> n >> x;
+
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) cin >> arr[i];
+
+    map<int, vector<int>> indices;
+    for (int i = 0; i < n; i++) indices[arr[i]].push_back(i);
+
+    sort(arr.begin(), arr.end());
+    for (auto e : arr) {
+        int y = x - e;
+        if (indices.count(y)) {
+            for (auto i : indices[e]) {
+                for (auto j : indices[y]) {
+                    if (i != j) {
+                        cout << i + 1 << " " << j + 1 << endl;
+                        return 0;
+                    }
+                }
+            }
+        }
+    }
+
+    cout << "IMPOSSIBLE" << endl;
+}
+```
+
+</CodeTabs>

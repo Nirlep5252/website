@@ -1,0 +1,137 @@
+---
+time: 1683563283972
+---
+
+## Explanation
+
+
+
+Here, we have `n` applicants and `m` apartments. Each applicant has a desired size range of `[ai - k, ai + k]` where `ai` is the `i`th element of the array `a` which contains the desired size of each applicant. 
+
+
+
+Also, we are provided `b` which is the list of sizes of each apartment.
+
+
+
+This problem can be solved by sorting both arrays then comparing their first elements. If their difference is less than or equal to `k`, then increase the count and move on to the next element of both arrays.
+
+Otherwise, if the difference is greater than `k` and the apartment size is greater than the desired size, then we will move on to the next element in the applicant's array, as that applicant will never be able to have the apartment of his desired size.
+
+If the apartment size is less than the desired size, then we'll move on to the next element in the apartment array, as it is possible to have an apartment that matches the desired size of the applicant. 
+
+
+
+Simply repeat the process until we reach the end of one of the array.
+
+## Code
+
+
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+n, m, k = map(int, input().split())
+
+applicants = sorted(list(map(int, input().split())))
+sizes = sorted(list(map(int, input().split())))
+
+i = j = ans = 0
+
+while i < n and j < m:
+    if applicants[i] <= sizes[j] + k and applicants[i] >= sizes[j] - k:
+        ans += 1
+        i += 1
+        j += 1
+    elif applicants[i] < sizes[j] - k:
+        i += 1
+    else:
+        j += 1
+
+print(ans)
+```
+
+```rust
+use std::io;
+use std::fmt::Debug;
+
+fn main() {
+    let v = scan_arr::<usize>();
+    let (n, m, k) = (v[0], v[1], v[2] as isize);
+
+    let mut applicants = scan_arr::<isize>();
+    let mut apartments = scan_arr::<isize>();
+
+    applicants.sort();
+    apartments.sort();
+
+    let mut i = 0;
+    let mut j = 0;
+
+    let mut count = 0;
+
+    while i < n && j < m {
+        if applicants[i] + k < apartments[j] {
+            i += 1;
+        } else if applicants[i] - k > apartments[j] {
+            j += 1;
+        } else {
+            i += 1;
+            j += 1;
+            count += 1;
+        }
+    }
+
+    println!("{count}");
+}
+
+fn scan_arr<T: std::str::FromStr>() -> Vec<T> where <T as std::str::FromStr>::Err: Debug {
+    let mut inp = String::new();
+    io::stdin().read_line(&mut inp).unwrap();
+    inp
+        .trim()
+        .split(" ")
+        .map(|x| x.parse().unwrap())
+        .collect::<Vec<T>>()
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    int n, m, k;
+    cin >> n >> m >> k;
+
+    vector<int> applicants(n);
+    vector<int> apartments(m);
+
+    for (int i = 0; i < n; i++) {
+        cin >> applicants[i];
+    }
+    for (int i = 0; i < m; i++) {
+        cin >> apartments[i];
+    }
+
+    sort(applicants.begin(), applicants.end());
+    sort(apartments.begin(), apartments.end());
+
+    int i = 0, j = 0, count = 0;
+    while (i < n && j < m) {
+        if (abs(applicants[i] - apartments[j]) <= k) {
+            count++;
+            i++;
+            j++;
+        } else if (applicants[i] < apartments[j]) {
+            i++;
+        } else {
+            j++;
+        }
+    }
+
+    cout << count << endl;
+}
+```
+
+</CodeTabs>

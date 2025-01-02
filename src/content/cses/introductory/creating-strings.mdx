@@ -1,0 +1,44 @@
+---
+time: 1683385432490
+---
+
+## Explanation
+
+
+
+In this problem, we are given a string and our task is to print all the unique permutations of the string in alphabetical order.
+
+It can be done using the built-in `permutations` function in Python or `next_permutation` function in C++ and storing the result in a set to remove duplicates.
+
+## Code
+
+
+
+<CodeTabs langs={["Python", "C++"]}>
+
+```python
+import itertools
+
+ans = sorted(set(map(lambda e: "".join(e),itertools.permutations(input()))))
+print(len(ans), *ans, sep="\n")
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    string s;
+    cin >> s;
+    sort(s.begin(), s.end());
+
+    set<string> ans;
+    do ans.insert(s);
+    while (next_permutation(s.begin(), s.end()));
+
+    cout << ans.size() << endl;
+    for (auto x : ans) cout << x << endl;
+}
+```
+
+</CodeTabs>

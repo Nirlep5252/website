@@ -1,0 +1,108 @@
+---
+time: 1683387026417
+---
+
+## Explanation
+
+
+
+In this problem, we are given an array and we need to divide it in 2 parts such that the difference between both parts is minimum.
+
+Now, looking at the constraints (`1 <= n <= 20`) we can see that this can be done using brute force.
+
+So, using recursion we will explore each possibility and return the minimum difference.
+
+## Code
+
+
+
+Here, we are using two variables `a` and `b` in our recursive function. These variables will store the sum of elements in the two sets we are creating.
+
+
+
+After each call, we either add the next element in the set `a` or in the set `b`. And we keep on increasing the index of the array. When the index reaches the end of the array, we return the absolute difference between the two sets.
+
+
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+import sys
+sys.setrecursionlimit(1100000)
+
+n = int(input())
+arr = list(map(int, input().split()))
+
+
+def min_diff(index: int, set_a: int, set_b: int) -> int:
+    if index == n:
+        return abs(set_a - set_b)
+
+    return min(
+        min_diff(index + 1, set_a + arr[index], set_b), 
+        min_diff(index + 1, set_a, set_b + arr[index])
+    )
+
+print(min_diff(0, 0, 0))
+```
+
+```rust
+use std::io;
+
+fn min_diff(index: usize, a: isize, b: isize, arr: &Vec<isize>) -> isize {
+    if index == arr.len() {
+        return (a - b).abs();
+    }
+
+    std::cmp::min(
+        min_diff(index + 1, a + arr[index], b, arr),
+        min_diff(index + 1, a, b + arr[index], arr),
+    )
+}
+
+fn main() {
+    let mut s = String::new();
+    io::stdin().read_line(&mut s).unwrap();
+    let _n = s.trim().parse::<usize>().unwrap();
+
+    let mut s = String::new();
+    io::stdin().read_line(&mut s).unwrap();
+    let arr = s
+        .trim()
+        .split_whitespace()
+        .map(|x| x.parse::<isize>().unwrap())
+        .collect::<Vec<isize>>();
+
+    println!("{}", min_diff(0, 0, 0, &arr));
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+long long min_diff(int index, long long a, long long b, vector<long long> *v) {
+    if (index == v->size()) {
+        return abs(a - b);
+    }
+
+    return min(
+        min_diff(index + 1, a + v->at(index), b, v),
+        min_diff(index + 1, a, b + v->at(index), v)
+    );
+}
+
+int main () {
+    int n;
+    cin >> n;
+
+    vector<long long> v(n);
+    for (int i=0; i<n; i++) {
+        cin >> v[i];
+    }
+
+    cout << min_diff(0, 0, 0, &v) << endl;
+}
+```
+
+</CodeTabs>

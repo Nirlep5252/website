@@ -1,0 +1,87 @@
+---
+time: 1683213732913
+---
+
+## Explanation
+
+
+
+In this problem, we are told to construct a *beautiful* permutation of `n` numbers, which is to construct a permutation such that the absolute difference between any two adjacent numbers should not be `1`.
+
+
+
+This can simply be done by first printing out all the even numbers till n in increasing order, then print out all the odd numbers in increasing order.
+
+
+
+Except, for `n = 2, 3` this problem has no solution and we need to print `NO SOLUTION`.
+
+## Code
+
+
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+n = int(input())
+
+if n in [2, 3]:
+    print("NO SOLUTION")
+else:
+    for i in range(2, n + 1, 2):
+        print(i, end=" ")
+    for i in range(1, n + 1, 2):
+        print(i, end=" ")
+    print()
+```
+
+```rust
+use std::io;
+
+fn main() {
+    let mut n = String::new();
+    io::stdin().read_line(&mut n).unwrap();
+    let n: usize = n.trim().parse().unwrap();
+
+    if n == 2 || n == 3 {
+        println!("NO SOLUTION");
+        return;
+    }
+
+    for i in (2..=n).step_by(2) {
+        print!("{} ", i);
+    }
+
+    for i in (1..=n).step_by(2) {
+        print!("{} ", i);
+    }
+    println!("");
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    int n;
+    cin >> n;
+
+    if (n == 2 || n == 3) {
+        cout << "NO SOLUTION" << endl;
+        return 0;
+    }
+
+    for (int i = 2; i <= n; i += 2) {
+        cout << i << " ";
+    }
+
+    for (int i = 1; i <= n; i += 2) {
+        cout << i << " ";
+    }
+
+    cout << endl;
+}
+```
+
+</CodeTabs>
