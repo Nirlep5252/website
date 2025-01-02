@@ -23,7 +23,16 @@ function formatDate(dateStr: string) {
   });
 }
 
+function calculateReadingTime(content: string): string {
+  const wordsPerMinute = 225;
+  const words = content.trim().split(/\s+/).length;
+  const minutes = Math.ceil(words / wordsPerMinute);
+  return `${minutes} min read`;
+}
+
 export function BlogPostCard({ post }: { post: Post }) {
+  const readingTime = calculateReadingTime(post.content);
+
   return (
     <Link href={`/posts/${post.slug}`}>
       <motion.article
@@ -54,7 +63,7 @@ export function BlogPostCard({ post }: { post: Post }) {
             </div>
             <div className="flex items-center gap-1.5">
               <Clock className="w-4 h-4" />
-              <span>5 min read</span>
+              <span>{readingTime}</span>
             </div>
           </motion.div>
           <motion.h2
