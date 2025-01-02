@@ -1,0 +1,127 @@
+---
+time: 1683614401414
+---
+
+## Explanation
+
+
+
+Here, we are given `n` children and a ferris wheel. We need to find out how many gondolas are required if each gondola can contain at most `2` children and it's weight limit is `x`.
+
+
+
+This can be solved by greedily making as many pairs of children as possible. If we can't make a pair, we put the child in a gondola alone. This is because if we put a child in a gondola with another child, the weight limit might be exceeded.
+
+
+
+We can make pairs by sorting the children by their weight and then using two pointers to find the pairs. We put one pointer at the start (lowest weight) and one at the end (highest weight) then if the pair is possible (weight of both children is less than or equal to `x`), we increment the start pointer and decrement the end pointer. Otherwise, we just decrement the end pointer.
+
+
+
+After each step, we add `1` to the gondolas count. After both pointers meet, we have the answer.
+
+## Code
+
+
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+n, x = map(int, input().split())
+children = sorted(list(map(int, input().split())))
+
+count = 0
+
+i = 0
+j = n - 1
+
+while i < j:
+    if children[i] + children[j] <= x:
+        count += 1
+        i += 1
+        j -= 1
+    else:
+        count += 1
+        j -= 1
+
+if i == j:
+    count += 1
+
+print(count)
+```
+
+```rust
+use std::io;
+
+fn main() {
+    let mut inp = String::new();
+    io::stdin().read_line(&mut inp).unwrap();
+    let v = inp
+        .trim()
+        .split(" ")
+        .map(|x| x.parse().unwrap())
+        .collect::<Vec<usize>>();
+
+    let (n, x) = (v[0], v[1]);
+
+    inp = String::new();
+    io::stdin().read_line(&mut inp).unwrap();
+    let mut children = inp
+        .trim()
+        .split(" ")
+        .map(|x| x.parse().unwrap())
+        .collect::<Vec<usize>>();
+    children.sort();
+
+    let mut count = 0;
+    let mut i = 0;
+    let mut j = n - 1;
+
+    while i < j {
+        if children[i] + children[j] <= x {
+            i += 1;
+            j -= 1;
+        } else {
+            j -= 1;
+        }
+
+        count += 1;
+    }
+    if i == j {
+        count += 1;
+    }
+
+    println!("{count}");
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    int n, x;
+    cin >> n >> x;
+
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) cin >> a[i];
+    sort(a.begin(), a.end());
+
+    int count = 0, i = 0, j = n - 1;
+    while (j > i) {
+        if (a[i] + a[j] <= x) {
+            count++;
+            i++;
+            j--;
+        } else {
+            count++;
+            j--;
+        }
+    }
+    if (i == j) count++;
+
+    cout << count << endl;
+}
+```
+
+</CodeTabs>

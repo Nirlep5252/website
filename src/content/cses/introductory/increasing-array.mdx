@@ -1,0 +1,98 @@
+---
+time: 1683211301912
+---
+
+## Explanation
+
+
+
+In this problem, we are provided with an array containing `n` positive integers. Our task is to make this array *non-decreasing* by only applying the following move *minimum* number of times.
+
+
+
+**Move:** Add `1` to any element of the array.
+
+
+
+This can be done by comparing `arr[i]` and `arr[i - 1]` where `i` ranges from `1` to `n - 1`.
+If `arr[i]` is less than `arr[i - 1]` we will add `1` to `arr[i]` `arr[i - 1] - arr[i]` times.
+
+
+
+We'll add `arr[i - 1] - arr[i]` to a `moves` variable everytime we perform this.
+
+## Code
+
+
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+n = int(input())
+arr = list(map(int, input().split()))
+
+moves = 0
+
+for i in range(1, n):
+    if arr[i] < arr[i - 1]:
+        moves += arr[i - 1] - arr[i]
+        arr[i] = arr[i - 1]
+
+print(moves)
+```
+
+```rust
+use std::io;
+
+fn main() {
+    let mut n = String::new();
+    io::stdin().read_line(&mut n).unwrap();
+    let n: usize = n.trim().parse().unwrap();
+
+    let mut arr = String::new();
+    io::stdin().read_line(&mut arr).unwrap();
+    let mut arr: Vec<usize> = arr
+        .split_whitespace()
+        .map(|s| s.parse().unwrap())
+        .collect();
+
+    let mut moves = 0;
+
+    for i in 1..n {
+        if arr[i] < arr[i - 1] {
+            moves += arr[i - 1] - arr[i];
+            arr[i] = arr[i - 1];
+        }
+    }
+
+    println!("{}", moves);
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    int n;
+    cin >> n;
+
+    vector<int> arr(n);
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    long long moves = 0;
+    for (int i = 1; i < n; i++) {
+        if (arr[i] < arr[i - 1]) {
+            moves += arr[i - 1] - arr[i];
+            arr[i] = arr[i - 1];
+        }
+    }
+
+    cout << moves << endl;
+}
+```
+
+</CodeTabs>

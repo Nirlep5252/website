@@ -1,0 +1,99 @@
+---
+time: 1685424763585
+---
+
+## Explanation
+
+
+
+Here, we are given `n` tasks, with their durations and deadlines. The reward for completing each task is `deadline - finish_time` and we want to maximize the total reward.
+
+
+
+This is simple. Just do the tasks that take the least time first. This way we can complete the most tasks and get the most reward.
+
+## Code
+
+
+
+<CodeTabs langs={["Python", "Rust", "C++"]}>
+
+```python
+input = __import__("sys").stdin.readline # To avoid TLE just because of slow input
+tasks = sorted([tuple(map(int, input().split())) for _ in range(int(input()))])
+
+reward = 0
+time = 0
+
+for duration, deadline in tasks:
+    time += duration
+    reward += deadline - time
+
+print(reward)
+```
+
+```rust
+use std::io;
+
+fn main() {
+    let mut tasks = vec![];
+    for _ in 0..scan::<usize>() {
+        tasks.push(scan_vec::<isize>());
+    }
+    tasks.sort();
+
+    let mut reward = 0;
+    let mut time = 0;
+    for task in tasks {
+        time += task[0];
+        reward += task[1] - time;
+    }
+
+    println!("{reward}");
+}
+
+fn scan_vec<T: std::str::FromStr>() -> Vec<T> {
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).unwrap();
+    input
+        .trim()
+        .split_whitespace()
+        .map(|x| x.parse().ok().unwrap())
+        .collect()
+}
+
+fn scan<T: std::str::FromStr>() -> T {
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).unwrap();
+    input.trim().parse().ok().unwrap()
+}
+```
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    int n;
+    cin >> n;
+
+    vector<pair<int, int>> tasks;
+    while (n--) {
+        int a, b;
+        cin >> a >> b;
+        tasks.push_back({a, b});
+    }
+    sort(tasks.begin(), tasks.end());
+
+    long long reward = 0, time = 0;
+    for (auto task : tasks) {
+        time += task.first;
+        reward += task.second - time;
+    }
+
+    cout << reward << endl;
+    return 0;
+}
+```
+
+</CodeTabs>
