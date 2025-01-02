@@ -9,10 +9,10 @@ import MDXComponents from "@/app/components/MDXComponents";
 import Link from "next/link";
 
 interface Props {
-  params: {
+  params: Promise<{
     category: string;
     problem: string;
-  };
+  }>;
 }
 
 interface PreProps {
@@ -42,7 +42,7 @@ function formatDate(timestamp: number): string {
 }
 
 export default async function ProblemPage({ params }: Props) {
-  const { category, problem } = params;
+  const { category, problem } = await params;
   const filePath = path.join(process.cwd(), `src/content/cses/${category}/${problem}.mdx`);
   
   if (!fs.existsSync(filePath)) {
