@@ -4,17 +4,11 @@ time: 1683692482279
 
 ## Explanation
 
-
-
 In this problem, `n` customers enter and leave a store at different times. We want to find the maximum number of customers in the store at any given time.
-
-
 
 This can be done by storing the entering times as a tuple/pair of `(enter_time, 1)` and the leaving times as a tuple/pair of `(leave_time, -1)`. Then, we sort the list of tuples/pairs by the first element of each tuple/pair. This way, we can iterate through the list of tuples/pairs and keep track of the number of customers in the store at any given time.
 
 ## Code
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

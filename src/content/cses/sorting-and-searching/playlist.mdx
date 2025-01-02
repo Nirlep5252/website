@@ -4,17 +4,11 @@ time: 1683781049599
 
 ## Explanation
 
-
-
 Here, we are given an array and we need to find the length of the longest contiguous subarray with no duplicate elements.
-
-
 
 This can be done using a set and the two pointers method. We'll put both of the pointers at the start of the array, and increase the 2nd pointer if the element at the 2nd pointer is not in the set. If it is in the set, we'll remove the element at the 1st pointer from the set and increase the 1st pointer. We'll keep track of the maximum length of the set and return it.
 
 ## Code
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

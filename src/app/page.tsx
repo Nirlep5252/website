@@ -10,7 +10,7 @@ const Sparkles = dynamic(
   () => import("./components/ui/Sparkles").then((mod) => mod.Sparkles),
   {
     ssr: false,
-  }
+  },
 );
 
 const MotionLink = motion.create(Link);

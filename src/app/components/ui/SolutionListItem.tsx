@@ -12,18 +12,22 @@ interface Solution {
 }
 
 function formatDate(timestamp: number): string {
-  return new Date(timestamp).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
+  return new Date(timestamp).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
   });
 }
 
-export function SolutionListItem({ solution, index }: { solution: Solution; index: number }) {
+export function SolutionListItem({
+  solution,
+  index,
+}: {
+  solution: Solution;
+  index: number;
+}) {
   return (
-    <Link 
-      href={`/adventures/cses/${solution.category}/${solution.name}`}
-    >
+    <Link href={`/adventures/cses/${solution.category}/${solution.name}`}>
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -41,4 +45,4 @@ export function SolutionListItem({ solution, index }: { solution: Solution; inde
       </motion.div>
     </Link>
   );
-} 
+}

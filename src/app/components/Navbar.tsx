@@ -13,11 +13,11 @@ const navItems = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  
+
   return (
     <Container>
       {navItems.map((item) => (
-        <NavLink 
+        <NavLink
           key={item.path}
           href={item.path}
           isActive={
@@ -31,4 +31,4 @@ export default function Navbar() {
       ))}
     </Container>
   );
-} 
+}

@@ -4,18 +4,16 @@ time: 1683088240644
 
 ## Explanation
 
-
 Here, we are given a number `n` and we need to apply the following operations on it:
 
 - **number is odd?** : multiply by 3 and add 1
 - **number is even?** : divide by 2
 
-And we need to apply those until the number `n` becomes `1`. 
+And we need to apply those until the number `n` becomes `1`.
 
 This can be solved by a simple `while` loop and implementing the operations.
 
 ## Code
-
 
 <CodeTabs langs={["Python", "C++", "Rust"]} >
 
@@ -53,7 +51,7 @@ use std::io;
 fn main() {
     let mut s = String::new();
     io::stdin().read_line(&mut s).unwrap();
-  
+
     let mut n: usize = s.trim().parse().unwrap();
 
     while n > 1 {

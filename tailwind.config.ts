@@ -29,64 +29,64 @@ const config: Config = {
         text: {
           DEFAULT: "var(--color-text)",
           dimmed: "var(--color-text-dimmed)",
-        }
+        },
       },
       typography: {
         DEFAULT: {
           css: {
-            maxWidth: '100ch',
-            color: 'white',
+            maxWidth: "100ch",
+            color: "white",
             a: {
-              color: '#3182ce',
-              '&:hover': {
-                color: '#2c5282',
+              color: "#3182ce",
+              "&:hover": {
+                color: "#2c5282",
               },
             },
             strong: {
-              color: 'white',
+              color: "white",
             },
-            'ol > li::marker': {
-              color: 'white',
+            "ol > li::marker": {
+              color: "white",
             },
-            'ul > li::marker': {
-              color: 'white',
+            "ul > li::marker": {
+              color: "white",
             },
             hr: {
-              borderColor: 'white',
+              borderColor: "white",
             },
             blockquote: {
-              color: 'white',
-              borderLeftColor: '#3182ce',
+              color: "white",
+              borderLeftColor: "#3182ce",
             },
             h1: {
-              color: 'white',
+              color: "white",
             },
             h2: {
-              color: 'white',
+              color: "white",
             },
             h3: {
-              color: 'white',
+              color: "white",
             },
             h4: {
-              color: 'white',
+              color: "white",
             },
             code: {
-              color: 'white',
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
-              borderRadius: '0.25rem',
-              padding: '0.2rem 0.4rem',
+              color: "white",
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              borderRadius: "0.25rem",
+              padding: "0.2rem 0.4rem",
             },
-            'code::before': {
+            "code::before": {
               content: '""',
             },
-            'code::after': {
+            "code::after": {
               content: '""',
             },
             pre: {
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
               code: {
-                backgroundColor: 'transparent',
-                padding: '0',
+                backgroundColor: "transparent",
+                padding: "0",
               },
             },
           },

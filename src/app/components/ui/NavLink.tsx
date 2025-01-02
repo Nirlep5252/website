@@ -12,7 +12,7 @@ interface NavLinkProps {
 
 export function NavLink({ href, isActive, children }: NavLinkProps) {
   return (
-    <Link 
+    <Link
       href={href}
       className="relative flex items-center justify-center h-8 px-4"
     >
@@ -23,7 +23,7 @@ export function NavLink({ href, isActive, children }: NavLinkProps) {
           transition={{
             type: "spring",
             bounce: 0.15,
-            duration: 0.5
+            duration: 0.5,
           }}
         />
       )}
@@ -35,9 +35,7 @@ export function NavLink({ href, isActive, children }: NavLinkProps) {
       >
         <span
           className={`text-[13px] font-medium transition-colors duration-200 ${
-            isActive 
-              ? "text-text" 
-              : "text-text-dimmed hover:text-text"
+            isActive ? "text-text" : "text-text-dimmed hover:text-text"
           }`}
         >
           {children}
@@ -49,11 +47,11 @@ export function NavLink({ href, isActive, children }: NavLinkProps) {
             transition={{
               type: "spring",
               stiffness: 300,
-              damping: 30
+              damping: 30,
             }}
           />
         )}
       </motion.div>
     </Link>
   );
-} 
+}

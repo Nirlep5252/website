@@ -4,29 +4,19 @@ time: 1683563283972
 
 ## Explanation
 
-
-
-Here, we have `n` applicants and `m` apartments. Each applicant has a desired size range of `[ai - k, ai + k]` where `ai` is the `i`th element of the array `a` which contains the desired size of each applicant. 
-
-
+Here, we have `n` applicants and `m` apartments. Each applicant has a desired size range of `[ai - k, ai + k]` where `ai` is the `i`th element of the array `a` which contains the desired size of each applicant.
 
 Also, we are provided `b` which is the list of sizes of each apartment.
-
-
 
 This problem can be solved by sorting both arrays then comparing their first elements. If their difference is less than or equal to `k`, then increase the count and move on to the next element of both arrays.
 
 Otherwise, if the difference is greater than `k` and the apartment size is greater than the desired size, then we will move on to the next element in the applicant's array, as that applicant will never be able to have the apartment of his desired size.
 
-If the apartment size is less than the desired size, then we'll move on to the next element in the apartment array, as it is possible to have an apartment that matches the desired size of the applicant. 
-
-
+If the apartment size is less than the desired size, then we'll move on to the next element in the apartment array, as it is possible to have an apartment that matches the desired size of the applicant.
 
 Simply repeat the process until we reach the end of one of the array.
 
 ## Code
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

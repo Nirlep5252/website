@@ -10,12 +10,19 @@ export default async function Adventures() {
     {
       title: "CSES Problem Set",
       date: "2023 - Present",
-      description: "My journey through the CSES Problem Set - a collection of competitive programming problems. This is a long-term adventure where I solve algorithmic problems, learn new concepts, and improve my problem-solving skills.",
+      description:
+        "My journey through the CSES Problem Set - a collection of competitive programming problems. This is a long-term adventure where I solve algorithmic problems, learn new concepts, and improve my problem-solving skills.",
       progress: csesStats.progress,
       solvedPercentage,
-      tags: ["Dynamic Programming", "Graph Algorithms", "Tree Algorithms", "Mathematics", "String Algorithms"],
+      tags: [
+        "Dynamic Programming",
+        "Graph Algorithms",
+        "Tree Algorithms",
+        "Mathematics",
+        "String Algorithms",
+      ],
       link: "https://cses.fi/user/151151/",
-    }
+    },
   ];
 
   return (
@@ -30,4 +37,4 @@ export default async function Adventures() {
       </div>
     </main>
   );
-} 
+}

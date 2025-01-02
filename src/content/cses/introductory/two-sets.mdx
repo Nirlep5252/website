@@ -4,21 +4,13 @@ time: 1683298404909
 
 ## Explanation
 
-
-
 In this problem, we are provided a number `n` and we need to divide the array from `1` to `n` into two parts such that the sum of the elements in the first part is equal to the sum of the elements in the second part or print `NO` if it isn't possible.
-
-
 
 We can do this by checking if the value `(n * (n + 1)) / 2` is divisible by `2`. If it is, then we output `YES` otherwise we will output `NO`.
 
-
-
 If the sum is divisible by `2`, then first we will find the first part of the array. We will intialize the variable `sum` with the value `(n * (n + 1)) / 4`. Then we will check if `sum` is greater than `n`. If it is, then we will subtract `n` from `sum` and add `n` to the first part of the array, also we will reduce `n` by `1`.
 
-## Code 
-
-
+## Code
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

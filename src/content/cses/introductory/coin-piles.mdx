@@ -4,26 +4,16 @@ time: 1683304821893
 
 ## Explanation
 
-
-
-Here, we are provided with 2 piles of coins, containing `a` and `b` coins. Now, we can remove `1` coin from any pile and `2` coins from the other pile. 
+Here, we are provided with 2 piles of coins, containing `a` and `b` coins. Now, we can remove `1` coin from any pile and `2` coins from the other pile.
 We need to find whether it is possible to empty both of the piles by doing the above step any number of times.
-
-
 
 Now, on each move, we are removing a total of `3` coins. So, if the total number of coins is not divisible by `3`, then it is not possible to empty both the piles.
 
-
-
 Also, if one pile contains more than twice the coins from the other pile, then the smaller pile will be emptied before the bigger one. Hence, it is not possible to empty both the piles.
-
-
 
 Otherwise, it is possible to empty both the piles.
 
 ## Code
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

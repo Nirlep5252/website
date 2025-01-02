@@ -10,25 +10,31 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
 
   if (!post) {
     return {
       title: "Post Not Found",
-      description: "The requested blog post could not be found."
+      description: "The requested blog post could not be found.",
     };
   }
 
   return {
     title: `${post.title} | Nirlep's Blog`,
-    description: post.description || `Read about ${post.title} and explore insights on software development, programming, and technology.`,
+    description:
+      post.description ||
+      `Read about ${post.title} and explore insights on software development, programming, and technology.`,
     keywords: [...(post.tags || []), "blog", "programming", "tech", "tutorial"],
     authors: [{ name: "Nirlep" }],
     openGraph: {
       title: post.title,
-      description: post.description || `Read about ${post.title} and explore insights on software development.`,
+      description:
+        post.description ||
+        `Read about ${post.title} and explore insights on software development.`,
       type: "article",
       publishedTime: post.date,
       tags: post.tags,
@@ -36,8 +42,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     twitter: {
       card: "summary_large_image",
       title: post.title,
-      description: post.description || `Read about ${post.title} and explore insights on software development.`,
-    }
+      description:
+        post.description ||
+        `Read about ${post.title} and explore insights on software development.`,
+    },
   };
 }
 
@@ -52,17 +60,22 @@ export default async function BlogPost({ params }: PageProps) {
   return (
     <main className="min-h-screen text-white pt-20">
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <Link 
-          href="/posts" 
+        <Link
+          href="/posts"
           className="inline-flex items-center text-blue-400 hover:text-blue-300 mb-8 group"
         >
-          <svg 
-            className="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" 
-            fill="none" 
-            stroke="currentColor" 
+          <svg
+            className="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform"
+            fill="none"
+            stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
           </svg>
           Back to Posts
         </Link>
@@ -83,10 +96,7 @@ export default async function BlogPost({ params }: PageProps) {
               </div>
             </div>
             <div className="prose prose-invert prose-lg">
-              <MDXRemote 
-                source={post.content} 
-                components={MDXComponents} 
-              />
+              <MDXRemote source={post.content} components={MDXComponents} />
             </div>
           </article>
         </AnimatedPost>

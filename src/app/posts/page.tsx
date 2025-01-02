@@ -5,18 +5,27 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Blog Posts | Nirlep's Personal Blog",
-  description: "Read my latest thoughts, tutorials, and experiences on software development, programming, and technology. Discover in-depth articles about coding, tech, and personal projects.",
-  keywords: ["blog", "programming", "software development", "tech articles", "coding tutorials"],
+  description:
+    "Read my latest thoughts, tutorials, and experiences on software development, programming, and technology. Discover in-depth articles about coding, tech, and personal projects.",
+  keywords: [
+    "blog",
+    "programming",
+    "software development",
+    "tech articles",
+    "coding tutorials",
+  ],
   openGraph: {
     title: "Blog Posts | Nirlep's Personal Blog",
-    description: "Read my latest thoughts, tutorials, and experiences on software development and technology.",
+    description:
+      "Read my latest thoughts, tutorials, and experiences on software development and technology.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Blog Posts | Nirlep's Personal Blog",
-    description: "Read my latest thoughts, tutorials, and experiences on software development and technology.",
-  }
+    description:
+      "Read my latest thoughts, tutorials, and experiences on software development and technology.",
+  },
 };
 
 export default async function Posts() {
@@ -39,4 +48,4 @@ export default async function Posts() {
       </div>
     </main>
   );
-} 
+}

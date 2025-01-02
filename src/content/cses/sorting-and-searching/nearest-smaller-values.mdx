@@ -4,21 +4,13 @@ time: 1685539142900
 
 ## Explanation
 
-
-
 Here, we are given an array and we need to find the closest value to it's left that is smaller than itself. We need to output it's position if it exists, otherwise output `0`.
 
-
-
 This can be done using a stack and popping all the elements greater than or equal to the current element, and outputting the smaller element's index.
-
-
 
 This is because the greater values to the left side of a value will never be used, hence they can popped.
 
 ## Code
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

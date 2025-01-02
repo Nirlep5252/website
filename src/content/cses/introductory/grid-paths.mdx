@@ -4,68 +4,50 @@ time: 1685070296782
 
 ## Explanation
 
-
-
 Here, we are given a 7 x 7 grid and an incomplete path that goes from the top left corner to the bottom left corner. We need to find the number of paths matching with the incomplete path.
-
-
 
 The approach for this would be a backtracking algorithm where we will try to find all the possible paths and check if they match with the incomplete path. If they do, we will increment the count.
 But, this approach will take a lot of time and will not be efficient.
 
-
-
 So, we'll apply 3 optimizations on it to make it efficient and finish under 1 second.
-
-
 
 Sources: [USACO Guide](https://usaco.guide/problems/cses-1625-grid-paths/solution), [CSES Book](https://cses.fi/book/book.pdf)
 
 ## Optimizations
 
-
-
 ### 1. Finish too early.
 
 If we reach the bottom-left cell before all the other cells are visited then we can not consider that path and move on before checking all the cells.
-
-
 
 ### 2. Spliting the grid.
 
 If we reach a cell after which we are able to move in only one axis and not the other axis, that means we will never be able to travel all the cells. So, we can stop there and move on to the next path.
 
-
-
 **Example:**
 
-<img src="https://media.discordapp.net/attachments/1010432704434667524/1111495162431021086/image.png" width="500px" />
+<img
+  src="https://media.discordapp.net/attachments/1010432704434667524/1111495162431021086/image.png"
+  width="500px"
+/>
 
 Here, we won't be able to travel both sides of the grid. So, we can stop here and move on to the next path.
-
-
 
 ### 3. Dead Ends.
 
 If we have a few cells to travel to and one of the cell is surrounded by 3 walls (including the current), then we must travel to that one, otherwise we won't be able to travel it later on.
 
-
-
 **Example:**
 
-<img src="https://media.discordapp.net/attachments/1010432704434667524/1111496551479644160/image.png" width="500px" />
+<img
+  src="https://media.discordapp.net/attachments/1010432704434667524/1111496551479644160/image.png"
+  width="500px"
+/>
 
 Here, after reach (6, 1) we have 2 choices, either **DOWN** or **RIGHT**. If we choose **DOWN**, then the (7, 1) path will become a dead end, and returning after visiting that would be impossible. Thus we must choose **RIGHT** to avoid that.
 
-
-
 ## Code
 
-
-
 Unfortunately, I was not able to solve this problem in Python. So, I have provided the solution in Rust and C++.
-
-
 
 <CodeTabs langs={["Rust", "C++"]}>
 

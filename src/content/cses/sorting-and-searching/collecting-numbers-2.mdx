@@ -4,26 +4,16 @@ time: 1683776503725
 
 ## Explanation
 
-
-
 This problem is an extension of **Collecting Numbers**. Here, we are given `m` operations after the array, where elements at positions `a` and `b` are swapped and we need to find the number of trips after each operation.
-
-
 
 This can be done by first calculating the count of the entire array before any operation is applied (check previous problem). Then for each operation, get the count of the trips added for pairs `[(num1 - 1, num1), (num1, num1 + 1), (num2 - 1, num2), (num2, num2 + 1)]`.
 
-
-
 Then swap the 2 numbers. And get the count of the trips for those pairs again. Subtrack the previous count from the new count and add it to the answer.
-
-
 
 Unfortunately, this approach is slow and it results in a TLE verdict for Python. However, it passes for Rust and C++ (barely).\
 I'll try my best to come up with a better approach and update this post soon.
 
 ## Code
-
-
 
 <CodeTabs langs={["Rust", "C++"]}>
 

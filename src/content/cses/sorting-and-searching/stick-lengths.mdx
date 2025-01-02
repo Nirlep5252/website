@@ -4,21 +4,13 @@ time: 1683736012220
 
 ## Explanation
 
-
-
 Here, we are given `n` sticks and we can either increase or decrease a stick's length by `1` which is counted as one operator. We need to find the minimum number of operators required to make all the sticks of equal length.
 
-
-
 This can be done using median of the array. We can find the median of the array and then calculate the number of operators required to make all the sticks equal to the median. The number of operators required will be the sum of absolute difference of each stick with the median.
-
-
 
 If 2 medians exist then we can calculate the number of operators required for both the medians and then output the minimum of the two.
 
 ## Code
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

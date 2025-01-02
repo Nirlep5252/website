@@ -12,4 +12,4 @@ export function AnimatedPost({ children }: { children: React.ReactNode }) {
       {children}
     </motion.div>
   );
-} 
+}

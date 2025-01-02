@@ -4,45 +4,33 @@ time: 1683214424843
 
 ## Explanation
 
-
-
 In this problem, we are given a grid with a specific pattern and we need to identify the element in the cell `(x, y)`.
 
-
-
-<img className="m-auto" width="300px" src="https://cses.fi/file/bba36f2601b99c7edc15865aa2a49e680a271075f30e86aa0e4e18d00a779c21" />
-
-
+<img
+  className="m-auto"
+  width="300px"
+  src="https://cses.fi/file/bba36f2601b99c7edc15865aa2a49e680a271075f30e86aa0e4e18d00a779c21"
+/>
 
 Here, the first row follows this pattern:
+
 <div className="mt-2" />
-```haskell
-1    2    9    10     25 ...
-  +1   +7   +1    +15 ...
-```
+```haskell 1 2 9 10 25 ... +1 +7 +1 +15 ... ```
 <div className="mt-2" />
 
 The difference between adjacent elements in the first row alternates between `1` and `7 + (8 * (n / 2 - 1))`, where `n` is the row number.
 
 Similarly, the different between adjacent elements in the first column alternates between `3 + (8 * (n / 2 - 1))` and `1`, where `n` is the column number.
 
-
-
 As you may have noticed, moving down the first row it adds `1` to the number if the row number is even, otherwise it subtracts `1`.
 This pattern follows until the column number is greater than the row number.
 
-
-
 Similary, moving right from the first column, it adds `1` to the number if the column number is odd, otherwise it subtracts `1`.
 
-
-
-After finding `i`th element of the first row, we can just move down the column and find the `j`th element of the `i`th row, as long as `j` is less than `i`. 
+After finding `i`th element of the first row, we can just move down the column and find the `j`th element of the `i`th row, as long as `j` is less than `i`.
 Otherwise, we'll find the `j`th element of the first column and move right to find the `i`th element of the `j`th column.
 
 ## Code
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

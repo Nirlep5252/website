@@ -4,17 +4,11 @@ time: 1685422366318
 
 ## Explanation
 
-
-
 Here, we are given `n` machines that takes certain seconds each to make a single product. We need to find the minimum time required to make `t` products. It is given that the machines can work simultaneously.
-
-
 
 We can use binary search to find the minimum time required. And we can calculate the number of products for a given time using the following formula: `time / machine1 + time / machine2 + ... + time / machinen >= t`
 
 ## Code
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

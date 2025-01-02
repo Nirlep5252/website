@@ -4,35 +4,21 @@ time: 1685425842216
 
 ## Explanation
 
-
-
 Here, we are given `n` books and time required to read each book. 2 girls are trying to read all the books individually. They can read different books simultaneously, but they cannot read the same book at the same time. We need to find the minimum time required to read all the books.
-
-
 
 We can do this using **Two Pointers**, we can put one at the start of the array, representing the 1st girl, and we can put the 2nd pointer at the right side, representing the 2nd girl.
 
-
-
-Then, we'll keep track of how much time they have spent reading books, and move the pointer of the girl that has the less time, as she is behind the other girl. 
-
-
+Then, we'll keep track of how much time they have spent reading books, and move the pointer of the girl that has the less time, as she is behind the other girl.
 
 Once, they reach at the same book, we'll check the difference between times of the books. If the difference is greater than the current book that means that one of the girl is reading too fast, and will now have to wait until the slower girl finishes reading the book. So, we'll add the wait time, which is `difference - books[i]`. Otherwise, we'll just add `books[i]` to any one of the times.
-
-
 
 Finally, we'll return the `time1 + time2`.
 
 ## Edge Case:
 
-
-
 For `n == 1`, we'll just return `books[0] * 2`.
 
 ## Code
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

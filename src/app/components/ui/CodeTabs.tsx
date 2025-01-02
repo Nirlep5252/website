@@ -31,25 +31,26 @@ export function CodeTabs({ langs, children }: CodeTabsProps) {
 
   const childArray = React.Children.toArray(children);
   const codes = childArray
-    .filter(child => 
-      typeof child === 'object' && 
-      child !== null && 
-      'type' in child && 
-      (child as { type: string }).type === 'code'
+    .filter(
+      (child) =>
+        typeof child === "object" &&
+        child !== null &&
+        "type" in child &&
+        (child as { type: string }).type === "code",
     )
-    .map(child => (child as CodeElement).props.children);
+    .map((child) => (child as CodeElement).props.children);
 
   if (codes.length === 0) {
-    console.log('No codes found!');
+    console.log("No codes found!");
     return null;
   }
 
   const getLanguageIdentifier = (lang: string) => {
     // Map display names to Prism.js language identifiers
     const langMap: Record<string, string> = {
-      'C++': 'cpp',
-      'Python': 'python',
-      'Rust': 'rust'
+      "C++": "cpp",
+      Python: "python",
+      Rust: "rust",
     };
     return langMap[lang] || lang.toLowerCase();
   };
@@ -60,7 +61,7 @@ export function CodeTabs({ langs, children }: CodeTabsProps) {
         {langs.map((lang, index) => (
           <button
             key={lang}
-            ref={el => {
+            ref={(el) => {
               tabsRef.current[index] = el;
             }}
             onClick={() => setActiveTab(index)}
@@ -78,12 +79,12 @@ export function CodeTabs({ langs, children }: CodeTabsProps) {
           initial={false}
           animate={{
             left: tabBounds.left,
-            width: tabBounds.width
+            width: tabBounds.width,
           }}
           transition={{
             type: "spring",
             stiffness: 400,
-            damping: 30
+            damping: 30,
           }}
         />
       </div>
@@ -103,4 +104,4 @@ export function CodeTabs({ langs, children }: CodeTabsProps) {
       </AnimatePresence>
     </div>
   );
-} 
+}

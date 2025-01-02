@@ -4,33 +4,19 @@ time: 1685416410024
 
 ## Explanation
 
-
-
 Here, in this problem we are given `n` ranges and we need to find out whether each range contains some other range and whether each range is contained by some other range.
-
-
 
 We can solve this problem by sorting the ranges by their **start points in ascending order**, and their **end points in descending order** (when their start points are same). Then we can also maintain a multiset of start points and end points.
 
-
-
 Now, first we will iterate over the ranges in the sorted order. For each range, we will remove the end point of the range from the multiset of end points. Then we will find the end point in the multiset of end points that is less than the or equal to the end point of the current range. If there is no such end point, then we can say that the current range contains no other range. Otherwise, we can say that the current range contains some other range.
-
-
 
 Similarly, we can do this for the 2nd part of the problem, except we will check for points greater than or equal to the current one.
 
 ## Code
 
-
-
 I was unable to find a way to solve this problem in Rust and Python, because they do not contain built-in data structures like `multiset` in C++. And my own implementations of `multiset` in Rust and Python were too slow to pass the time limit.
 
-
-
 However, I'll keep this post updated as soon as I find a way to solve this problem in Rust and Python.
-
-
 
 <CodeTabs langs={["C++"]}>
 

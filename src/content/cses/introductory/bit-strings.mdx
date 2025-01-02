@@ -1,24 +1,16 @@
 ---
-time: 1683301360465 
+time: 1683301360465
 ---
 
 ## Explanation
 
-
-
 In this problem, we need to calculate the total number of possible bit strings of length `n`.
 
-
-
 This is nothing but `2 ^ n`. Except, the `n` can be very large (upto `10 ^ 6`), and we need to print the final answer modulo `10 ^ 9 + 7`.
-
-
 
 So, to solve this, we'll just loop from `1` to `n` and multiply the answer with `2` in each iteration. And, we'll take the modulo of the answer with `10 ^ 9 + 7` in each iteration.
 
 ## Code
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 
@@ -70,6 +62,5 @@ int main () {
     return 0;
 }
 ```
-
 
 </CodeTabs>

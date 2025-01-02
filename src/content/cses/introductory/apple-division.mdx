@@ -4,8 +4,6 @@ time: 1683387026417
 
 ## Explanation
 
-
-
 In this problem, we are given an array and we need to divide it in 2 parts such that the difference between both parts is minimum.
 
 Now, looking at the constraints (`1 <= n <= 20`) we can see that this can be done using brute force.
@@ -14,15 +12,9 @@ So, using recursion we will explore each possibility and return the minimum diff
 
 ## Code
 
-
-
 Here, we are using two variables `a` and `b` in our recursive function. These variables will store the sum of elements in the two sets we are creating.
 
-
-
 After each call, we either add the next element in the set `a` or in the set `b`. And we keep on increasing the index of the array. When the index reaches the end of the array, we return the absolute difference between the two sets.
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 
@@ -39,7 +31,7 @@ def min_diff(index: int, set_a: int, set_b: int) -> int:
         return abs(set_a - set_b)
 
     return min(
-        min_diff(index + 1, set_a + arr[index], set_b), 
+        min_diff(index + 1, set_a + arr[index], set_b),
         min_diff(index + 1, set_a, set_b + arr[index])
     )
 

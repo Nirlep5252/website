@@ -4,21 +4,13 @@ time: 1683860717658
 
 ## Explanation
 
-
-
 Here, we have `x` positions on a street. At first, there are no lights on any positions and the maximum distance without lights is `x`. Now, lights are added to some positions. Now, we need to find out the maximum distance without lights.
 
-
-
 This can be done using a sorted set to maintain the lights positions, a sorted set to maintain the differences and a map for its counts. Firstly, when a light is added we will try to find a light on its left and right. Then we will remove the difference `right - left` from the set. Also we will add `curr_light - left` and `right - curr_light` to the set. We will also update the map and the positions set accordingly.
-
-
 
 After each light, we will just output the maximum element of the differences set.
 
 ## Code
-
-
 
 <CodeTabs langs={["Rust", "C++"]}>
 

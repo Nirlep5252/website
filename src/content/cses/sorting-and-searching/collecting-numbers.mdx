@@ -4,11 +4,7 @@ time: 1683775647709
 
 ## Explanation
 
-
-
 Here, in this problem, we are given an array of numbers which contains numbers from 1 to N. We are told to take trips from left to right of the array and collect whatever numbers appear in increasing order. We need to find out how many trips we need to take to collect all the numbers from 1 to N.
-
-
 
 Let's take an example. Suppose we have an array `[3, 1, 2, 4]`. We can collect the numbers in the following order:
 
@@ -17,17 +13,11 @@ Let's take an example. Suppose we have an array `[3, 1, 2, 4]`. We can collect t
 
 So, we need to take 2 trips to collect all the numbers from 1 to 4.
 
-
-
 Now, we can solve this using a simple observation. For every pair of numbers, if the first number appears after the second number then we'll need an extra trip. For example, in the above array, for the pair `(2, 3)`, 2 appears after 3. So, we'll need an extra trip that we would have needed otherwise (which would default to `1`).
-
-
 
 So, our answer would be: `1 + (number of pairs where first number appears after second number)`.
 
 ## Code
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

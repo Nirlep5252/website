@@ -4,17 +4,11 @@ time: 1683733035710
 
 ## Explanation
 
-
-
 In this problem, we are given an array and we need to find the maximum sum of values of a contiguous non-empty subarray.
-
-
 
 We can iterate through the array and keep track of the current sum of the subarray. If the `sum + next_element` is greater than the `next_element`, then we can add the `next_element` to the `sum`. Otherwise, we can set the `sum` to the `next_element`. We can also keep track of the maximum sum of the subarray and update it if the `sum` is greater than the `max_sum`.
 
 ## Code
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

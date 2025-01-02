@@ -4,29 +4,17 @@ time: 1683604663460
 
 ## Explanation
 
-
-
 Here, we need to find the digit at `k`th position in an infinite sequence of numbers formed by concatenating the natural numbers.
-
-
 
 This can be solved by observing the pattern that, the first `9` numbers are single digit numbers, the next `90` numbers are 2 digit numbers, the next `900` numbers are 3 digit numbers and so on.
 
 ## Code
 
-
-
 Here, we'll first figure out how many digits the number is going to have. Then, we'll figure out which number it is going to be. Finally, we'll figure out which digit it is going to be.
-
-
 
 The first step can be done by precomputing the prefix sum of the number of digits in the numbers. Then, we can iterate over the prefix sum to find the number of digits in the number.
 
-
-
 The variable `pref` will contain an array similar to this: `[0, 9, 9 + 2*90, 9 + 2*90 + 3*900, ...]`
-
-
 
 <CodeTabs langs={["Python", "Rust"]}>
 

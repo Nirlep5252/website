@@ -4,26 +4,16 @@ time: 1683566481986
 
 ## Explanantion
 
-
-
 This problem can be solved using the [Backtracking](https://en.wikipedia.org/wiki/Backtracking) algorithm.
-
-
 
 <img width="800px" src="https://i.imgur.com/hh6heQV.png" />
 *Source: [CSES Book](https://cses.fi/book/book.pdf) (Page: 50)*
 
-
-
 Here, we'll first try and place the first queen in all the cells in the first row, then for each queen placed in the first row we'll place the queens in the possible cells in the second row and so on. We'll break the recursion if we're unable to place a queen in any of the cells in a row.
-
-
 
 If are able to place all the queens in the board, we'll increment the `count` by one.
 
 ## Code
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

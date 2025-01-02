@@ -4,17 +4,11 @@ time: 1683797639727
 
 ## Explanation
 
-
-
 Here, we are given `n` cubes and we need to build towers using them. We can only place a smaller cube on top of a larger cube. We need to process the cubes in the given order. We need to find the minimum number of towers we can build using all the cubes.
-
-
 
 This can be done using partition point. We can maintain a vector of the top cubes of the towers we have built so far. Then for the next cube we are given to place, we will find the maximum top cube that is smaller than the current cube. If we find one, we will place the current cube on top of that cube. If we don't find one, we will create a new tower with the current cube as the top cube. We will do this for all the cubes and the number of towers we have built will be the answer.
 
 ## Code
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

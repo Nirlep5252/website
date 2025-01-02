@@ -4,29 +4,17 @@ time: 1685420251483
 
 ## Explanation
 
-
-
-Here, `n` customers arrive and they occupy a room they are given and stay from `a` to `b`. We need to allocate rooms such that each customer stays in one room and we also need to output the maximum number of rooms occupied at a single time. 
-
-
+Here, `n` customers arrive and they occupy a room they are given and stay from `a` to `b`. We need to allocate rooms such that each customer stays in one room and we also need to output the maximum number of rooms occupied at a single time.
 
 We can do this by first sorting the customers and then creating a `multiset` or `set + map` of leaving times of the customers who are still in a room. We will also create a `map` of the rooms allocated to each customer, and we will maintain a count variable to keep track of the maximum number of rooms occupied at a single time.
 
-
-
-Now, we will iterate over the customers and for each customer, we will use `lower_bound` or `range` method to check whether any customer having leaving time before the enterring time of this customer, whose room we can assign to this customer. 
-
-
+Now, we will iterate over the customers and for each customer, we will use `lower_bound` or `range` method to check whether any customer having leaving time before the enterring time of this customer, whose room we can assign to this customer.
 
 If we find such customer then we will remove that customer from the `multiset` or `set + map` and update the room of the current customer in the `map` and if we don't find such customer then we will increment the count variable and update the room of the current customer in the `map`.
-
-
 
 At the end, we will output the count variable and room that we assigned for each customer.
 
 ## Code
-
-
 
 <CodeTabs langs={["Rust", "C++"]}>
 

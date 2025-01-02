@@ -4,25 +4,15 @@ time: 1683614401414
 
 ## Explanation
 
-
-
 Here, we are given `n` children and a ferris wheel. We need to find out how many gondolas are required if each gondola can contain at most `2` children and it's weight limit is `x`.
-
-
 
 This can be solved by greedily making as many pairs of children as possible. If we can't make a pair, we put the child in a gondola alone. This is because if we put a child in a gondola with another child, the weight limit might be exceeded.
 
-
-
 We can make pairs by sorting the children by their weight and then using two pointers to find the pairs. We put one pointer at the start (lowest weight) and one at the end (highest weight) then if the pair is possible (weight of both children is less than or equal to `x`), we increment the start pointer and decrement the end pointer. Otherwise, we just decrement the end pointer.
-
-
 
 After each step, we add `1` to the gondolas count. After both pointers meet, we have the answer.
 
 ## Code
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

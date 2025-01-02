@@ -13,19 +13,15 @@ interface PreProps {
 
 const MDXComponents: MDXComponentsType = {
   pre: ({ children }: PreProps) => {
-    const code = children?.props?.children ?? '';
-    const className = children?.props?.className ?? '';
-    const language = className.replace('language-', '');
-    
-    if (className.startsWith('language-')) {
-      return (
-        <CodeBlock language={language}>
-          {code}
-        </CodeBlock>
-      );
+    const code = children?.props?.children ?? "";
+    const className = children?.props?.className ?? "";
+    const language = className.replace("language-", "");
+
+    if (className.startsWith("language-")) {
+      return <CodeBlock language={language}>{code}</CodeBlock>;
     }
     return <pre>{children}</pre>;
   },
 };
 
-export default MDXComponents; 
+export default MDXComponents;

@@ -4,25 +4,20 @@ time: 1683261634645
 
 ## Explanation
 
-
-
 In this problem, we are given a number `n` and we need to find the number of ways 2 knights can be placed on a `k x k` chessboard such that they do not attack each other. Here, k lies from `1` to `n`.
 
+Now, let's try to solve this problem for a `8 x 8` chessboard first, then we'll generalize the solution.
 
+- If the first knight is placed on a corner, there are `2` positions at which the other knight _cannot_ be placed.
+- If it is placed adjacent to a corner, there are `3` positions at which the other knight _cannot_ be placed.\
+  ... for the rest of the pattern please check the image below.
 
-Now, let's try to solve this problem for a `8 x 8` chessboard first, then we'll generalize the solution. 
-
-
-
-- If the first knight is placed on a corner, there are `2` positions at which the other knight *cannot* be placed.
-- If it is placed adjacent to a corner, there are `3` positions at which the other knight *cannot* be placed.\
-... for the rest of the pattern please check the image below.
-
-
-
-<img className="m-auto" height="500px" width="500px" src="https://i.imgur.com/oXny4PF.png" />
-
-
+<img
+  className="m-auto"
+  height="500px"
+  width="500px"
+  src="https://i.imgur.com/oXny4PF.png"
+/>
 
 So here the total number of possibilities will be:
 
@@ -36,9 +31,7 @@ For `8 x 8` grid, n will be `8`.
 
 The total number will be the summation of all these divided by 2. Because we are counting each possibility twice.
 
-## Code 
-
-
+## Code
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

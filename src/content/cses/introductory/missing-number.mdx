@@ -4,22 +4,14 @@ time: 1683088283987
 
 ## Explanation
 
-
-
 Here, we are provided `n - 1` distinct numbers from **1 to n (inclusive)**.\
 Our task is to find the missing number from the sequence **1, 2, 3, ... n**.
 
-
-
-This can be done finding the sum of `n` numbers using `(n * (n + 1)) / 2` and subtracting the sum of the given numbers from it. 
+This can be done finding the sum of `n` numbers using `(n * (n + 1)) / 2` and subtracting the sum of the given numbers from it.
 
 ## Example
 
-
-
 For numbers `1, 2, 3, 4, 5`, if the missing number was `2`. Using our method would be following these steps:
-
-
 
 ```python
 sum_total = 1 + 2 + 3 + 4 + 5
@@ -29,8 +21,6 @@ ans = sum_total - sum_given = 2
 ```
 
 ## Code
-
-
 
 <CodeTabs langs={["Python", "Rust", "C++"]}>
 

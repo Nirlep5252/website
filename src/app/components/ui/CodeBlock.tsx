@@ -31,7 +31,7 @@ export function CodeBlock({ children, language }: CodeBlockProps) {
     }
   }, [children, language]);
 
-  const content = children || '';
+  const content = children || "";
 
   return (
     <div className="relative group">
@@ -48,4 +48,4 @@ export function CodeBlock({ children, language }: CodeBlockProps) {
       </pre>
     </div>
   );
-} 
+}
