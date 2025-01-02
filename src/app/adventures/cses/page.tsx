@@ -4,6 +4,23 @@ import fs from "fs";
 import path from "path";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { SolutionListItem } from "@/app/components/ui/SolutionListItem";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "CSES Solutions | Nirlep's Coding Adventures",
+  description: "Explore detailed solutions and explanations for CSES (Code Submission Evaluation System) problems. Learn algorithmic problem-solving techniques and competitive programming strategies.",
+  keywords: ["CSES", "competitive programming", "algorithm solutions", "coding problems", "programming tutorials"],
+  openGraph: {
+    title: "CSES Solutions | Nirlep's Coding Adventures",
+    description: "Detailed solutions and explanations for CSES (Code Submission Evaluation System) problems. Learn algorithmic problem-solving techniques.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CSES Solutions | Nirlep's Coding Adventures",
+    description: "Detailed solutions and explanations for CSES (Code Submission Evaluation System) problems.",
+  }
+};
 
 interface Solution {
   name: string;

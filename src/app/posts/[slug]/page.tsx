@@ -4,9 +4,41 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { AnimatedPost } from "@/components/AnimatedPost";
 import MDXComponents from "@/app/components/MDXComponents";
 import Link from "next/link";
+import { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+
+  if (!post) {
+    return {
+      title: "Post Not Found",
+      description: "The requested blog post could not be found."
+    };
+  }
+
+  return {
+    title: `${post.title} | Nirlep's Blog`,
+    description: post.description || `Read about ${post.title} and explore insights on software development, programming, and technology.`,
+    keywords: [...(post.tags || []), "blog", "programming", "tech", "tutorial"],
+    authors: [{ name: "Nirlep" }],
+    openGraph: {
+      title: post.title,
+      description: post.description || `Read about ${post.title} and explore insights on software development.`,
+      type: "article",
+      publishedTime: post.date,
+      tags: post.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description || `Read about ${post.title} and explore insights on software development.`,
+    }
+  };
 }
 
 export default async function BlogPost({ params }: PageProps) {

@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { AnimatedPost } from "@/components/AnimatedPost";
 import MDXComponents from "@/app/components/MDXComponents";
 import Link from "next/link";
+import { Metadata } from "next";
 
 interface Props {
   params: Promise<{
@@ -39,6 +40,28 @@ function formatDate(timestamp: number): string {
     month: 'long',
     day: 'numeric'
   });
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { category, problem } = await params;
+  const title = formatTitle(problem);
+  const categoryName = formatTitle(category);
+
+  return {
+    title: `${title} - CSES Solution | Nirlep's Coding Adventures`,
+    description: `Detailed solution and explanation for the ${title} problem from ${categoryName} category in CSES (Code Submission Evaluation System). Learn the approach, implementation, and optimization techniques.`,
+    keywords: ["CSES", title, categoryName, "competitive programming", "algorithm", "solution", "tutorial"],
+    openGraph: {
+      title: `${title} - CSES Solution`,
+      description: `Learn how to solve the ${title} problem from CSES ${categoryName} section. Complete explanation with implementation details.`,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} - CSES Solution`,
+      description: `Learn how to solve the ${title} problem from CSES ${categoryName} section.`,
+    }
+  };
 }
 
 export default async function ProblemPage({ params }: Props) {
