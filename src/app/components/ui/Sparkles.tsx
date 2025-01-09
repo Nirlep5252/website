@@ -1,5 +1,7 @@
+"use client";
+
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const StarIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
@@ -19,17 +21,37 @@ const generateSparkles = (count: number) => {
   }));
 };
 
+interface Sparkle {
+  id: number;
+  size: number;
+  x: number;
+  y: number;
+  rotation: number;
+  duration: number;
+  delay: number;
+}
+
 export const Sparkles: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const sparkles = generateSparkles(16); // Fewer sparkles
+  const [sparkles, setSparkles] = useState<Sparkle[]>([]);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    setSparkles(generateSparkles(16));
+  }, []);
+
+  if (!mounted) {
+    return <>{children}</>;
+  }
 
   return (
     <div className="relative inline-block">
       {sparkles.map((sparkle) => (
         <motion.div
           key={sparkle.id}
-          className="absolute pointer-events-none text-white/80" // More transparent
+          className="absolute pointer-events-none text-white/80"
           style={{
             width: sparkle.size,
             height: sparkle.size,
@@ -38,7 +60,7 @@ export const Sparkles: React.FC<{ children: React.ReactNode }> = ({
             rotate: `${sparkle.rotation}deg`,
           }}
           animate={{
-            scale: [0, 1.1, 0], // Slightly smaller scale
+            scale: [0, 1.1, 0],
             opacity: [0, 1, 0],
             rotate: [`${sparkle.rotation}deg`, `${sparkle.rotation + 360}deg`],
           }}

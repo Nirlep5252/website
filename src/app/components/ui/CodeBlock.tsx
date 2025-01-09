@@ -43,7 +43,7 @@ export function CodeBlock({ children, language }: CodeBlockProps) {
           Copy
         </button>
       </div>
-      <pre className="!bg-gray-900 !p-4 rounded-lg">
+      <pre className="!bg-gray-900 !p-4 rounded-xl">
         <code ref={codeRef}>{content.trim()}</code>
       </pre>
     </div>

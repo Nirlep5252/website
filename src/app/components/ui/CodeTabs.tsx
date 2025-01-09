@@ -36,7 +36,7 @@ export function CodeTabs({ langs, children }: CodeTabsProps) {
         typeof child === "object" &&
         child !== null &&
         "type" in child &&
-        (child as { type: string }).type === "code",
+        (child as { type: string }).type === "code"
     )
     .map((child) => (child as CodeElement).props.children);
 
@@ -56,7 +56,7 @@ export function CodeTabs({ langs, children }: CodeTabsProps) {
   };
 
   return (
-    <div className="rounded-lg overflow-hidden border border-white/5">
+    <div className="rounded-xl overflow-hidden border border-white/5">
       <div className="flex bg-gray-900/50 border-b border-white/5 relative">
         {langs.map((lang, index) => (
           <button

@@ -32,7 +32,7 @@ export function SolutionListItem({
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: index * 0.05 }}
-        className="flex items-center justify-between p-4 bg-gray-900/30 backdrop-blur-xl border border-white/5 rounded-lg hover:border-blue-500/50 transition-colors group"
+        className="flex items-center justify-between p-4 bg-gray-900/30 backdrop-blur-xl border border-white/5 rounded-xl hover:border-blue-500/50 transition-colors group"
       >
         <div className="flex-1 min-w-0">
           <h3 className="font-medium text-white/90 truncate">
