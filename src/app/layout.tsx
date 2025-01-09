@@ -22,6 +22,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="65115862-88b5-4b2a-8768-11b2a06702f6"
+        ></script>
+      </head>
       <body className={`${inter.className} bg-black`}>
         <AnimatedBackground />
         {/* <AnimatedCursor /> */}
