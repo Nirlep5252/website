@@ -74,14 +74,14 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
                 <Newspaper className="w-6 h-6 text-purple-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-xl mb-2">
+                <h3 className="font-semibold text-xl mb-4">
                   Recent Blog Posts
                 </h3>
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-4">
                   {recentPosts.map((post) => (
                     <Link href={`/posts/${post.slug}`} key={post.slug}>
                       <motion.div
-                        className="bg-white/5 p-4 rounded-xl group cursor-pointer relative overflow-hidden backdrop-blur-sm border border-transparent hover:border-white/10 transition-colors"
+                        className="bg-white/5 p-5 rounded-xl group cursor-pointer relative overflow-hidden backdrop-blur-sm border border-transparent hover:border-white/10 transition-colors"
                         whileHover={{
                           scale: 1.03,
                           transition: { duration: 0.2, ease: "easeOut" },
@@ -94,8 +94,8 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
                           className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                           initial={false}
                         />
-                        <div className="relative">
-                          <div className="flex items-center gap-2 text-sm text-gray-400 mb-1">
+                        <div className="relative space-y-2">
+                          <div className="flex items-center gap-2 text-sm text-gray-400">
                             <time
                               dateTime={post.date}
                               className="group-hover:text-gray-300 transition-colors"
@@ -103,18 +103,18 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
                               {formatDate(post.date)}
                             </time>
                             <span>•</span>
-                            <div className="flex gap-1">
+                            <div className="flex gap-2">
                               {post.tags.slice(0, 2).map((tag) => (
                                 <span
                                   key={tag}
-                                  className="bg-purple-500/10 text-purple-400/90 px-2 py-0.5 rounded-full text-xs group-hover:bg-purple-500/20 group-hover:text-purple-300 transition-all duration-300"
+                                  className="bg-purple-500/10 text-purple-400/90 px-2.5 py-1 rounded-full text-xs group-hover:bg-purple-500/20 group-hover:text-purple-300 transition-all duration-300"
                                 >
                                   {tag}
                                 </span>
                               ))}
                             </div>
                           </div>
-                          <h4 className="text-white/90 font-medium mb-1 group-hover:text-white transition-colors">
+                          <h4 className="text-white/90 font-medium group-hover:text-white transition-colors">
                             {post.title}
                           </h4>
                           <p className="text-gray-400 text-sm line-clamp-2 group-hover:text-gray-300 transition-colors">
