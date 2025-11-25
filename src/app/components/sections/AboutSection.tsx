@@ -123,8 +123,8 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
             variants={staggerItem}
             className="p-6 bg-bg-secondary border border-border rounded-xl group hover:border-border-hover transition-colors"
           >
-            <div className="p-2 bg-amber-500/10 rounded-lg w-fit mb-4">
-              <Trophy className="w-5 h-5 text-amber-500" />
+            <div className="p-2 bg-emerald-500/10 rounded-lg w-fit mb-4">
+              <Trophy className="w-5 h-5 text-emerald-500" />
             </div>
             <h3 className="text-lg font-semibold text-zinc-100 mb-2">
               Problem Solving
@@ -147,8 +147,8 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
             variants={staggerItem}
             className="p-6 bg-bg-secondary border border-border rounded-xl"
           >
-            <div className="p-2 bg-violet-500/10 rounded-lg w-fit mb-4">
-              <Code2 className="w-5 h-5 text-violet-500" />
+            <div className="p-2 bg-emerald-500/10 rounded-lg w-fit mb-4">
+              <Code2 className="w-5 h-5 text-emerald-500" />
             </div>
             <h3 className="text-lg font-semibold text-zinc-100 mb-3">
               Languages
@@ -157,7 +157,7 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
               {skills.languages.map((lang) => (
                 <span
                   key={lang}
-                  className="px-2 py-1 text-xs font-mono bg-violet-500/10 text-violet-400 rounded border border-violet-500/20"
+                  className="px-2 py-1 text-xs font-mono bg-emerald-500/10 text-emerald-400 rounded border border-emerald-500/20"
                 >
                   {lang}
                 </span>
@@ -170,8 +170,8 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
             variants={staggerItem}
             className="p-6 bg-bg-secondary border border-border rounded-xl"
           >
-            <div className="p-2 bg-blue-500/10 rounded-lg w-fit mb-4">
-              <Zap className="w-5 h-5 text-blue-500" />
+            <div className="p-2 bg-cyan-500/10 rounded-lg w-fit mb-4">
+              <Zap className="w-5 h-5 text-cyan-500" />
             </div>
             <h3 className="text-lg font-semibold text-zinc-100 mb-3">
               Frontend
@@ -180,7 +180,7 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
               {skills.frontend.map((tech) => (
                 <span
                   key={tech}
-                  className="px-2 py-1 text-xs font-mono bg-blue-500/10 text-blue-400 rounded border border-blue-500/20"
+                  className="px-2 py-1 text-xs font-mono bg-cyan-500/10 text-cyan-400 rounded border border-cyan-500/20"
                 >
                   {tech}
                 </span>
@@ -193,8 +193,8 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
             variants={staggerItem}
             className="p-6 bg-bg-secondary border border-border rounded-xl"
           >
-            <div className="p-2 bg-orange-500/10 rounded-lg w-fit mb-4">
-              <Database className="w-5 h-5 text-orange-500" />
+            <div className="p-2 bg-emerald-500/10 rounded-lg w-fit mb-4">
+              <Database className="w-5 h-5 text-emerald-500" />
             </div>
             <h3 className="text-lg font-semibold text-zinc-100 mb-3">
               Backend
@@ -203,7 +203,7 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
               {skills.backend.map((tech) => (
                 <span
                   key={tech}
-                  className="px-2 py-1 text-xs font-mono bg-orange-500/10 text-orange-400 rounded border border-orange-500/20"
+                  className="px-2 py-1 text-xs font-mono bg-emerald-500/10 text-emerald-400 rounded border border-emerald-500/20"
                 >
                   {tech}
                 </span>

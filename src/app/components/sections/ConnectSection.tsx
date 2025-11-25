@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Mail, Github, Twitter, Linkedin, MapPin, ArrowUpRight } from "lucide-react";
+import { Mail, Github, Twitter, Linkedin, MapPin, ArrowUpRight, MessageCircle } from "lucide-react";
 
 const links = [
   {
@@ -24,14 +24,21 @@ const links = [
     value: "@nirlep_5252_",
     href: "https://twitter.com/nirlep_5252_",
     icon: Twitter,
-    color: "blue",
+    color: "emerald",
   },
   {
     name: "LinkedIn",
     value: "nirlep5252",
     href: "https://linkedin.com/in/nirlep5252",
     icon: Linkedin,
-    color: "sky",
+    color: "emerald",
+  },
+  {
+    name: "Discord",
+    value: "Join Server",
+    href: "https://discord.com/invite/9rYbc54KtY",
+    icon: MessageCircle,
+    color: "emerald",
   },
 ];
 
