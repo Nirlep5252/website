@@ -3,15 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import {
-  Terminal,
-  Code2,
-  Cpu,
-  Database,
-  Zap,
-  ArrowUpRight,
-  Trophy,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Post } from "@/lib/mdx";
 
 interface AboutSectionProps {
@@ -21,40 +13,20 @@ interface AboutSectionProps {
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-US", {
     month: "short",
-    day: "numeric",
     year: "numeric",
   });
 }
 
-const skills = {
-  languages: ["Rust", "TypeScript", "Python", "Go", "C++", "Java"],
-  frontend: ["React", "Next.js", "TailwindCSS", "Framer Motion"],
-  backend: ["FastAPI", "Node.js", "PostgreSQL", "Redis", "Docker"],
-  interests: ["System Design", "Performance", "Algorithms"],
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const staggerItem = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  },
-};
+const technologies = [
+  "Rust",
+  "TypeScript",
+  "Python",
+  "Go",
+  "React",
+  "Next.js",
+  "Node.js",
+  "PostgreSQL",
+];
 
 export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
   return (
@@ -66,7 +38,7 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="mb-20"
         >
           <span className="text-emerald-500 font-mono text-sm mb-2 block">
             {"// about"}
@@ -76,205 +48,130 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
           </h2>
         </motion.div>
 
-        {/* Bento Grid */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-        >
-          {/* Main card - Who I am */}
+        {/* Main content - Two column layout */}
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+          {/* Left column - About text */}
           <motion.div
-            variants={staggerItem}
-            className="lg:col-span-2 p-6 bg-bg-secondary border border-border rounded-xl group hover:border-border-hover transition-colors"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true }}
           >
-            <div className="flex items-start gap-4 mb-4">
-              <div className="p-2 bg-emerald-500/10 rounded-lg">
-                <Terminal className="w-5 h-5 text-emerald-500" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-zinc-100 mb-2">
-                  Full-Stack Developer
-                </h3>
-                <p className="text-zinc-400 leading-relaxed">
-                  I craft modern web applications with a focus on performance,
-                  accessibility, and user experience. With expertise spanning
-                  from low-level systems programming to modern frontend
-                  frameworks, I bring ideas to life through clean, maintainable
-                  code.
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-wrap gap-2 mt-6">
-              {["Web Apps", "APIs", "CLI Tools", "System Design"].map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 text-xs font-mono bg-zinc-800/50 text-zinc-400 rounded-md border border-border"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Problem Solving card */}
-          <motion.div
-            variants={staggerItem}
-            className="p-6 bg-bg-secondary border border-border rounded-xl group hover:border-border-hover transition-colors"
-          >
-            <div className="p-2 bg-emerald-500/10 rounded-lg w-fit mb-4">
-              <Trophy className="w-5 h-5 text-emerald-500" />
-            </div>
-            <h3 className="text-lg font-semibold text-zinc-100 mb-2">
-              Problem Solving
-            </h3>
-            <p className="text-zinc-400 text-sm leading-relaxed">
-              Competitive programming enthusiast. Solving algorithmic challenges
-              and optimizing for performance.
+            <p className="text-xl md:text-2xl text-zinc-300 leading-relaxed mb-8">
+              I build modern web applications with a focus on{" "}
+              <span className="text-emerald-400">performance</span>,{" "}
+              <span className="text-emerald-400">accessibility</span>, and{" "}
+              <span className="text-emerald-400">user experience</span>.
             </p>
-            <Link
-              href="/adventures"
-              className="inline-flex items-center gap-1 text-emerald-500 text-sm mt-4 hover:text-emerald-400 transition-colors"
+            <p className="text-zinc-500 leading-relaxed mb-10">
+              With expertise spanning from low-level systems programming to modern
+              frontend frameworks, I bring ideas to life through clean, maintainable code.
+              I&apos;m passionate about solving complex problems and building tools that
+              make a difference.
+            </p>
+
+            {/* Technologies */}
+            <div className="flex flex-wrap gap-3">
+              {technologies.map((tech) => (
+                <span
+                  key={tech}
+                  className="px-3 py-1.5 text-sm font-mono text-zinc-400 border border-zinc-800 rounded-full"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right column - Cards */}
+          <div className="space-y-4">
+            {/* Problem Solving Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true }}
             >
-              View Solutions
-              <ArrowUpRight className="w-3 h-3" />
-            </Link>
-          </motion.div>
-
-          {/* Languages */}
-          <motion.div
-            variants={staggerItem}
-            className="p-6 bg-bg-secondary border border-border rounded-xl"
-          >
-            <div className="p-2 bg-emerald-500/10 rounded-lg w-fit mb-4">
-              <Code2 className="w-5 h-5 text-emerald-500" />
-            </div>
-            <h3 className="text-lg font-semibold text-zinc-100 mb-3">
-              Languages
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {skills.languages.map((lang) => (
-                <span
-                  key={lang}
-                  className="px-2 py-1 text-xs font-mono bg-emerald-500/10 text-emerald-400 rounded border border-emerald-500/20"
-                >
-                  {lang}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Frontend */}
-          <motion.div
-            variants={staggerItem}
-            className="p-6 bg-bg-secondary border border-border rounded-xl"
-          >
-            <div className="p-2 bg-cyan-500/10 rounded-lg w-fit mb-4">
-              <Zap className="w-5 h-5 text-cyan-500" />
-            </div>
-            <h3 className="text-lg font-semibold text-zinc-100 mb-3">
-              Frontend
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {skills.frontend.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-2 py-1 text-xs font-mono bg-cyan-500/10 text-cyan-400 rounded border border-cyan-500/20"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Backend */}
-          <motion.div
-            variants={staggerItem}
-            className="p-6 bg-bg-secondary border border-border rounded-xl"
-          >
-            <div className="p-2 bg-emerald-500/10 rounded-lg w-fit mb-4">
-              <Database className="w-5 h-5 text-emerald-500" />
-            </div>
-            <h3 className="text-lg font-semibold text-zinc-100 mb-3">
-              Backend
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {skills.backend.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-2 py-1 text-xs font-mono bg-emerald-500/10 text-emerald-400 rounded border border-emerald-500/20"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Recent Posts - spans 2 columns */}
-          <motion.div
-            variants={staggerItem}
-            className="lg:col-span-2 p-6 bg-bg-secondary border border-border rounded-xl"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-zinc-100">
-                Recent Writing
-              </h3>
               <Link
-                href="/posts"
-                className="text-sm text-zinc-400 hover:text-emerald-500 transition-colors"
+                href="/adventures"
+                className="group block p-6 border border-zinc-800 rounded-xl hover:border-zinc-700 hover:bg-zinc-900/30 transition-all"
               >
-                View all
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="text-lg font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors">
+                    Problem Solving
+                  </h3>
+                  <ArrowUpRight className="w-5 h-5 text-zinc-600 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                </div>
+                <p className="text-zinc-500 text-sm leading-relaxed">
+                  Competitive programming enthusiast. Solving algorithmic challenges
+                  and optimizing for performance.
+                </p>
               </Link>
-            </div>
-            <div className="space-y-3">
-              {recentPosts.slice(0, 2).map((post) => (
+            </motion.div>
+
+            {/* Recent Writing Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true }}
+              className="p-6 border border-zinc-800 rounded-xl"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-zinc-100">
+                  Recent Writing
+                </h3>
                 <Link
-                  key={post.slug}
-                  href={`/posts/${post.slug}`}
-                  className="group block p-4 bg-bg-tertiary rounded-lg border border-transparent hover:border-border transition-colors"
+                  href="/posts"
+                  className="text-sm text-zinc-500 hover:text-emerald-500 transition-colors"
                 >
-                  <div className="flex items-center justify-between gap-4">
-                    <div className="flex-1 min-w-0">
-                      <h4 className="text-zinc-200 font-medium truncate group-hover:text-emerald-500 transition-colors">
+                  View all
+                </Link>
+              </div>
+              <div className="space-y-3">
+                {recentPosts.slice(0, 2).map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={`/posts/${post.slug}`}
+                    className="group block py-3 border-t border-zinc-800/50 first:border-0 first:pt-0"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <h4 className="text-zinc-300 group-hover:text-emerald-400 transition-colors line-clamp-1">
                         {post.title}
                       </h4>
-                      <p className="text-zinc-500 text-sm mt-1 truncate">
-                        {post.description}
-                      </p>
+                      <span className="text-zinc-600 text-xs font-mono whitespace-nowrap">
+                        {formatDate(post.date)}
+                      </span>
                     </div>
-                    <span className="text-zinc-600 text-xs font-mono whitespace-nowrap">
-                      {formatDate(post.date)}
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </motion.div>
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
 
-          {/* Interests */}
-          <motion.div
-            variants={staggerItem}
-            className="p-6 bg-bg-secondary border border-border rounded-xl"
-          >
-            <div className="p-2 bg-emerald-500/10 rounded-lg w-fit mb-4">
-              <Cpu className="w-5 h-5 text-emerald-500" />
-            </div>
-            <h3 className="text-lg font-semibold text-zinc-100 mb-3">
-              Interests
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {skills.interests.map((interest) => (
-                <span
-                  key={interest}
-                  className="px-2 py-1 text-xs font-mono bg-emerald-500/10 text-emerald-400 rounded border border-emerald-500/20"
-                >
-                  {interest}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
+            {/* Projects CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true }}
+            >
+              <Link
+                href="/projects"
+                className="group flex items-center justify-between p-6 bg-emerald-500/5 border border-emerald-500/20 rounded-xl hover:bg-emerald-500/10 hover:border-emerald-500/30 transition-all"
+              >
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors">
+                    View My Work
+                  </h3>
+                  <p className="text-zinc-500 text-sm mt-1">
+                    Projects I&apos;ve built and contributed to
+                  </p>
+                </div>
+                <ArrowUpRight className="w-5 h-5 text-emerald-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+              </Link>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
