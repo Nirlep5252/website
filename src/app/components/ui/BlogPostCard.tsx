@@ -29,7 +29,7 @@ export function BlogPostCard({ post, index }: BlogPostCardProps) {
   const readingTime = calculateReadingTime(post.content);
 
   return (
-    <Link href={`/posts/${post.slug}`}>
+    <Link href={`/posts/${post.slug}`} className="block">
       <motion.article
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

@@ -48,9 +48,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        sans: ["var(--font-outfit)", "system-ui", "sans-serif"],
         mono: ["var(--font-jetbrains)", "Menlo", "monospace"],
-        display: ["var(--font-display)", "Georgia", "serif"],
+        display: ["var(--font-outfit)", "system-ui", "sans-serif"],
       },
       fontSize: {
         "display-xl": ["5rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
