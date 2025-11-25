@@ -17,9 +17,9 @@ export const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
         >
-          <h1 className="text-[clamp(3rem,15vw,12rem)] font-bold leading-[0.85] tracking-tighter">
-            <span className="block text-zinc-100">Nirlep</span>
-            <span className="block bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">
+          <h1 className="text-[clamp(2.5rem,10vw,9rem)] font-bold leading-none tracking-tighter">
+            <span className="text-zinc-100">Nirlep </span>
+            <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">
               Gohil
             </span>
           </h1>
