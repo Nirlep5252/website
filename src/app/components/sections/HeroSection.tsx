@@ -9,18 +9,17 @@ const MotionLink = motion.create(Link);
 
 export const HeroSection = () => {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-4">
+    <section className="min-h-screen flex flex-col items-center justify-center px-4 relative">
       <div className="max-w-6xl w-full text-center">
-        {/* Main heading - MASSIVE */}
+        {/* Main heading - MASSIVE with full gradient */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         >
           <h1 className="text-[clamp(2.5rem,10vw,9rem)] font-bold leading-none tracking-tighter">
-            <span className="text-zinc-100">Nirlep </span>
-            <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">
-              Gohil
+            <span className="bg-gradient-to-r from-emerald-300 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">
+              Nirlep Gohil
             </span>
           </h1>
         </motion.div>
@@ -29,18 +28,17 @@ export const HeroSection = () => {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
-          className="mt-8 text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto"
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-8 text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto font-light"
         >
-          Software Engineer crafting elegant solutions
-          <span className="hidden sm:inline"> with modern technologies</span>
+          Full-stack developer building products that matter.
         </motion.p>
 
         {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
+          transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-wrap items-center justify-center gap-4 mt-12"
         >
           <MotionLink

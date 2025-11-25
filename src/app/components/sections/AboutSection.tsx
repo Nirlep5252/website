@@ -8,9 +8,9 @@ import {
   Code2,
   Cpu,
   Database,
-  Globe,
   Zap,
   ArrowUpRight,
+  Trophy,
 } from "lucide-react";
 import { Post } from "@/lib/mdx";
 
@@ -30,7 +30,30 @@ const skills = {
   languages: ["Rust", "TypeScript", "Python", "Go", "C++", "Java"],
   frontend: ["React", "Next.js", "TailwindCSS", "Framer Motion"],
   backend: ["FastAPI", "Node.js", "PostgreSQL", "Redis", "Docker"],
-  interests: ["System Design", "Open Source", "Competitive Programming"],
+  interests: ["System Design", "Performance", "Algorithms"],
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const staggerItem = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
 };
 
 export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
@@ -41,7 +64,7 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true }}
           className="mb-16"
         >
@@ -54,13 +77,16 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
         </motion.div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+        >
           {/* Main card - Who I am */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
+            variants={staggerItem}
             className="lg:col-span-2 p-6 bg-bg-secondary border border-border rounded-xl group hover:border-border-hover transition-colors"
           >
             <div className="flex items-start gap-4 mb-4">
@@ -92,41 +118,33 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
             </div>
           </motion.div>
 
-          {/* Open Source card */}
+          {/* Problem Solving card */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
+            variants={staggerItem}
             className="p-6 bg-bg-secondary border border-border rounded-xl group hover:border-border-hover transition-colors"
           >
-            <div className="p-2 bg-cyan-500/10 rounded-lg w-fit mb-4">
-              <Globe className="w-5 h-5 text-cyan-500" />
+            <div className="p-2 bg-amber-500/10 rounded-lg w-fit mb-4">
+              <Trophy className="w-5 h-5 text-amber-500" />
             </div>
             <h3 className="text-lg font-semibold text-zinc-100 mb-2">
-              Open Source
+              Problem Solving
             </h3>
             <p className="text-zinc-400 text-sm leading-relaxed">
-              Actively contributing to and maintaining open source projects.
-              Believer in collaborative development.
+              Competitive programming enthusiast. Solving algorithmic challenges
+              and optimizing for performance.
             </p>
-            <a
-              href="https://github.com/nirlep5252"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/adventures"
               className="inline-flex items-center gap-1 text-emerald-500 text-sm mt-4 hover:text-emerald-400 transition-colors"
             >
-              View GitHub
+              View Solutions
               <ArrowUpRight className="w-3 h-3" />
-            </a>
+            </Link>
           </motion.div>
 
           {/* Languages */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: true }}
+            variants={staggerItem}
             className="p-6 bg-bg-secondary border border-border rounded-xl"
           >
             <div className="p-2 bg-violet-500/10 rounded-lg w-fit mb-4">
@@ -149,10 +167,7 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
 
           {/* Frontend */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            viewport={{ once: true }}
+            variants={staggerItem}
             className="p-6 bg-bg-secondary border border-border rounded-xl"
           >
             <div className="p-2 bg-blue-500/10 rounded-lg w-fit mb-4">
@@ -175,10 +190,7 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
 
           {/* Backend */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            viewport={{ once: true }}
+            variants={staggerItem}
             className="p-6 bg-bg-secondary border border-border rounded-xl"
           >
             <div className="p-2 bg-orange-500/10 rounded-lg w-fit mb-4">
@@ -201,10 +213,7 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
 
           {/* Recent Posts - spans 2 columns */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            viewport={{ once: true }}
+            variants={staggerItem}
             className="lg:col-span-2 p-6 bg-bg-secondary border border-border rounded-xl"
           >
             <div className="flex items-center justify-between mb-4">
@@ -245,10 +254,7 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
 
           {/* Interests */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-            viewport={{ once: true }}
+            variants={staggerItem}
             className="p-6 bg-bg-secondary border border-border rounded-xl"
           >
             <div className="p-2 bg-emerald-500/10 rounded-lg w-fit mb-4">
@@ -268,7 +274,7 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
               ))}
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
