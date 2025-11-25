@@ -9,72 +9,91 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+        mono: ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "monospace"],
+      },
       colors: {
-        primary: {
-          DEFAULT: "var(--color-primary)",
-          hover: "var(--color-primary-hover)",
-        },
-        secondary: {
-          DEFAULT: "var(--color-secondary)",
-          hover: "var(--color-secondary-hover)",
+        bg: {
+          DEFAULT: "#0a0a0a",
+          secondary: "#111111",
+          tertiary: "#1a1a1a",
         },
         accent: {
-          DEFAULT: "var(--color-accent)",
-          hover: "var(--color-accent-hover)",
+          DEFAULT: "#10b981",
+          dim: "rgba(16, 185, 129, 0.1)",
+          glow: "rgba(16, 185, 129, 0.15)",
         },
-        background: {
-          DEFAULT: "var(--color-background)",
-          lighter: "var(--color-background-lighter)",
+        border: {
+          DEFAULT: "#27272a",
+          hover: "#3f3f46",
         },
-        text: {
-          DEFAULT: "var(--color-text)",
-          dimmed: "var(--color-text-dimmed)",
+      },
+      animation: {
+        "fade-in": "fadeIn 0.6s ease forwards",
+        "fade-up": "fadeUp 0.6s ease forwards",
+        blink: "blink 1s infinite",
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        fadeUp: {
+          from: { opacity: "0", transform: "translateY(20px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        blink: {
+          "0%, 50%": { opacity: "1" },
+          "51%, 100%": { opacity: "0" },
         },
       },
       typography: {
         DEFAULT: {
           css: {
             maxWidth: "100ch",
-            color: "white",
+            color: "#fafafa",
             a: {
-              color: "#3182ce",
+              color: "#10b981",
+              textDecoration: "none",
               "&:hover": {
-                color: "#2c5282",
+                color: "#34d399",
               },
             },
             strong: {
-              color: "white",
+              color: "#fafafa",
             },
             "ol > li::marker": {
-              color: "white",
+              color: "#a1a1aa",
             },
             "ul > li::marker": {
-              color: "white",
+              color: "#a1a1aa",
             },
             hr: {
-              borderColor: "white",
+              borderColor: "#27272a",
             },
             blockquote: {
-              color: "white",
-              borderLeftColor: "#3182ce",
+              color: "#a1a1aa",
+              borderLeftColor: "#10b981",
             },
             h1: {
-              color: "white",
+              color: "#fafafa",
             },
             h2: {
-              color: "white",
+              color: "#fafafa",
             },
             h3: {
-              color: "white",
+              color: "#fafafa",
             },
             h4: {
-              color: "white",
+              color: "#fafafa",
             },
             code: {
-              color: "white",
-              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              color: "#10b981",
+              backgroundColor: "rgba(16, 185, 129, 0.1)",
               borderRadius: "0.25rem",
               padding: "0.2rem 0.4rem",
+              fontFamily: "'JetBrains Mono', monospace",
             },
             "code::before": {
               content: '""',
@@ -83,10 +102,12 @@ const config: Config = {
               content: '""',
             },
             pre: {
-              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              backgroundColor: "#111111",
+              border: "1px solid #27272a",
               code: {
                 backgroundColor: "transparent",
                 padding: "0",
+                color: "#fafafa",
               },
             },
           },

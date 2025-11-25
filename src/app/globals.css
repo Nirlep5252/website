@@ -4,74 +4,181 @@
 
 @layer base {
   :root {
-    /* Primary Colors - Modern Electric Blue */
-    --color-primary: #0ea5e9;
-    --color-primary-hover: #0284c7;
+    /* Refined Dark Theme - Developer Aesthetic */
+    --color-bg: #0a0a0a;
+    --color-bg-secondary: #111111;
+    --color-bg-tertiary: #1a1a1a;
 
-    /* Secondary Colors - Deep Purple */
-    --color-secondary: #8b5cf6;
-    --color-secondary-hover: #7c3aed;
+    /* Accent - Subtle emerald/cyan for developer feel */
+    --color-accent: #10b981;
+    --color-accent-dim: rgba(16, 185, 129, 0.1);
+    --color-accent-glow: rgba(16, 185, 129, 0.15);
 
-    /* Accent Colors - Vibrant Pink */
-    --color-accent: #ec4899;
-    --color-accent-hover: #db2777;
+    /* Text hierarchy */
+    --color-text-primary: #fafafa;
+    --color-text-secondary: #a1a1aa;
+    --color-text-tertiary: #52525b;
 
-    /* Background Colors - Rich Deep Blue */
-    --color-background: #020617;
-    --color-background-lighter: #0f172a;
+    /* Borders */
+    --color-border: #27272a;
+    --color-border-hover: #3f3f46;
 
-    /* Text Colors - Clean and Sharp */
-    --color-text: #f8fafc;
-    --color-text-dimmed: #94a3b8;
-
-    /* Navbar Highlight */
-    --highlight-width: 0px;
-    --highlight-x-offset: 0px;
+    /* Gradients */
+    --gradient-accent: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+    --gradient-subtle: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
   }
 }
 
-/* Additional global styles */
+/* Base styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: var(--color-background);
-  color: var(--color-text);
-  background-image: radial-gradient(
-      circle at 0% 0%,
-      rgba(14, 165, 233, 0.03) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 100% 0%,
-      rgba(139, 92, 246, 0.03) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 100% 100%,
-      rgba(236, 72, 153, 0.03) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 0% 100%,
-      rgba(14, 165, 233, 0.03) 0%,
-      transparent 50%
-    );
-  background-attachment: fixed;
-  min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Navbar highlight target */
-.highlight-target {
+/* Subtle dot grid background */
+.dot-grid {
+  background-image: radial-gradient(circle, var(--color-border) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Grain texture overlay */
+.grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.03;
+  z-index: 1000;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Glow effect */
+.glow {
+  box-shadow: 0 0 20px var(--color-accent-glow),
+              0 0 40px var(--color-accent-glow),
+              0 0 60px rgba(16, 185, 129, 0.05);
+}
+
+.glow-text {
+  text-shadow: 0 0 20px var(--color-accent-glow);
+}
+
+/* Terminal cursor blink */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s infinite;
+}
+
+/* Smooth gradient border */
+.gradient-border {
   position: relative;
-  z-index: 1;
+  background: var(--color-bg-secondary);
+  border-radius: 12px;
 }
 
-/* Hide cursor on clickable elements */
-/* a, button, input[type="button"], input[type="submit"], input[type="reset"],
-[role="button"], .cursor-pointer {
-  cursor: none !important;
-} */
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--color-border) 0%, transparent 50%, var(--color-border) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
 
-/* Hide cursor on their hover states too */
-/* a:hover, button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover,
-[role="button"]:hover, .cursor-pointer:hover {
-  cursor: none !important;
-} */
+/* Code block styling */
+.code-block {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+/* Selection styling */
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-hover);
+}
+
+/* Link styling */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transition: width 0.3s ease;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+/* Stagger children */
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.6s; }

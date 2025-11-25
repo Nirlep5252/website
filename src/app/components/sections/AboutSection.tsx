@@ -3,9 +3,16 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Code2, Globe, Newspaper } from "lucide-react";
+import {
+  Terminal,
+  Code2,
+  Cpu,
+  Database,
+  Globe,
+  Zap,
+  ArrowUpRight,
+} from "lucide-react";
 import { Post } from "@/lib/mdx";
-import { SkillsSection } from "./SkillsSection";
 
 interface AboutSectionProps {
   recentPosts: Post[];
@@ -13,132 +20,256 @@ interface AboutSectionProps {
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
+    month: "short",
     day: "numeric",
+    year: "numeric",
   });
 }
 
+const skills = {
+  languages: ["Rust", "TypeScript", "Python", "Go", "C++", "Java"],
+  frontend: ["React", "Next.js", "TailwindCSS", "Framer Motion"],
+  backend: ["FastAPI", "Node.js", "PostgreSQL", "Redis", "Docker"],
+  interests: ["System Design", "Open Source", "Competitive Programming"],
+};
+
 export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 text-white">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="max-w-4xl"
-      >
-        <h2 className="text-4xl font-bold mb-8">About Me</h2>
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+    <section className="py-32 px-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <span className="text-emerald-500 font-mono text-sm mb-2 block">
+            {"// about"}
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-zinc-100">
+            What I Do
+          </h2>
+        </motion.div>
+
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* Main card - Who I am */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="lg:col-span-2 p-6 bg-bg-secondary border border-border rounded-xl group hover:border-border-hover transition-colors"
           >
-            <div className="flex gap-4 items-start">
-              <div className="mt-1">
-                <Code2 className="w-6 h-6 text-blue-400" />
+            <div className="flex items-start gap-4 mb-4">
+              <div className="p-2 bg-emerald-500/10 rounded-lg">
+                <Terminal className="w-5 h-5 text-emerald-500" />
               </div>
               <div>
-                <h3 className="font-semibold text-xl mb-2">
-                  Passionate Developer
+                <h3 className="text-xl font-semibold text-zinc-100 mb-2">
+                  Full-Stack Developer
                 </h3>
-                <p className="text-gray-300 leading-relaxed">
-                  I&apos;m a passionate developer who loves creating beautiful
-                  and functional web experiences. With expertise in modern web
-                  technologies, I bring ideas to life through clean code and
-                  intuitive design.
+                <p className="text-zinc-400 leading-relaxed">
+                  I craft modern web applications with a focus on performance,
+                  accessibility, and user experience. With expertise spanning
+                  from low-level systems programming to modern frontend
+                  frameworks, I bring ideas to life through clean, maintainable
+                  code.
                 </p>
               </div>
             </div>
-            <div className="flex gap-4 items-start">
-              <div className="mt-1">
-                <Globe className="w-6 h-6 text-blue-400" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-xl mb-2">
-                  Open Source Enthusiast
-                </h3>
-                <p className="text-gray-300 leading-relaxed">
-                  When I&apos;m not coding, you can find me exploring new
-                  technologies, contributing to open-source projects, or sharing
-                  my knowledge through blog posts and tutorials.
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-4 items-start">
-              <div className="mt-1">
-                <Newspaper className="w-6 h-6 text-purple-400" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-xl mb-4">
-                  Recent Blog Posts
-                </h3>
-                <div className="flex flex-col gap-4">
-                  {recentPosts.map((post) => (
-                    <Link href={`/posts/${post.slug}`} key={post.slug}>
-                      <motion.div
-                        className="bg-white/5 p-5 rounded-xl group cursor-pointer relative overflow-hidden backdrop-blur-sm border border-transparent hover:border-white/10 transition-colors"
-                        whileHover={{
-                          scale: 1.03,
-                          transition: { duration: 0.2, ease: "easeOut" },
-                        }}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <motion.div
-                          className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                          initial={false}
-                        />
-                        <div className="relative space-y-2">
-                          <div className="flex items-center gap-2 text-sm text-gray-400">
-                            <time
-                              dateTime={post.date}
-                              className="group-hover:text-gray-300 transition-colors"
-                            >
-                              {formatDate(post.date)}
-                            </time>
-                            <span>•</span>
-                            <div className="flex gap-2">
-                              {post.tags.slice(0, 2).map((tag) => (
-                                <span
-                                  key={tag}
-                                  className="bg-purple-500/10 text-purple-400/90 px-2.5 py-1 rounded-full text-xs group-hover:bg-purple-500/20 group-hover:text-purple-300 transition-all duration-300"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                          <h4 className="text-white/90 font-medium group-hover:text-white transition-colors">
-                            {post.title}
-                          </h4>
-                          <p className="text-gray-400 text-sm line-clamp-2 group-hover:text-gray-300 transition-colors">
-                            {post.description}
-                          </p>
-                        </div>
-                      </motion.div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
+            <div className="flex flex-wrap gap-2 mt-6">
+              {["Web Apps", "APIs", "CLI Tools", "System Design"].map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 text-xs font-mono bg-zinc-800/50 text-zinc-400 rounded-md border border-border"
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           </motion.div>
+
+          {/* Open Source card */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="space-y-4"
+            className="p-6 bg-bg-secondary border border-border rounded-xl group hover:border-border-hover transition-colors"
           >
-            <SkillsSection />
+            <div className="p-2 bg-cyan-500/10 rounded-lg w-fit mb-4">
+              <Globe className="w-5 h-5 text-cyan-500" />
+            </div>
+            <h3 className="text-lg font-semibold text-zinc-100 mb-2">
+              Open Source
+            </h3>
+            <p className="text-zinc-400 text-sm leading-relaxed">
+              Actively contributing to and maintaining open source projects.
+              Believer in collaborative development.
+            </p>
+            <a
+              href="https://github.com/nirlep5252"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-emerald-500 text-sm mt-4 hover:text-emerald-400 transition-colors"
+            >
+              View GitHub
+              <ArrowUpRight className="w-3 h-3" />
+            </a>
+          </motion.div>
+
+          {/* Languages */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="p-6 bg-bg-secondary border border-border rounded-xl"
+          >
+            <div className="p-2 bg-violet-500/10 rounded-lg w-fit mb-4">
+              <Code2 className="w-5 h-5 text-violet-500" />
+            </div>
+            <h3 className="text-lg font-semibold text-zinc-100 mb-3">
+              Languages
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {skills.languages.map((lang) => (
+                <span
+                  key={lang}
+                  className="px-2 py-1 text-xs font-mono bg-violet-500/10 text-violet-400 rounded border border-violet-500/20"
+                >
+                  {lang}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Frontend */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="p-6 bg-bg-secondary border border-border rounded-xl"
+          >
+            <div className="p-2 bg-blue-500/10 rounded-lg w-fit mb-4">
+              <Zap className="w-5 h-5 text-blue-500" />
+            </div>
+            <h3 className="text-lg font-semibold text-zinc-100 mb-3">
+              Frontend
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {skills.frontend.map((tech) => (
+                <span
+                  key={tech}
+                  className="px-2 py-1 text-xs font-mono bg-blue-500/10 text-blue-400 rounded border border-blue-500/20"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Backend */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            viewport={{ once: true }}
+            className="p-6 bg-bg-secondary border border-border rounded-xl"
+          >
+            <div className="p-2 bg-orange-500/10 rounded-lg w-fit mb-4">
+              <Database className="w-5 h-5 text-orange-500" />
+            </div>
+            <h3 className="text-lg font-semibold text-zinc-100 mb-3">
+              Backend
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {skills.backend.map((tech) => (
+                <span
+                  key={tech}
+                  className="px-2 py-1 text-xs font-mono bg-orange-500/10 text-orange-400 rounded border border-orange-500/20"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Recent Posts - spans 2 columns */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            viewport={{ once: true }}
+            className="lg:col-span-2 p-6 bg-bg-secondary border border-border rounded-xl"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-zinc-100">
+                Recent Writing
+              </h3>
+              <Link
+                href="/posts"
+                className="text-sm text-zinc-400 hover:text-emerald-500 transition-colors"
+              >
+                View all
+              </Link>
+            </div>
+            <div className="space-y-3">
+              {recentPosts.slice(0, 2).map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/posts/${post.slug}`}
+                  className="group block p-4 bg-bg-tertiary rounded-lg border border-transparent hover:border-border transition-colors"
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-zinc-200 font-medium truncate group-hover:text-emerald-500 transition-colors">
+                        {post.title}
+                      </h4>
+                      <p className="text-zinc-500 text-sm mt-1 truncate">
+                        {post.description}
+                      </p>
+                    </div>
+                    <span className="text-zinc-600 text-xs font-mono whitespace-nowrap">
+                      {formatDate(post.date)}
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Interests */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            viewport={{ once: true }}
+            className="p-6 bg-bg-secondary border border-border rounded-xl"
+          >
+            <div className="p-2 bg-emerald-500/10 rounded-lg w-fit mb-4">
+              <Cpu className="w-5 h-5 text-emerald-500" />
+            </div>
+            <h3 className="text-lg font-semibold text-zinc-100 mb-3">
+              Interests
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {skills.interests.map((interest) => (
+                <span
+                  key={interest}
+                  className="px-2 py-1 text-xs font-mono bg-emerald-500/10 text-emerald-400 rounded border border-emerald-500/20"
+                >
+                  {interest}
+                </span>
+              ))}
+            </div>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };
