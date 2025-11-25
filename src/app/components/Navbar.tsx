@@ -5,9 +5,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const navItems = [
-  { name: "Home", path: "/" },
-  { name: "Projects", path: "/projects" },
-  { name: "Posts", path: "/posts" },
+  { name: "Work", path: "/projects" },
+  { name: "Writing", path: "/posts" },
   { name: "Adventures", path: "/adventures" },
 ] as const;
 
@@ -21,61 +20,36 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      <nav className="max-w-5xl mx-auto px-4 py-4">
+      <nav className="max-w-5xl mx-auto px-6 py-5">
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex items-center justify-between px-4 py-2.5 bg-bg-secondary/80 backdrop-blur-xl border border-border rounded-xl"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="flex items-center justify-between"
         >
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-zinc-100 font-mono font-medium"
+            className="text-zinc-100 text-sm font-medium hover:text-emerald-400 transition-colors"
           >
-            <span className="text-emerald-500">~</span>
-            <span>nirlep</span>
+            nirlep.dev
           </Link>
 
           {/* Nav links */}
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-6">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 href={item.path}
-                className="relative px-3 py-1.5"
+                className={`text-sm transition-colors ${
+                  isActive(item.path)
+                    ? "text-zinc-100"
+                    : "text-zinc-500 hover:text-zinc-300"
+                }`}
               >
-                {isActive(item.path) && (
-                  <motion.span
-                    layoutId="navbar-active"
-                    className="absolute inset-0 bg-zinc-800 rounded-md"
-                    transition={{
-                      type: "spring",
-                      stiffness: 500,
-                      damping: 30,
-                    }}
-                  />
-                )}
-                <span
-                  className={`relative text-sm font-medium transition-colors ${
-                    isActive(item.path)
-                      ? "text-zinc-100"
-                      : "text-zinc-400 hover:text-zinc-200"
-                  }`}
-                >
-                  {item.name}
-                </span>
+                {item.name}
               </Link>
             ))}
-          </div>
-
-          {/* Status indicator */}
-          <div className="hidden sm:flex items-center gap-2 text-xs text-zinc-500">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span className="font-mono">available</span>
           </div>
         </motion.div>
       </nav>
