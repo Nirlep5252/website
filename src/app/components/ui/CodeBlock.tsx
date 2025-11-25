@@ -35,16 +35,16 @@ export function CodeBlock({ children, language }: CodeBlockProps) {
 
   return (
     <div className="relative group">
-      <div className="absolute right-4 top-4 opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="absolute right-4 top-4 opacity-0 group-hover:opacity-100 transition-opacity z-10">
         <button
           onClick={() => navigator.clipboard.writeText(content)}
-          className="bg-white/10 hover:bg-white/20 text-white/60 hover:text-white/90 px-2 py-1 rounded text-sm transition-colors"
+          className="bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-zinc-200 px-3 py-1.5 rounded-md text-xs font-mono transition-colors border border-zinc-700"
         >
           Copy
         </button>
       </div>
-      <pre className="!bg-gray-900 !p-4 rounded-xl">
-        <code ref={codeRef}>{content.trim()}</code>
+      <pre className="!bg-zinc-900 !p-4 !m-0 rounded-none">
+        <code ref={codeRef} className="!text-sm">{content.trim()}</code>
       </pre>
     </div>
   );
