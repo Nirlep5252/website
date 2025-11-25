@@ -19,7 +19,7 @@ interface SolutionListItemProps {
 
 export function SolutionListItem({ solution, index }: SolutionListItemProps) {
   return (
-    <Link href={`/adventures/cses/${solution.category}/${solution.name}`}>
+    <Link href={`/adventures/cses/${solution.category}/${solution.name}`} className="block">
       <motion.article
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}

@@ -190,7 +190,7 @@ export default async function CSESSolutions() {
                 <h2 className="text-xs font-mono text-text-tertiary uppercase tracking-widest mb-4">
                   {formatCategoryName(category.name)}
                 </h2>
-                <div className="space-y-2">
+                <div className="flex flex-col gap-3">
                   {category.solutions
                     .sort((a, b) => a.time - b.time)
                     .map((solution, index) => (
