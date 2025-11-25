@@ -142,7 +142,7 @@ export default function Projects() {
             Other experiments
           </motion.h2>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-zinc-800/50">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {otherProjects.map((project, index) => (
               <motion.a
                 key={project.title}
@@ -152,7 +152,7 @@ export default function Projects() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.4 + index * 0.05 }}
-                className="group bg-bg p-6 hover:bg-zinc-900/50 transition-colors"
+                className="group p-5 border border-zinc-800/50 rounded-lg hover:border-zinc-700 hover:bg-zinc-900/30 transition-all"
               >
                 <div className="flex items-start justify-between mb-4">
                   <h3 className="text-lg font-medium text-zinc-200 group-hover:text-emerald-400 transition-colors">
