@@ -3,9 +3,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Code2, Globe, Newspaper } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Post } from "@/lib/mdx";
-import { SkillsSection } from "./SkillsSection";
 
 interface AboutSectionProps {
   recentPosts: Post[];
@@ -13,132 +12,193 @@ interface AboutSectionProps {
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-US", {
+    month: "short",
     year: "numeric",
-    month: "long",
-    day: "numeric",
   });
 }
 
+const technologies = [
+  "Rust",
+  "TypeScript",
+  "Python",
+  "Go",
+  "React",
+  "Next.js",
+  "Node.js",
+  "PostgreSQL",
+];
+
 export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 text-white">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="max-w-4xl"
-      >
-        <h2 className="text-4xl font-bold mb-8">About Me</h2>
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+    <section className="py-32 px-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
+          className="mb-20"
+        >
+          <span className="text-emerald-500 font-mono text-sm mb-2 block">
+            {"// about"}
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-zinc-100">
+            What I Do
+          </h2>
+        </motion.div>
+
+        {/* Main content - Two column layout */}
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+          {/* Left column - About text */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
-            className="space-y-6"
           >
-            <div className="flex gap-4 items-start">
-              <div className="mt-1">
-                <Code2 className="w-6 h-6 text-blue-400" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-xl mb-2">
-                  Passionate Developer
-                </h3>
-                <p className="text-gray-300 leading-relaxed">
-                  I&apos;m a passionate developer who loves creating beautiful
-                  and functional web experiences. With expertise in modern web
-                  technologies, I bring ideas to life through clean code and
-                  intuitive design.
-                </p>
-              </div>
+            <p className="text-xl md:text-2xl text-zinc-300 leading-relaxed mb-8">
+              I build modern web applications with a focus on{" "}
+              <span className="text-emerald-400">performance</span>,{" "}
+              <span className="text-emerald-400">accessibility</span>, and{" "}
+              <span className="text-emerald-400">user experience</span>.
+            </p>
+            <p className="text-zinc-500 leading-relaxed mb-10">
+              With expertise spanning from low-level systems programming to modern
+              frontend frameworks, I bring ideas to life through clean, maintainable code.
+              I&apos;m passionate about solving complex problems and building tools that
+              make a difference.
+            </p>
+
+            {/* Technologies */}
+            <div className="flex flex-wrap gap-3">
+              {technologies.map((tech) => (
+                <span
+                  key={tech}
+                  className="px-3 py-1.5 text-sm font-mono text-zinc-400 border border-zinc-800 rounded-full"
+                >
+                  {tech}
+                </span>
+              ))}
             </div>
-            <div className="flex gap-4 items-start">
-              <div className="mt-1">
-                <Globe className="w-6 h-6 text-blue-400" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-xl mb-2">
-                  Open Source Enthusiast
-                </h3>
-                <p className="text-gray-300 leading-relaxed">
-                  When I&apos;m not coding, you can find me exploring new
-                  technologies, contributing to open-source projects, or sharing
-                  my knowledge through blog posts and tutorials.
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-4 items-start">
-              <div className="mt-1">
-                <Newspaper className="w-6 h-6 text-purple-400" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-xl mb-4">
-                  Recent Blog Posts
-                </h3>
-                <div className="flex flex-col gap-4">
-                  {recentPosts.map((post) => (
-                    <Link href={`/posts/${post.slug}`} key={post.slug}>
-                      <motion.div
-                        className="bg-white/5 p-5 rounded-xl group cursor-pointer relative overflow-hidden backdrop-blur-sm border border-transparent hover:border-white/10 transition-colors"
-                        whileHover={{
-                          scale: 1.03,
-                          transition: { duration: 0.2, ease: "easeOut" },
-                        }}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3 }}
+          </motion.div>
+
+          {/* Right column - Cards */}
+          <div className="space-y-6">
+            {/* Problem Solving Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true }}
+            >
+              <Link
+                href="/adventures"
+                className="group block relative overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative p-6 border border-zinc-800 rounded-xl group-hover:border-emerald-500/30 transition-colors">
+                  <div className="flex items-start gap-4">
+                    <span className="text-5xl font-bold text-zinc-800 group-hover:text-emerald-500/20 transition-colors">
+                      01
+                    </span>
+                    <div className="flex-1 pt-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="text-lg font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors">
+                          Problem Solving
+                        </h3>
+                        <ArrowUpRight className="w-5 h-5 text-zinc-600 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                      </div>
+                      <p className="text-zinc-500 text-sm leading-relaxed">
+                        Competitive programming enthusiast. Solving algorithmic challenges.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+
+            {/* Recent Writing Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true }}
+            >
+              <div className="p-6 border border-zinc-800 rounded-xl">
+                <div className="flex items-start gap-4 mb-5">
+                  <span className="text-5xl font-bold text-zinc-800">
+                    02
+                  </span>
+                  <div className="flex-1 pt-1">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-semibold text-zinc-100">
+                        Recent Writing
+                      </h3>
+                      <Link
+                        href="/posts"
+                        className="text-sm text-zinc-500 hover:text-emerald-500 transition-colors flex items-center gap-1"
                       >
-                        <motion.div
-                          className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                          initial={false}
-                        />
-                        <div className="relative space-y-2">
-                          <div className="flex items-center gap-2 text-sm text-gray-400">
-                            <time
-                              dateTime={post.date}
-                              className="group-hover:text-gray-300 transition-colors"
-                            >
-                              {formatDate(post.date)}
-                            </time>
-                            <span>•</span>
-                            <div className="flex gap-2">
-                              {post.tags.slice(0, 2).map((tag) => (
-                                <span
-                                  key={tag}
-                                  className="bg-purple-500/10 text-purple-400/90 px-2.5 py-1 rounded-full text-xs group-hover:bg-purple-500/20 group-hover:text-purple-300 transition-all duration-300"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                          <h4 className="text-white/90 font-medium group-hover:text-white transition-colors">
-                            {post.title}
-                          </h4>
-                          <p className="text-gray-400 text-sm line-clamp-2 group-hover:text-gray-300 transition-colors">
-                            {post.description}
-                          </p>
-                        </div>
-                      </motion.div>
+                        View all
+                        <ArrowUpRight className="w-3 h-3" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                <div className="pl-[4.5rem]">
+                  {recentPosts.slice(0, 2).map((post) => (
+                    <Link
+                      key={post.slug}
+                      href={`/posts/${post.slug}`}
+                      className="group flex items-center justify-between gap-4 py-3 border-t border-zinc-800/50 first:border-0 first:pt-0"
+                    >
+                      <h4 className="text-zinc-400 group-hover:text-emerald-400 transition-colors text-sm line-clamp-1">
+                        {post.title}
+                      </h4>
+                      <span className="text-zinc-700 text-xs font-mono whitespace-nowrap">
+                        {formatDate(post.date)}
+                      </span>
                     </Link>
                   ))}
                 </div>
               </div>
-            </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            viewport={{ once: true }}
-            className="space-y-4"
-          >
-            <SkillsSection />
-          </motion.div>
+            </motion.div>
+
+            {/* Projects CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true }}
+            >
+              <Link
+                href="/projects"
+                className="group block relative overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 opacity-50 group-hover:opacity-100 transition-opacity" />
+                <div className="relative p-6 border border-emerald-500/20 rounded-xl group-hover:border-emerald-500/40 transition-colors">
+                  <div className="flex items-start gap-4">
+                    <span className="text-5xl font-bold text-emerald-500/20 group-hover:text-emerald-500/30 transition-colors">
+                      03
+                    </span>
+                    <div className="flex-1 pt-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="text-lg font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors">
+                          View My Work
+                        </h3>
+                        <ArrowUpRight className="w-5 h-5 text-emerald-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                      </div>
+                      <p className="text-zinc-500 text-sm">
+                        Projects I&apos;ve built and contributed to
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

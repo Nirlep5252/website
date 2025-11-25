@@ -56,8 +56,8 @@ export function CodeTabs({ langs, children }: CodeTabsProps) {
   };
 
   return (
-    <div className="rounded-xl overflow-hidden border border-white/5">
-      <div className="flex bg-gray-900/50 border-b border-white/5 relative">
+    <div className="rounded-lg overflow-hidden border border-zinc-800">
+      <div className="flex bg-zinc-900/80 border-b border-zinc-800 relative">
         {langs.map((lang, index) => (
           <button
             key={lang}
@@ -65,17 +65,17 @@ export function CodeTabs({ langs, children }: CodeTabsProps) {
               tabsRef.current[index] = el;
             }}
             onClick={() => setActiveTab(index)}
-            className={`px-4 py-2 text-sm font-medium transition-colors relative ${
+            className={`px-4 py-2.5 text-sm font-mono transition-colors relative ${
               activeTab === index
-                ? "text-blue-400"
-                : "text-gray-400 hover:text-gray-300"
+                ? "text-emerald-400"
+                : "text-zinc-500 hover:text-zinc-300"
             }`}
           >
             {lang}
           </button>
         ))}
         <motion.div
-          className="absolute bottom-0 h-0.5 bg-blue-400"
+          className="absolute bottom-0 h-0.5 bg-emerald-400"
           initial={false}
           animate={{
             left: tabBounds.left,

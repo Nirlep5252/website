@@ -11,7 +11,14 @@ export type Post = {
   content: string;
   description: string;
   tags: string[];
+  readingTime?: number;
 };
+
+function calculateReadingTime(content: string): number {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).length;
+  return Math.ceil(words / wordsPerMinute);
+}
 
 export async function getAllPosts(): Promise<Post[]> {
   const fileNames = await readdir(postsDirectory);
@@ -27,6 +34,7 @@ export async function getAllPosts(): Promise<Post[]> {
         return {
           slug,
           content,
+          readingTime: calculateReadingTime(content),
           ...(data as {
             title: string;
             date: string;
@@ -34,7 +42,7 @@ export async function getAllPosts(): Promise<Post[]> {
             tags: string[];
           }),
         };
-      }),
+      })
   );
 
   return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -49,6 +57,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     return {
       slug,
       content,
+      readingTime: calculateReadingTime(content),
       ...(data as {
         title: string;
         date: string;
