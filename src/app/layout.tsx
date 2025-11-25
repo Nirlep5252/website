@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Playfair_Display, Inter } from "next/font/google";
+import { JetBrains_Mono, DM_Serif_Display, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 
@@ -15,9 +15,10 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const playfair = Playfair_Display({
+const dmSerif = DM_Serif_Display({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  weight: "400",
+  variable: "--font-display",
   display: "swap",
 });
 
@@ -66,7 +67,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} ${playfair.variable}`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${dmSerif.variable}`}
     >
       <head>
         <script

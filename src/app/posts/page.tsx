@@ -51,7 +51,7 @@ export default async function Posts() {
         </div>
 
         {/* Posts list */}
-        <div className="space-y-4">
+        <div className="space-y-6">
           {posts.map((post, index) => (
             <BlogPostCard key={post.slug} post={post} index={index} />
           ))}

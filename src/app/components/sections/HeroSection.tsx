@@ -172,66 +172,6 @@ export const HeroSection = () => {
           </motion.div>
         </div>
 
-        {/* Decorative code block */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="hidden xl:block absolute right-12 top-1/2 -translate-y-1/2 w-96"
-        >
-          <div className="terminal">
-            <div className="terminal-header">
-              <div className="terminal-dot terminal-dot-red" />
-              <div className="terminal-dot terminal-dot-yellow" />
-              <div className="terminal-dot terminal-dot-green" />
-              <span className="ml-4 text-xs text-text-tertiary font-mono">
-                developer.ts
-              </span>
-            </div>
-            <div className="p-4 font-mono text-sm">
-              <div className="text-code-keyword">const</div>
-              <div className="ml-4">
-                <span className="text-code-function">developer</span>
-                <span className="text-text-secondary"> = </span>
-                <span className="text-secondary">{"{"}</span>
-              </div>
-              <div className="ml-8">
-                <span className="text-code-string">name</span>
-                <span className="text-text-tertiary">: </span>
-                <span className="text-success">&quot;Nirlep Gohil&quot;</span>
-                <span className="text-text-tertiary">,</span>
-              </div>
-              <div className="ml-8">
-                <span className="text-code-string">location</span>
-                <span className="text-text-tertiary">: </span>
-                <span className="text-success">&quot;India 🇮🇳&quot;</span>
-                <span className="text-text-tertiary">,</span>
-              </div>
-              <div className="ml-8">
-                <span className="text-code-string">skills</span>
-                <span className="text-text-tertiary">: [</span>
-              </div>
-              <div className="ml-12">
-                <span className="text-success">&quot;TypeScript&quot;</span>
-                <span className="text-text-tertiary">,</span>
-              </div>
-              <div className="ml-12">
-                <span className="text-success">&quot;Rust&quot;</span>
-                <span className="text-text-tertiary">,</span>
-              </div>
-              <div className="ml-12">
-                <span className="text-success">&quot;Python&quot;</span>
-              </div>
-              <div className="ml-8 text-text-tertiary">],</div>
-              <div className="ml-8">
-                <span className="text-code-string">available</span>
-                <span className="text-text-tertiary">: </span>
-                <span className="text-code-keyword">true</span>
-              </div>
-              <div className="ml-4 text-secondary">{"}"}</div>
-            </div>
-          </div>
-        </motion.div>
       </div>
 
       {/* Scroll indicator */}
