@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -50,49 +50,10 @@ const FloatingParticles = () => {
 };
 
 export const HeroSection = () => {
-  const [mounted, setMounted] = useState(false);
-
-  // Mouse position for interactive blob
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  // Smooth spring animation for blob
-  const springConfig = { damping: 25, stiffness: 150 };
-  const blobX = useSpring(mouseX, springConfig);
-  const blobY = useSpring(mouseY, springConfig);
-
-  useEffect(() => {
-    setMounted(true);
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      mouseX.set(clientX);
-      mouseY.set(clientY);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
-
   return (
     <section className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
       {/* Floating particles */}
       <FloatingParticles />
-
-      {/* Mouse-following gradient blob */}
-      {mounted && (
-        <motion.div
-          className="fixed pointer-events-none z-0"
-          style={{
-            x: blobX,
-            y: blobY,
-            translateX: "-50%",
-            translateY: "-50%",
-          }}
-        >
-          <div className="w-[500px] h-[500px] rounded-full bg-gradient-to-r from-emerald-500/10 via-cyan-500/10 to-emerald-500/10 blur-[100px]" />
-        </motion.div>
-      )}
 
       <div className="max-w-6xl w-full text-center relative z-10">
         {/* Glow effect behind text */}
