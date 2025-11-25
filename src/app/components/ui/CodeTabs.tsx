@@ -41,23 +41,26 @@ export function CodeTabs({ langs, children }: CodeTabsProps) {
     .map((child) => (child as CodeElement).props.children);
 
   if (codes.length === 0) {
-    console.log("No codes found!");
     return null;
   }
 
   const getLanguageIdentifier = (lang: string) => {
-    // Map display names to Prism.js language identifiers
     const langMap: Record<string, string> = {
       "C++": "cpp",
       Python: "python",
       Rust: "rust",
+      TypeScript: "typescript",
+      JavaScript: "javascript",
+      Go: "go",
+      Java: "java",
     };
     return langMap[lang] || lang.toLowerCase();
   };
 
   return (
-    <div className="rounded-xl overflow-hidden border border-white/5">
-      <div className="flex bg-gray-900/50 border-b border-white/5 relative">
+    <div className="rounded-lg overflow-hidden border border-border bg-bg-card my-6">
+      {/* Tabs header */}
+      <div className="flex bg-bg-elevated border-b border-border relative">
         {langs.map((lang, index) => (
           <button
             key={lang}
@@ -65,17 +68,17 @@ export function CodeTabs({ langs, children }: CodeTabsProps) {
               tabsRef.current[index] = el;
             }}
             onClick={() => setActiveTab(index)}
-            className={`px-4 py-2 text-sm font-medium transition-colors relative ${
+            className={`px-4 py-2.5 text-xs font-mono transition-colors relative ${
               activeTab === index
-                ? "text-blue-400"
-                : "text-gray-400 hover:text-gray-300"
+                ? "text-primary"
+                : "text-text-tertiary hover:text-text-secondary"
             }`}
           >
             {lang}
           </button>
         ))}
         <motion.div
-          className="absolute bottom-0 h-0.5 bg-blue-400"
+          className="absolute bottom-0 h-0.5 bg-primary"
           initial={false}
           animate={{
             left: tabBounds.left,
@@ -88,6 +91,8 @@ export function CodeTabs({ langs, children }: CodeTabsProps) {
           }}
         />
       </div>
+
+      {/* Tab content */}
       <AnimatePresence mode="wait">
         <motion.div
           key={activeTab}
@@ -97,9 +102,11 @@ export function CodeTabs({ langs, children }: CodeTabsProps) {
           transition={{ duration: 0.2 }}
           className="relative"
         >
-          <CodeBlock language={getLanguageIdentifier(langs[activeTab])}>
-            {codes[activeTab]}
-          </CodeBlock>
+          <div className="[&_.group]:rounded-none [&_.group]:border-0 [&_.group]:my-0">
+            <CodeBlock language={getLanguageIdentifier(langs[activeTab])}>
+              {codes[activeTab]}
+            </CodeBlock>
+          </div>
         </motion.div>
       </AnimatePresence>
     </div>

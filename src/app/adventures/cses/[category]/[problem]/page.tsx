@@ -8,6 +8,7 @@ import { AnimatedPost } from "@/components/AnimatedPost";
 import MDXComponents from "@/app/components/MDXComponents";
 import Link from "next/link";
 import { Metadata } from "next";
+import { ArrowLeft, Calendar, ExternalLink } from "lucide-react";
 
 interface Props {
   params: Promise<{
@@ -32,8 +33,14 @@ function formatTitle(filename: string): string {
     .join(" ");
 }
 
+function formatCategoryName(category: string): string {
+  return category
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 function formatDate(timestamp: number): string {
-  // Convert milliseconds to seconds if needed
   const timestampInMs = timestamp > 9999999999 ? timestamp : timestamp * 1000;
   return new Date(timestampInMs).toLocaleDateString("en-US", {
     year: "numeric",
@@ -48,8 +55,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const categoryName = formatTitle(category);
 
   return {
-    title: `${title} - CSES Solution | Nirlep's Coding Adventures`,
-    description: `Detailed solution and explanation for the ${title} problem from ${categoryName} category in CSES (Code Submission Evaluation System). Learn the approach, implementation, and optimization techniques.`,
+    title: `${title} - CSES Solution | Nirlep Gohil`,
+    description: `Detailed solution and explanation for the ${title} problem from ${categoryName} category in CSES.`,
     keywords: [
       "CSES",
       title,
@@ -57,17 +64,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "competitive programming",
       "algorithm",
       "solution",
-      "tutorial",
     ],
     openGraph: {
       title: `${title} - CSES Solution`,
-      description: `Learn how to solve the ${title} problem from CSES ${categoryName} section. Complete explanation with implementation details.`,
-      type: "article",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${title} - CSES Solution`,
       description: `Learn how to solve the ${title} problem from CSES ${categoryName} section.`,
+      type: "article",
     },
   };
 }
@@ -84,7 +85,6 @@ export default async function ProblemPage({ params }: Props) {
   }
 
   const source = await fs.promises.readFile(filePath, "utf-8");
-  // Extract frontmatter separately to preserve the original format
   const frontmatterMatch = source.match(/^---\n([\s\S]*?)\n---/);
   const frontmatterRaw = frontmatterMatch ? frontmatterMatch[1] : "";
   const time = frontmatterRaw.match(/time:\s*(\d+)/)?.[1];
@@ -106,7 +106,6 @@ export default async function ProblemPage({ params }: Props) {
       hr: () => null,
       pre: ({ children }: PreProps) => {
         const className = children?.props?.className ?? "";
-
         if (className.startsWith("language-")) {
           return children;
         }
@@ -116,42 +115,67 @@ export default async function ProblemPage({ params }: Props) {
   });
 
   return (
-    <main className="min-h-screen text-white pt-20">
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <Link
-          href="/adventures/cses"
-          className="inline-flex items-center text-blue-400 hover:text-blue-300 mb-8 group"
-        >
-          <svg
-            className="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+    <main className="min-h-screen pt-24 pb-16">
+      <div className="container-custom">
+        <div className="max-w-3xl mx-auto">
+          {/* Back link */}
+          <Link
+            href="/adventures/cses"
+            className="inline-flex items-center gap-2 text-sm font-mono text-text-tertiary hover:text-primary mb-8 group transition-colors"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-          Back to Solutions
-        </Link>
-        <AnimatedPost>
-          <article className="prose prose-invert prose-lg prose-headings:font-semibold prose-a:text-blue-400 hover:prose-a:text-blue-300 prose-pre:bg-transparent prose-pre:p-0">
-            <h1 className="text-4xl font-bold mb-4">{formatTitle(problem)}</h1>
-            <div className="flex items-center gap-4 mb-8 not-prose">
-              <time className="text-gray-400">{formatDate(Number(time))}</time>
-            </div>
-            <div className="prose prose-invert prose-lg">{content}</div>
-          </article>
-        </AnimatedPost>
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            Back to solutions
+          </Link>
+
+          <AnimatedPost>
+            <article>
+              {/* Header */}
+              <header className="mb-10">
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="px-2.5 py-1 text-xs font-mono bg-primary/10 text-primary border border-primary/20 rounded-md">
+                    {formatCategoryName(category)}
+                  </span>
+                  <div className="flex items-center gap-1.5 text-sm font-mono text-text-tertiary">
+                    <Calendar className="w-4 h-4" />
+                    <time>{formatDate(Number(time))}</time>
+                  </div>
+                </div>
+
+                <h1 className="text-display-md font-display font-bold text-text mb-4">
+                  {formatTitle(problem)}
+                </h1>
+
+                <a
+                  href={`https://cses.fi/problemset/task/${problem.replace(/-/g, "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-mono text-text-tertiary hover:text-primary transition-colors"
+                >
+                  View on CSES
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </header>
+
+              {/* Content */}
+              <div className="prose prose-lg max-w-none">{content}</div>
+            </article>
+          </AnimatedPost>
+
+          {/* Footer */}
+          <footer className="mt-16 pt-8 border-t border-border">
+            <Link
+              href="/adventures/cses"
+              className="text-sm font-mono text-text-tertiary hover:text-primary transition-colors"
+            >
+              ← All CSES solutions
+            </Link>
+          </footer>
+        </div>
       </div>
     </main>
   );
 }
 
-// Generate static paths for all solutions
 export async function generateStaticParams() {
   const solutionsDir = path.join(process.cwd(), "src/content/cses");
   const categories = fs

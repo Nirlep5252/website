@@ -1,6 +1,12 @@
 import React from "react";
 import { getCSESStats } from "@/lib/cses";
 import { AdventureCard } from "@/app/components/ui/AdventureCard";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Adventures | Nirlep Gohil",
+  description: "My ongoing learning journeys and challenges in competitive programming.",
+};
 
 export default async function Adventures() {
   const csesStats = await getCSESStats();
@@ -26,10 +32,26 @@ export default async function Adventures() {
   ];
 
   return (
-    <main className="min-h-screen text-white pt-20">
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-8">Adventures</h1>
-        <div className="flex flex-col gap-4">
+    <main className="min-h-screen pt-24 pb-16">
+      <div className="container-custom">
+        {/* Header */}
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-xs font-mono text-primary uppercase tracking-widest">
+              ~/adventures
+            </span>
+          </div>
+          <h1 className="text-display-md font-display font-bold text-text mb-4">
+            Adventures
+          </h1>
+          <p className="text-lg text-text-secondary max-w-2xl">
+            Ongoing learning journeys and challenges. Tracking my progress through 
+            various competitive programming problem sets.
+          </p>
+        </div>
+
+        {/* Adventures list */}
+        <div className="space-y-4">
           {adventures.map((adventure, index) => (
             <AdventureCard key={index} adventure={adventure} />
           ))}

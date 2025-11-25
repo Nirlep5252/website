@@ -4,9 +4,9 @@ import { BlogPostCard } from "@/app/components/ui/BlogPostCard";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog Posts | Nirlep's Personal Blog",
+  title: "Blog | Nirlep Gohil",
   description:
-    "Read my latest thoughts, tutorials, and experiences on software development, programming, and technology. Discover in-depth articles about coding, tech, and personal projects.",
+    "Read my latest thoughts, tutorials, and experiences on software development, programming, and technology.",
   keywords: [
     "blog",
     "programming",
@@ -15,14 +15,14 @@ export const metadata: Metadata = {
     "coding tutorials",
   ],
   openGraph: {
-    title: "Blog Posts | Nirlep's Personal Blog",
+    title: "Blog | Nirlep Gohil",
     description:
       "Read my latest thoughts, tutorials, and experiences on software development and technology.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blog Posts | Nirlep's Personal Blog",
+    title: "Blog | Nirlep Gohil",
     description:
       "Read my latest thoughts, tutorials, and experiences on software development and technology.",
   },
@@ -32,17 +32,35 @@ export default async function Posts() {
   const posts = await getAllPosts();
 
   return (
-    <main className="min-h-screen text-white pt-20">
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-8">Blog Posts</h1>
-        <div className="gap-4 flex flex-col">
-          {posts.map((post) => (
-            <BlogPostCard key={post.slug} post={post} />
+    <main className="min-h-screen pt-24 pb-16">
+      <div className="container-custom">
+        {/* Header */}
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-xs font-mono text-primary uppercase tracking-widest">
+              ~/posts
+            </span>
+          </div>
+          <h1 className="text-display-md font-display font-bold text-text mb-4">
+            Blog
+          </h1>
+          <p className="text-lg text-text-secondary max-w-2xl">
+            Thoughts on software development, programming, and technology. 
+            Writing about what I learn and build.
+          </p>
+        </div>
+
+        {/* Posts list */}
+        <div className="space-y-4">
+          {posts.map((post, index) => (
+            <BlogPostCard key={post.slug} post={post} index={index} />
           ))}
           {posts.length === 0 && (
-            <p className="text-gray-400 text-center py-8">
-              No blog posts found. Create your first post in src/content/posts!
-            </p>
+            <div className="card p-12 text-center">
+              <p className="text-text-secondary font-mono">
+                No posts yet. Check back soon!
+              </p>
+            </div>
           )}
         </div>
       </div>

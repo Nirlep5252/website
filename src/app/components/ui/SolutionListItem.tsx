@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { FileCode, ArrowRight } from "lucide-react";
 
 interface Solution {
   name: string;
@@ -11,38 +12,33 @@ interface Solution {
   time: number;
 }
 
-function formatDate(timestamp: number): string {
-  return new Date(timestamp).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-}
-
-export function SolutionListItem({
-  solution,
-  index,
-}: {
+interface SolutionListItemProps {
   solution: Solution;
   index: number;
-}) {
+}
+
+export function SolutionListItem({ solution, index }: SolutionListItemProps) {
   return (
     <Link href={`/adventures/cses/${solution.category}/${solution.name}`}>
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: index * 0.05 }}
-        className="flex items-center justify-between p-4 bg-gray-900/30 backdrop-blur-xl border border-white/5 rounded-xl hover:border-blue-500/50 transition-colors group"
+      <motion.article
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: index * 0.03 }}
+        whileHover={{ x: 4 }}
+        className="group card p-4 flex items-center gap-4"
       >
+        <div className="w-8 h-8 rounded-lg bg-bg-hover border border-border flex items-center justify-center shrink-0">
+          <FileCode className="w-4 h-4 text-text-tertiary group-hover:text-primary transition-colors" />
+        </div>
+
         <div className="flex-1 min-w-0">
-          <h3 className="font-medium text-white/90 truncate">
+          <h3 className="font-medium text-text group-hover:text-primary transition-colors truncate">
             {solution.title}
           </h3>
-          <div className="text-sm text-gray-400 mt-1">
-            {formatDate(solution.time)}
-          </div>
         </div>
-      </motion.div>
+
+        <ArrowRight className="w-4 h-4 text-text-tertiary opacity-0 group-hover:opacity-100 group-hover:text-primary transition-all shrink-0" />
+      </motion.article>
     </Link>
   );
 }

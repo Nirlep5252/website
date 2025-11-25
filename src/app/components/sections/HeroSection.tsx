@@ -1,54 +1,253 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import AnimatedName from "../AnimatedName";
+import { ArrowRight, Github, Twitter, Linkedin } from "lucide-react";
 
-const MotionLink = motion(Link);
+const roles = [
+  "Full-Stack Developer",
+  "Open Source Enthusiast",
+  "Competitive Programmer",
+  "Problem Solver",
+];
 
 export const HeroSection = () => {
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentRole = roles[roleIndex];
+    const typeSpeed = isDeleting ? 30 : 80;
+    const pauseTime = 2000;
+
+    if (!isDeleting && displayText === currentRole) {
+      const timeout = setTimeout(() => setIsDeleting(true), pauseTime);
+      return () => clearTimeout(timeout);
+    }
+
+    if (isDeleting && displayText === "") {
+      setIsDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      setDisplayText((prev) =>
+        isDeleting
+          ? currentRole.substring(0, prev.length - 1)
+          : currentRole.substring(0, prev.length + 1)
+      );
+    }, typeSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, roleIndex]);
+
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-4 text-white">
+    <section className="min-h-screen flex flex-col justify-center relative overflow-hidden">
+      <div className="container-custom">
+        <div className="max-w-4xl">
+          {/* Terminal-style greeting */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-3 mb-6"
+          >
+            <span className="text-primary font-mono text-sm">
+              ~/nirlep.dev
+            </span>
+            <span className="text-text-tertiary font-mono text-sm">
+              →
+            </span>
+            <span className="text-text-secondary font-mono text-sm">
+              git:(main)
+            </span>
+          </motion.div>
+
+          {/* Main heading */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mb-6"
+          >
+            <h1 className="text-display-lg md:text-display-xl font-display font-bold tracking-tight">
+              <span className="text-text">Hi, I&apos;m </span>
+              <span className="gradient-text text-glow">Nirlep</span>
+            </h1>
+          </motion.div>
+
+          {/* Animated role */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mb-8"
+          >
+            <div className="flex items-center gap-2 font-mono text-xl md:text-2xl">
+              <span className="text-text-tertiary">{">"}</span>
+              <span className="text-text-secondary">{displayText}</span>
+              <span className="w-3 h-6 bg-primary cursor-blink" />
+            </div>
+          </motion.div>
+
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-lg md:text-xl text-text-secondary max-w-2xl mb-10 leading-relaxed"
+          >
+            I build elegant digital experiences with clean code and thoughtful design. 
+            Passionate about creating tools that make developers&apos; lives easier.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-wrap items-center gap-4 mb-12"
+          >
+            <Link href="/projects">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-primary inline-flex items-center gap-2 group"
+              >
+                View Projects
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </motion.button>
+            </Link>
+            <a href="mailto:hello@nirlep.dev">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-ghost"
+              >
+                Get in Touch
+              </motion.button>
+            </a>
+          </motion.div>
+
+          {/* Social Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="flex items-center gap-6"
+          >
+            <span className="text-xs font-mono text-text-tertiary uppercase tracking-widest">
+              Connect
+            </span>
+            <div className="h-px w-8 bg-border" />
+            <div className="flex items-center gap-4">
+              <a
+                href="https://github.com/nirlep5252"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-secondary hover:text-primary transition-colors"
+              >
+                <Github className="w-5 h-5" />
+              </a>
+              <a
+                href="https://twitter.com/nirlep_5252_"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-secondary hover:text-primary transition-colors"
+              >
+                <Twitter className="w-5 h-5" />
+              </a>
+              <a
+                href="https://linkedin.com/in/nirlep5252"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-secondary hover:text-primary transition-colors"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Decorative code block */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="hidden xl:block absolute right-12 top-1/2 -translate-y-1/2 w-96"
+        >
+          <div className="terminal">
+            <div className="terminal-header">
+              <div className="terminal-dot terminal-dot-red" />
+              <div className="terminal-dot terminal-dot-yellow" />
+              <div className="terminal-dot terminal-dot-green" />
+              <span className="ml-4 text-xs text-text-tertiary font-mono">
+                developer.ts
+              </span>
+            </div>
+            <div className="p-4 font-mono text-sm">
+              <div className="text-code-keyword">const</div>
+              <div className="ml-4">
+                <span className="text-code-function">developer</span>
+                <span className="text-text-secondary"> = </span>
+                <span className="text-secondary">{"{"}</span>
+              </div>
+              <div className="ml-8">
+                <span className="text-code-string">name</span>
+                <span className="text-text-tertiary">: </span>
+                <span className="text-success">&quot;Nirlep Gohil&quot;</span>
+                <span className="text-text-tertiary">,</span>
+              </div>
+              <div className="ml-8">
+                <span className="text-code-string">location</span>
+                <span className="text-text-tertiary">: </span>
+                <span className="text-success">&quot;India 🇮🇳&quot;</span>
+                <span className="text-text-tertiary">,</span>
+              </div>
+              <div className="ml-8">
+                <span className="text-code-string">skills</span>
+                <span className="text-text-tertiary">: [</span>
+              </div>
+              <div className="ml-12">
+                <span className="text-success">&quot;TypeScript&quot;</span>
+                <span className="text-text-tertiary">,</span>
+              </div>
+              <div className="ml-12">
+                <span className="text-success">&quot;Rust&quot;</span>
+                <span className="text-text-tertiary">,</span>
+              </div>
+              <div className="ml-12">
+                <span className="text-success">&quot;Python&quot;</span>
+              </div>
+              <div className="ml-8 text-text-tertiary">],</div>
+              <div className="ml-8">
+                <span className="text-code-string">available</span>
+                <span className="text-text-tertiary">: </span>
+                <span className="text-code-keyword">true</span>
+              </div>
+              <div className="ml-4 text-secondary">{"}"}</div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Scroll indicator */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-center max-w-4xl"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <motion.div
-          initial={{ scale: 0.5, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          className="flex flex-col items-center gap-2"
         >
-          <AnimatedName />
-          <p className="text-2xl text-gray-300">
-            Full-stack developer and open source enthusiast.
-          </p>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-          className="flex gap-4 justify-center"
-        >
-          <motion.a
-            href="mailto:hello@nirlep.dev"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 rounded-full bg-white text-black font-semibold hover:bg-gray-200"
-          >
-            Get in Touch
-          </motion.a>
-          <MotionLink
-            href="/projects"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 rounded-full border-2 border-white text-white font-semibold hover:bg-white/10"
-          >
-            View Projects
-          </MotionLink>
+          <span className="text-xs font-mono text-text-tertiary">scroll</span>
+          <div className="w-px h-8 bg-gradient-to-b from-border to-transparent" />
         </motion.div>
       </motion.div>
     </section>

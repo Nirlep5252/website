@@ -5,29 +5,24 @@ import path from "path";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { SolutionListItem } from "@/app/components/ui/SolutionListItem";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowLeft, ExternalLink, Target } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "CSES Solutions | Nirlep's Coding Adventures",
+  title: "CSES Solutions | Nirlep Gohil",
   description:
-    "Explore detailed solutions and explanations for CSES (Code Submission Evaluation System) problems. Learn algorithmic problem-solving techniques and competitive programming strategies.",
+    "Detailed solutions and explanations for CSES (Code Submission Evaluation System) problems.",
   keywords: [
     "CSES",
     "competitive programming",
     "algorithm solutions",
     "coding problems",
-    "programming tutorials",
   ],
   openGraph: {
-    title: "CSES Solutions | Nirlep's Coding Adventures",
+    title: "CSES Solutions | Nirlep Gohil",
     description:
-      "Detailed solutions and explanations for CSES (Code Submission Evaluation System) problems. Learn algorithmic problem-solving techniques.",
+      "Detailed solutions and explanations for CSES competitive programming problems.",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "CSES Solutions | Nirlep's Coding Adventures",
-    description:
-      "Detailed solutions and explanations for CSES (Code Submission Evaluation System) problems.",
   },
 };
 
@@ -96,14 +91,13 @@ async function getCSESSolutions(): Promise<Solution[]> {
     }),
   );
 
-  return solutions.sort((a, b) => a.time - b.time); // Sort by earliest first
+  return solutions.sort((a, b) => a.time - b.time);
 }
 
 export default async function CSESSolutions() {
   const solutions = await getCSESSolutions();
   const stats = await getCSESStats();
 
-  // Group solutions by category and find earliest time for each category
   const categoriesWithTime: CategoryWithTime[] = Object.entries(
     solutions.reduce(
       (acc, solution) => {
@@ -125,41 +119,78 @@ export default async function CSESSolutions() {
     ),
   ).map(([, category]) => category);
 
-  // Sort categories by earliest problem time
   const sortedCategories = categoriesWithTime.sort(
     (a, b) => a.earliestTime - b.earliestTime,
   );
 
   return (
-    <main className="min-h-screen text-white pt-20">
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-4xl font-bold">CSES Solutions</h1>
-          <div className="text-blue-400/90 text-sm">{stats.progress}</div>
+    <main className="min-h-screen pt-24 pb-16">
+      <div className="container-custom">
+        {/* Back link */}
+        <Link
+          href="/adventures"
+          className="inline-flex items-center gap-2 text-sm font-mono text-text-tertiary hover:text-primary mb-8 group transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          Back to adventures
+        </Link>
+
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+          <div>
+            <div className="flex items-center gap-3 mb-2">
+              <Target className="w-6 h-6 text-primary" />
+              <h1 className="text-display-sm font-display font-bold text-text">
+                CSES Solutions
+              </h1>
+            </div>
+            <p className="text-text-secondary">
+              My approaches and solutions to the CSES Problem Set
+            </p>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="px-4 py-2 rounded-lg bg-bg-card border border-border">
+              <span className="text-sm font-mono text-primary">
+                {stats.progress}
+              </span>
+            </div>
+            <a
+              href="https://cses.fi/user/151151/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-mono text-text-tertiary hover:text-primary transition-colors"
+            >
+              CSES Profile
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          </div>
         </div>
 
-        <div className="bg-gray-900/30 backdrop-blur-xl border border-white/5 rounded-xl p-6 mb-8">
-          <p className="text-gray-300/70 leading-relaxed">
+        {/* Description */}
+        <div className="card p-6 mb-8">
+          <p className="text-text-secondary leading-relaxed">
             The CSES Problemset is a collection of competitive programming
-            problems that I&apos;m trying to solve. This page contains my
-            approaches, solutions and explanations to the problems I&apos;ve
+            problems that I&apos;m working through. This page contains my
+            approaches, solutions, and explanations for the problems I&apos;ve
             solved.
           </p>
         </div>
 
+        {/* Solutions */}
         {solutions.length === 0 ? (
-          <div className="text-center py-12 text-gray-400">
-            No solutions added yet. Solutions will appear here as they are added
-            to the src/content/cses directory.
+          <div className="card p-12 text-center">
+            <p className="text-text-secondary font-mono">
+              No solutions added yet. Check back soon!
+            </p>
           </div>
         ) : (
-          <div className="space-y-8">
+          <div className="space-y-10">
             {sortedCategories.map((category) => (
-              <div key={category.name}>
-                <h2 className="text-2xl font-bold mb-4">
+              <section key={category.name}>
+                <h2 className="text-xs font-mono text-text-tertiary uppercase tracking-widest mb-4">
                   {formatCategoryName(category.name)}
                 </h2>
-                <div className="grid gap-2">
+                <div className="space-y-2">
                   {category.solutions
                     .sort((a, b) => a.time - b.time)
                     .map((solution, index) => (
@@ -170,7 +201,7 @@ export default async function CSESSolutions() {
                       />
                     ))}
                 </div>
-              </div>
+              </section>
             ))}
           </div>
         )}
