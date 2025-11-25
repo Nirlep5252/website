@@ -84,7 +84,7 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
           </motion.div>
 
           {/* Right column - Cards */}
-          <div className="space-y-4">
+          <div className="space-y-6">
             {/* Problem Solving Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -94,18 +94,27 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
             >
               <Link
                 href="/adventures"
-                className="group block p-6 border border-zinc-800 rounded-xl hover:border-zinc-700 hover:bg-zinc-900/30 transition-all"
+                className="group block relative overflow-hidden"
               >
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-lg font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors">
-                    Problem Solving
-                  </h3>
-                  <ArrowUpRight className="w-5 h-5 text-zinc-600 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative p-6 border border-zinc-800 rounded-xl group-hover:border-emerald-500/30 transition-colors">
+                  <div className="flex items-start gap-4">
+                    <span className="text-5xl font-bold text-zinc-800 group-hover:text-emerald-500/20 transition-colors">
+                      01
+                    </span>
+                    <div className="flex-1 pt-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="text-lg font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors">
+                          Problem Solving
+                        </h3>
+                        <ArrowUpRight className="w-5 h-5 text-zinc-600 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                      </div>
+                      <p className="text-zinc-500 text-sm leading-relaxed">
+                        Competitive programming enthusiast. Solving algorithmic challenges.
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-zinc-500 text-sm leading-relaxed">
-                  Competitive programming enthusiast. Solving algorithmic challenges
-                  and optimizing for performance.
-                </p>
               </Link>
             </motion.div>
 
@@ -115,36 +124,43 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               viewport={{ once: true }}
-              className="p-6 border border-zinc-800 rounded-xl"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-zinc-100">
-                  Recent Writing
-                </h3>
-                <Link
-                  href="/posts"
-                  className="text-sm text-zinc-500 hover:text-emerald-500 transition-colors"
-                >
-                  View all
-                </Link>
-              </div>
-              <div className="space-y-3">
-                {recentPosts.slice(0, 2).map((post) => (
-                  <Link
-                    key={post.slug}
-                    href={`/posts/${post.slug}`}
-                    className="group block py-3 border-t border-zinc-800/50 first:border-0 first:pt-0"
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <h4 className="text-zinc-300 group-hover:text-emerald-400 transition-colors line-clamp-1">
+              <div className="p-6 border border-zinc-800 rounded-xl">
+                <div className="flex items-start gap-4 mb-5">
+                  <span className="text-5xl font-bold text-zinc-800">
+                    02
+                  </span>
+                  <div className="flex-1 pt-1">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-semibold text-zinc-100">
+                        Recent Writing
+                      </h3>
+                      <Link
+                        href="/posts"
+                        className="text-sm text-zinc-500 hover:text-emerald-500 transition-colors flex items-center gap-1"
+                      >
+                        View all
+                        <ArrowUpRight className="w-3 h-3" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                <div className="pl-[4.5rem]">
+                  {recentPosts.slice(0, 2).map((post) => (
+                    <Link
+                      key={post.slug}
+                      href={`/posts/${post.slug}`}
+                      className="group flex items-center justify-between gap-4 py-3 border-t border-zinc-800/50 first:border-0 first:pt-0"
+                    >
+                      <h4 className="text-zinc-400 group-hover:text-emerald-400 transition-colors text-sm line-clamp-1">
                         {post.title}
                       </h4>
-                      <span className="text-zinc-600 text-xs font-mono whitespace-nowrap">
+                      <span className="text-zinc-700 text-xs font-mono whitespace-nowrap">
                         {formatDate(post.date)}
                       </span>
-                    </div>
-                  </Link>
-                ))}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </motion.div>
 
@@ -157,17 +173,27 @@ export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
             >
               <Link
                 href="/projects"
-                className="group flex items-center justify-between p-6 bg-emerald-500/5 border border-emerald-500/20 rounded-xl hover:bg-emerald-500/10 hover:border-emerald-500/30 transition-all"
+                className="group block relative overflow-hidden"
               >
-                <div>
-                  <h3 className="text-lg font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors">
-                    View My Work
-                  </h3>
-                  <p className="text-zinc-500 text-sm mt-1">
-                    Projects I&apos;ve built and contributed to
-                  </p>
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 opacity-50 group-hover:opacity-100 transition-opacity" />
+                <div className="relative p-6 border border-emerald-500/20 rounded-xl group-hover:border-emerald-500/40 transition-colors">
+                  <div className="flex items-start gap-4">
+                    <span className="text-5xl font-bold text-emerald-500/20 group-hover:text-emerald-500/30 transition-colors">
+                      03
+                    </span>
+                    <div className="flex-1 pt-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="text-lg font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors">
+                          View My Work
+                        </h3>
+                        <ArrowUpRight className="w-5 h-5 text-emerald-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                      </div>
+                      <p className="text-zinc-500 text-sm">
+                        Projects I&apos;ve built and contributed to
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <ArrowUpRight className="w-5 h-5 text-emerald-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
               </Link>
             </motion.div>
           </div>
