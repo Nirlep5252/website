@@ -96,6 +96,7 @@ export default async function ProblemPage({ params }: Props) {
       mdxOptions: {
         format: "mdx",
       },
+      blockJS: false,
     },
     components: {
       ...MDXComponents,

@@ -119,7 +119,7 @@ export default async function BlogPost({ params }: PageProps) {
 
             {/* Content */}
             <div className="prose prose-invert prose-zinc max-w-none prose-headings:text-zinc-100 prose-headings:font-semibold prose-p:text-zinc-300 prose-a:text-emerald-500 hover:prose-a:text-emerald-400 prose-strong:text-zinc-200 prose-code:text-emerald-400 prose-code:bg-emerald-500/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-code:before:content-none prose-code:after:content-none prose-pre:bg-bg-secondary prose-pre:border prose-pre:border-border prose-blockquote:border-emerald-500 prose-blockquote:text-zinc-400 prose-hr:border-border">
-              <MDXRemote source={post.content} components={MDXComponents} />
+              <MDXRemote source={post.content} components={MDXComponents} options={{ blockJS: false }} />
             </div>
           </article>
         </AnimatedPost>
