@@ -6,6 +6,22 @@ import { ArrowUpRight, Github } from "lucide-react";
 
 const projects = [
   {
+    title: "BondBot",
+    description:
+      "Discord AI agent for server management via natural language commands.",
+    tags: ["Next.js", "Discord API", "AI"],
+    preview: "https://bondbot.gg",
+    featured: true,
+  },
+  {
+    title: "Formality",
+    description:
+      "Modern image hosting platform for uploading and sharing.",
+    tags: ["Next.js", "Tailwind CSS", "React Query"],
+    preview: "https://formality.life",
+    featured: true,
+  },
+  {
     title: "MashCode",
     description:
       "Competitive programming platform focused on LIVE 1v1 battles. Real-time code execution and ranking system.",
@@ -86,7 +102,7 @@ export default function Projects() {
           {featuredProjects.map((project, index) => (
             <motion.a
               key={project.title}
-              href={project.github}
+              href={project.preview || project.github}
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
@@ -146,7 +162,7 @@ export default function Projects() {
             {otherProjects.map((project, index) => (
               <motion.a
                 key={project.title}
-                href={project.github}
+                href={project.preview || project.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 initial={{ opacity: 0 }}
