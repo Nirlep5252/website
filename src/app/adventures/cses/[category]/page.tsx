@@ -89,6 +89,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function CategoryPage({ params }: Props) {
+  "use cache";
   const { category } = await params;
   const solutions = await getCategorySolutions(category);
 

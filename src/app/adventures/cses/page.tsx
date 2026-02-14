@@ -96,6 +96,7 @@ async function getCSESSolutions(): Promise<Solution[]> {
 }
 
 export default async function CSESSolutions() {
+  "use cache";
   const solutions = await getCSESSolutions();
   const stats = await getCSESStats();
 

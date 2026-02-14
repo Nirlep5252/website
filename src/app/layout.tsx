@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 
@@ -38,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <head>
         {/* Load fonts from Google Fonts CDN */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -70,8 +71,10 @@ export default function RootLayout({
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
         </div>
 
-        <Navbar />
-        <div className="relative z-10">{children}</div>
+        <Suspense>
+          <Navbar />
+          <div className="relative z-10">{children}</div>
+        </Suspense>
       </body>
     </html>
   );

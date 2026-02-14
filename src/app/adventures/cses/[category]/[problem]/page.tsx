@@ -69,6 +69,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProblemPage({ params }: Props) {
+  "use cache";
   const { category, problem } = await params;
   const filePath = path.join(
     process.cwd(),

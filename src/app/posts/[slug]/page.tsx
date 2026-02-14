@@ -59,6 +59,7 @@ function formatDate(dateStr: string) {
 }
 
 export default async function BlogPost({ params }: PageProps) {
+  "use cache";
   const { slug } = await params;
   const post = await getPostBySlug(slug);
 

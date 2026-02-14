@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useSyncExternalStore } from "react";
 
 const StarIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
@@ -12,12 +12,12 @@ const StarIcon = () => (
 const generateSparkles = (count: number) => {
   return Array.from({ length: count }, (_, i) => ({
     id: i,
-    size: Math.random() * 12 + 8, // Reduced size range (8-20px)
-    x: Math.random() * 110 - 5, // Slightly smaller spread (-5% to 105%)
-    y: Math.random() * 110 - 5, // Slightly smaller spread (-5% to 105%)
+    size: Math.random() * 12 + 8,
+    x: Math.random() * 110 - 5,
+    y: Math.random() * 110 - 5,
     rotation: Math.random() * 360,
-    duration: Math.random() * 1.5 + 1, // Slightly slower animation (1-2.5s)
-    delay: Math.random() * 1.2, // Increased delays
+    duration: Math.random() * 1.5 + 1,
+    delay: Math.random() * 1.2,
   }));
 };
 
@@ -31,16 +31,20 @@ interface Sparkle {
   delay: number;
 }
 
+const emptySubscribe = () => () => {};
+
 export const Sparkles: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [sparkles, setSparkles] = useState<Sparkle[]>([]);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    setSparkles(generateSparkles(16));
-  }, []);
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+  const sparkles = useMemo<Sparkle[]>(
+    () => (mounted ? generateSparkles(16) : []),
+    [mounted]
+  );
 
   if (!mounted) {
     return <>{children}</>;
