@@ -100,14 +100,12 @@ export const HeroSection = () => {
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </MotionLink>
 
-          <motion.a
+          <a
             href="mailto:hello@nirlep.dev"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="px-8 py-4 text-zinc-400 font-medium rounded-full border border-zinc-800 hover:border-zinc-600 hover:text-zinc-200 transition-all"
+            className="px-8 py-4 text-zinc-400 font-medium rounded-full border border-zinc-800 hover:border-zinc-600 hover:text-zinc-200 transition-all hover:scale-[1.02] active:scale-[0.98]"
           >
             Get in Touch
-          </motion.a>
+          </a>
         </motion.div>
 
       </div>
