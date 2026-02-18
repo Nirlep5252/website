@@ -1,9 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Calendar, Mail, ArrowRight } from "lucide-react";
+import { Calendar, Mail, ArrowRight, Check } from "lucide-react";
+
+const EMAIL = "hello@nirlep.dev";
 
 const containerVariants = {
   hidden: {},
@@ -24,6 +26,19 @@ const itemVariants = {
 };
 
 export const CTASection = () => {
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const handleEmailClick = useCallback(async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${EMAIL}`;
+    }
+  }, []);
+
   return (
     <section id="contact" className="py-20 sm:py-32 relative">
       {/* Pulsing glow effect */}
@@ -93,18 +108,27 @@ export const CTASection = () => {
             Book a Call
           </motion.a>
 
-          <motion.a
-            href="mailto:hello@nirlep.dev"
+          <motion.button
+            onClick={handleEmailClick}
             whileHover={{
               scale: 1.03,
               borderColor: "rgba(161, 161, 170, 0.6)",
             }}
             whileTap={{ scale: 0.97 }}
-            className="flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 text-zinc-200 text-sm sm:text-base font-medium rounded-full border border-zinc-600 hover:text-white transition-all"
+            className="flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 text-zinc-200 text-sm sm:text-base font-medium rounded-full border border-zinc-600 hover:text-white transition-all cursor-pointer"
           >
-            <Mail className="w-4 h-4" />
-            Send an Email
-          </motion.a>
+            {emailCopied ? (
+              <>
+                <Check className="w-4 h-4 text-emerald-400" />
+                <span className="text-emerald-400">Email Copied!</span>
+              </>
+            ) : (
+              <>
+                <Mail className="w-4 h-4" />
+                Send an Email
+              </>
+            )}
+          </motion.button>
         </motion.div>
 
         {/* Secondary link */}

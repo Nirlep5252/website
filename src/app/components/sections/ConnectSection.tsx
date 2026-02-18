@@ -1,16 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Mail, Github, Twitter, Linkedin, ArrowUpRight, MessageCircle } from "lucide-react";
+import { Mail, Github, Twitter, Linkedin, ArrowUpRight, MessageCircle, Check, Copy } from "lucide-react";
+
+const EMAIL = "hello@nirlep.dev";
 
 const links = [
-  {
-    name: "Email",
-    value: "hello@nirlep.dev",
-    href: "mailto:hello@nirlep.dev",
-    icon: Mail,
-  },
   {
     name: "GitHub",
     value: "@nirlep5252",
@@ -38,8 +34,21 @@ const links = [
 ];
 
 export const ConnectSection = () => {
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const handleEmailClick = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    } catch {
+      // Fallback: open mailto anyway
+      window.location.href = `mailto:${EMAIL}`;
+    }
+  }, []);
+
   return (
-    <section className="py-32 px-4">
+    <section id="connect" className="py-32 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <motion.div
@@ -69,12 +78,38 @@ export const ConnectSection = () => {
           viewport={{ once: true }}
           className="border-t border-zinc-800"
         >
+          {/* Email - click to copy */}
+          <button
+            onClick={handleEmailClick}
+            className="group flex items-center justify-between py-5 border-b border-zinc-800 hover:bg-zinc-900/30 -mx-4 px-4 transition-colors w-[calc(100%+2rem)] text-left cursor-pointer"
+          >
+            <div className="flex items-center gap-4">
+              <Mail className="w-5 h-5 text-zinc-600 group-hover:text-emerald-500 transition-colors" />
+              <span className="text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                Email
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              {emailCopied ? (
+                <>
+                  <span className="text-emerald-400 font-medium">Copied!</span>
+                  <Check className="w-4 h-4 text-emerald-400" />
+                </>
+              ) : (
+                <>
+                  <span className="text-zinc-200 font-medium">{EMAIL}</span>
+                  <Copy className="w-4 h-4 text-zinc-600 group-hover:text-emerald-500 transition-all" />
+                </>
+              )}
+            </div>
+          </button>
+
           {links.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              target={link.href.startsWith("http") ? "_blank" : undefined}
-              rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group flex items-center justify-between py-5 border-b border-zinc-800 hover:bg-zinc-900/30 -mx-4 px-4 transition-colors"
             >
               <div className="flex items-center gap-4">
