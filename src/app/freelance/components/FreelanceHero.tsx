@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Calendar, ChevronDown } from "lucide-react";
@@ -29,17 +29,20 @@ const projects = [
 ];
 
 const desktopRotations = [-2, 1, -1.5];
+const desktopQuery = "(min-width: 1024px)";
 
 const useIsLg = () => {
-  const [isLg, setIsLg] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    setIsLg(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsLg(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-  return isLg;
+  return useSyncExternalStore(
+    (callback) => {
+      const mq = window.matchMedia(desktopQuery);
+      const handler = () => callback();
+
+      mq.addEventListener("change", handler);
+      return () => mq.removeEventListener("change", handler);
+    },
+    () => window.matchMedia(desktopQuery).matches,
+    () => false
+  );
 };
 
 const containerVariants = {
