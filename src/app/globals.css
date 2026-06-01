@@ -279,6 +279,85 @@ body {
   }
 }
 
+/* ============================================================
+   Scroll companion (HomeScrollCat): the hero cat morphs into a
+   corner watcher. Once it takes over, the in-flow hero cat is
+   hidden (its box still reserves the hero layout).
+   ============================================================ */
+[data-scrollcat="on"] #hero-cat-anchor {
+  opacity: 0;
+}
+.scroll-cat {
+  will-change: transform;
+}
+.scroll-cat .cat-scene {
+  transition: filter 0.3s ease;
+}
+.scroll-cat.is-docked {
+  cursor: pointer;
+}
+.scroll-cat.is-docked .cat-scene {
+  filter: drop-shadow(0 10px 18px oklch(0.4 0.03 55 / 0.22));
+}
+
+/* Napping (companion near the footer): closed eyes + a drifting "zzz" */
+.cat-eye-closed {
+  display: none;
+}
+.cat-napping .cat-eye {
+  display: none;
+}
+.cat-napping .cat-eye-closed {
+  display: block;
+}
+.cat-zzz span {
+  position: absolute;
+  font-weight: 700;
+  line-height: 1;
+  color: oklch(0.56 0.16 50 / 0.85);
+  animation: cat-zzz 2.6s ease-in-out infinite;
+}
+.cat-zzz span:nth-child(1) {
+  font-size: 0.7rem;
+  left: 0;
+  animation-delay: 0s;
+}
+.cat-zzz span:nth-child(2) {
+  font-size: 0.9rem;
+  left: 0.55rem;
+  animation-delay: 0.55s;
+}
+.cat-zzz span:nth-child(3) {
+  font-size: 1.15rem;
+  left: 1.2rem;
+  animation-delay: 1.1s;
+}
+@keyframes cat-zzz {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) rotate(-6deg);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) rotate(8deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-scrollcat="on"] #hero-cat-anchor {
+    opacity: 1;
+  }
+  .scroll-cat {
+    display: none;
+  }
+  .cat-zzz span {
+    animation: none;
+  }
+}
+
 /* Mascot eyes: pupils track the cursor (vars set in JS), with a smooth follow */
 .cat-pupil {
   transform: translate(var(--eye-x, 0px), var(--eye-y, 0px));

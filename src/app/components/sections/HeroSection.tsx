@@ -72,8 +72,14 @@ export const HeroSection = () => {
         {/* Mascot */}
         <div className="relative order-1 flex justify-center lg:order-2">
           <div className="cafe-sun-glow pointer-events-none absolute left-1/2 top-1/2 -z-0 aspect-square w-[125%] -translate-x-1/2 -translate-y-1/2 rounded-full" />
-          <div className="hero-pop relative z-[1] w-full max-w-[300px] sm:max-w-[360px] lg:max-w-[440px]">
-            <CatMascot className="w-full" />
+          <div
+            id="hero-cat-anchor"
+            className="hero-pop relative z-[1] w-full max-w-[300px] sm:max-w-[360px] lg:max-w-[440px]"
+          >
+            {/* Static placeholder for no-JS / reduced-motion; the interactive,
+                scroll-morphing cat is rendered by <HomeScrollCat /> and sits
+                exactly here at the top of the page. */}
+            <CatMascot className="w-full" interactive={false} />
           </div>
         </div>
       </div>

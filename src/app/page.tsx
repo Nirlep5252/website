@@ -6,6 +6,7 @@ import { HeroSection } from "./components/sections/HeroSection";
 import { AboutSection } from "./components/sections/AboutSection";
 import { ExploreSection } from "./components/sections/ExploreSection";
 import { ConnectSection } from "./components/sections/ConnectSection";
+import HomeScrollCat from "./components/HomeScrollCat";
 
 export default async function Home() {
   const [allPosts, cses] = await Promise.all([getAllPosts(), getCSESStats()]);
@@ -21,6 +22,7 @@ export default async function Home() {
         csesSolved={cses.solved}
       />
       <ConnectSection />
+      <HomeScrollCat />
     </main>
   );
 }

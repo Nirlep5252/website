@@ -33,13 +33,24 @@ const LEAF = "M0 0 C-9 -14 -5 -30 0 -40 C5 -30 9 -14 0 0 Z";
 
 type Heart = { id: number; x: number };
 
-export default function CatMascot({ className = "" }: { className?: string }) {
+export default function CatMascot({
+  className = "",
+  interactive = true,
+  napping = false,
+}: {
+  className?: string;
+  /** When false, the cat is a static placeholder: no cursor tracking, no pet. */
+  interactive?: boolean;
+  /** When true, the cat closes its eyes and a little "zzz" drifts up. */
+  napping?: boolean;
+}) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [hearts, setHearts] = useState<Heart[]>([]);
   const heartId = useRef(0);
 
-  // Pupils follow the cursor (skipped entirely under reduced motion).
+  // Pupils follow the cursor (skipped when non-interactive or under reduced motion).
   useEffect(() => {
+    if (!interactive) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (reduce.matches) return;
 
@@ -74,7 +85,7 @@ export default function CatMascot({ className = "" }: { className?: string }) {
       window.removeEventListener("pointermove", onMove);
       if (frame) cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [interactive]);
 
   const pet = useCallback(() => {
     const id = heartId.current++;
@@ -87,10 +98,21 @@ export default function CatMascot({ className = "" }: { className?: string }) {
 
   return (
     <div
-      className={`cat-scene relative cursor-pointer select-none ${className}`}
-      onPointerDown={pet}
+      className={`cat-scene relative select-none ${
+        interactive && !napping ? "cursor-pointer" : ""
+      } ${napping ? "cat-napping" : ""} ${className}`}
+      onPointerDown={interactive && !napping ? pet : undefined}
       aria-hidden="true"
     >
+      {/* A sleepy "zzz" while napping */}
+      {napping && (
+        <div className="cat-zzz pointer-events-none absolute right-[16%] top-[4%] z-10">
+          <span>z</span>
+          <span>z</span>
+          <span>z</span>
+        </div>
+      )}
+
       {/* Floating hearts on pet */}
       <div className="pointer-events-none absolute inset-x-0 top-[14%] z-10">
         {hearts.map((h) => (
@@ -248,6 +270,18 @@ export default function CatMascot({ className = "" }: { className?: string }) {
             <ellipse cx="212" cy="122" rx="5" ry="10" fill={C.ink} />
             <circle cx="209.8" cy="118" r="1.8" fill="white" />
           </g>
+        </g>
+
+        {/* Closed, content eyes — shown only while napping */}
+        <g
+          className="cat-eye-closed"
+          stroke={C.ink}
+          strokeWidth="3"
+          strokeLinecap="round"
+          fill="none"
+        >
+          <path d="M149 120 Q160 130 171 120" />
+          <path d="M201 120 Q212 130 223 120" />
         </g>
 
         {/* Nose + mouth */}
