@@ -1,113 +1,82 @@
-"use client";
-
 import React from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-
-const MotionLink = motion.create(Link);
-
-// Floating particles component
-const FloatingParticles = () => {
-  const particles = [
-    { size: 4, x: "10%", y: "20%", duration: 20, delay: 0 },
-    { size: 3, x: "20%", y: "80%", duration: 25, delay: 2 },
-    { size: 5, x: "80%", y: "30%", duration: 22, delay: 1 },
-    { size: 3, x: "70%", y: "70%", duration: 28, delay: 3 },
-    { size: 4, x: "90%", y: "50%", duration: 24, delay: 0.5 },
-    { size: 2, x: "30%", y: "40%", duration: 26, delay: 1.5 },
-    { size: 3, x: "50%", y: "90%", duration: 21, delay: 2.5 },
-    { size: 4, x: "15%", y: "60%", duration: 23, delay: 0.8 },
-  ];
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map((particle, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full bg-emerald-500/20"
-          style={{
-            width: particle.size,
-            height: particle.size,
-            left: particle.x,
-            top: particle.y,
-          }}
-          animate={{
-            y: [0, -30, 0],
-            x: [0, 10, 0],
-            opacity: [0.2, 0.5, 0.2],
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            delay: particle.delay,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </div>
-  );
-};
+import CatMascot from "../CatMascot";
 
 export const HeroSection = () => {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
-      {/* Floating particles */}
-      <FloatingParticles />
+    <section className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      {/* Warm ambient light from the top-right corner */}
+      <div className="cafe-sun-glow pointer-events-none absolute -right-32 -top-40 h-[460px] w-[460px] rounded-full opacity-70" />
 
-      <div className="max-w-6xl w-full text-center relative z-10">
-        {/* Glow effect behind text */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[200px] bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-emerald-500/20 blur-[120px] pointer-events-none" />
+      <div className="mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-6 pb-20 pt-28">
+      <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-6">
+        {/* Copy */}
+        <div className="order-2 min-w-0 max-w-xl lg:order-1">
+          <span
+            className="hero-reveal inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1.5 text-sm font-semibold text-ink-muted"
+          >
+            <span className="h-2 w-2 rounded-full bg-herb" />
+            open for new projects
+          </span>
 
-        {/* Main heading - MASSIVE with animated gradient */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="relative"
-        >
-          <h1 className="text-[clamp(2.5rem,10vw,9rem)] font-bold leading-none tracking-tighter">
-            <span className="hero-gradient-text bg-[length:200%_auto] animate-gradient-shift bg-clip-text text-transparent">
-              Nirlep Gohil
-            </span>
+          <p
+            className="hero-reveal mt-7 text-lg font-medium text-ink-muted"
+            style={{ ["--reveal-delay" as string]: "0.06s" }}
+          >
+            Hey, I&apos;m
+          </p>
+          <h1
+            className="hero-reveal mt-1 text-balance font-display text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[1.02] tracking-[-0.02em] text-ink-strong"
+            style={{ ["--reveal-delay" as string]: "0.12s" }}
+          >
+            Nirlep Gohil
           </h1>
-        </motion.div>
-
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto font-light"
-        >
-          Full-stack developer building products that matter.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center justify-center gap-4 mt-12"
-        >
-          <MotionLink
-            href="/projects"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="group flex items-center gap-2 px-8 py-4 bg-zinc-100 text-zinc-900 font-medium rounded-full hover:bg-white transition-colors"
+          <p
+            className="hero-reveal mt-3 text-balance font-display text-[clamp(1.35rem,3vw,2rem)] font-medium leading-snug text-ink"
+            style={{ ["--reveal-delay" as string]: "0.2s" }}
           >
-            View Work
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </MotionLink>
+            Code, coffee, and one{" "}
+            <span className="text-ginger-deep">very orange cat</span>.
+          </p>
 
-          <a
-            href="#connect"
-            className="px-8 py-4 text-zinc-400 font-medium rounded-full border border-zinc-800 hover:border-zinc-600 hover:text-zinc-200 transition-all hover:scale-[1.02] active:scale-[0.98]"
+          <p
+            className="hero-reveal mt-5 max-w-[46ch] text-pretty text-lg leading-relaxed text-ink-muted"
+            style={{ ["--reveal-delay" as string]: "0.28s" }}
           >
-            Get in Touch
-          </a>
-        </motion.div>
+            Full-stack developer and competitive programmer. I ship open source,
+            write about what I learn, and keep this corner of the internet warm.
+          </p>
 
+          <div
+            className="hero-reveal mt-9 flex flex-wrap items-center gap-3"
+            style={{ ["--reveal-delay" as string]: "0.36s" }}
+          >
+            <Link
+              href="/projects"
+              className="group inline-flex items-center gap-2 rounded-full bg-ginger-deep px-7 py-3.5 font-semibold text-paper shadow-cafe-rest transition-[background-color,transform,box-shadow] duration-200 ease-out-quart hover:bg-ink-strong hover:shadow-cafe-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ginger focus-visible:ring-offset-2 focus-visible:ring-offset-paper motion-safe:hover:-translate-y-0.5"
+            >
+              See my work
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out-quart group-hover:translate-x-0.5" />
+            </Link>
+
+            <Link
+              href="/posts"
+              className="inline-flex items-center rounded-full border border-line bg-paper px-7 py-3.5 font-semibold text-ink transition-colors duration-200 hover:border-line-strong hover:text-ink-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ginger focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+            >
+              Read the writing
+            </Link>
+          </div>
+        </div>
+
+        {/* Mascot */}
+        <div className="relative order-1 flex justify-center lg:order-2">
+          <div className="cafe-sun-glow pointer-events-none absolute left-1/2 top-1/2 -z-0 aspect-square w-[125%] -translate-x-1/2 -translate-y-1/2 rounded-full" />
+          <div className="hero-pop relative z-[1] w-full max-w-[300px] sm:max-w-[360px] lg:max-w-[440px]">
+            <CatMascot className="w-full" />
+          </div>
+        </div>
+      </div>
       </div>
     </section>
   );

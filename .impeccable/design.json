@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-01T00:00:00Z",
+  "title": "Design System: nirlep.dev",
+  "extensions": {
+    "colorMeta": {
+      "ginger": {
+        "role": "primary",
+        "displayName": "Ginger",
+        "canonical": "oklch(0.70 0.16 58)",
+        "tonalRamp": [
+          "oklch(0.30 0.10 52)",
+          "oklch(0.40 0.13 53)",
+          "oklch(0.48 0.15 54)",
+          "oklch(0.56 0.16 55)",
+          "oklch(0.64 0.16 57)",
+          "oklch(0.72 0.15 60)",
+          "oklch(0.84 0.10 64)",
+          "oklch(0.95 0.04 66)"
+        ]
+      },
+      "herb": {
+        "role": "secondary",
+        "displayName": "Herb",
+        "canonical": "oklch(0.55 0.13 140)",
+        "tonalRamp": [
+          "oklch(0.30 0.08 142)",
+          "oklch(0.38 0.10 141)",
+          "oklch(0.46 0.12 142)",
+          "oklch(0.55 0.13 140)",
+          "oklch(0.63 0.12 139)",
+          "oklch(0.73 0.10 138)",
+          "oklch(0.85 0.07 139)",
+          "oklch(0.95 0.03 140)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Warm Ink",
+        "canonical": "oklch(0.26 0.03 55)",
+        "tonalRamp": [
+          "oklch(0.20 0.03 50)",
+          "oklch(0.26 0.03 55)",
+          "oklch(0.38 0.028 55)",
+          "oklch(0.50 0.025 55)",
+          "oklch(0.64 0.02 58)",
+          "oklch(0.84 0.02 62)",
+          "oklch(0.91 0.012 65)",
+          "oklch(0.98 0.008 68)"
+        ]
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Honest White",
+        "canonical": "oklch(1 0 0)",
+        "tonalRamp": [
+          "oklch(0.84 0.02 62)",
+          "oklch(0.91 0.012 65)",
+          "oklch(0.955 0.022 68)",
+          "oklch(0.975 0.012 70)",
+          "oklch(1 0 0)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero and page titles in Kreon 700. Caps at 5.5rem; this brand smiles, it does not shout." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings in Kreon 600." },
+      "title": { "displayName": "Title", "purpose": "Card and post titles in Kreon 600." },
+      "body": { "displayName": "Body", "purpose": "All prose in Hanken Grotesk 400, 65-75ch line length." },
+      "label": { "displayName": "Label", "purpose": "Metadata and small UI labels, sentence case, not tracked all-caps eyebrows." },
+      "code": { "displayName": "Code", "purpose": "Inline code and code blocks in JetBrains Mono; functional, real code." }
+    },
+    "shadows": [
+      { "name": "rest", "value": "0 1px 2px oklch(0.40 0.03 55 / 0.05)", "purpose": "Barely-there grounding for resting cards; often a hairline border instead." },
+      { "name": "lift", "value": "0 10px 28px oklch(0.40 0.03 55 / 0.10)", "purpose": "Hover/active elevation for cards and interactive surfaces." },
+      { "name": "float", "value": "0 18px 44px oklch(0.35 0.04 50 / 0.14)", "purpose": "The mascot, popovers, dropdowns, modals; things that hover above the room." },
+      { "name": "focus-ring", "value": "0 0 0 3px oklch(0.70 0.16 58 / 0.35)", "purpose": "Ginger focus glow on interactive elements (:focus-visible)." }
+    ],
+    "motion": [
+      { "name": "ease-out-quart", "value": "cubic-bezier(0.25, 1, 0.5, 1)", "purpose": "Default easing for state transitions and hovers." },
+      { "name": "ease-out-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Entrances and reveals; settles softly." },
+      { "name": "duration-quick", "value": "160ms", "purpose": "Hover and small state changes." },
+      { "name": "duration-base", "value": "240ms", "purpose": "Standard transitions." },
+      { "name": "duration-slow", "value": "420ms", "purpose": "Entrances and mascot idles." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The confident 'order something' CTA. Burnt-ginger fill, white text, full pill.",
+      "html": "<button class=\"ds-btn-primary\">View work</button>",
+      "css": ".ds-btn-primary { font-family: 'Hanken Grotesk', system-ui, sans-serif; font-weight: 600; font-size: 1rem; color: oklch(1 0 0); background: oklch(0.56 0.16 50); border: none; border-radius: 999px; padding: 14px 28px; cursor: pointer; transition: background 240ms cubic-bezier(0.25,1,0.5,1), transform 160ms cubic-bezier(0.25,1,0.5,1), box-shadow 240ms ease; } .ds-btn-primary:hover { background: oklch(0.20 0.03 50); transform: translateY(-1px) scale(1.02); box-shadow: 0 10px 28px oklch(0.40 0.03 55 / 0.18); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px oklch(0.70 0.16 58 / 0.35); } @media (prefers-reduced-motion: reduce) { .ds-btn-primary { transition: background 240ms ease; } .ds-btn-primary:hover { transform: none; } }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Low-commitment action. White fill, warm ink text, hairline border that warms on hover. One depth cue (no shadow at rest).",
+      "html": "<button class=\"ds-btn-secondary\">Get in touch</button>",
+      "css": ".ds-btn-secondary { font-family: 'Hanken Grotesk', system-ui, sans-serif; font-weight: 600; font-size: 1rem; color: oklch(0.26 0.03 55); background: oklch(1 0 0); border: 1px solid oklch(0.91 0.012 65); border-radius: 999px; padding: 13px 27px; cursor: pointer; transition: border-color 240ms cubic-bezier(0.25,1,0.5,1), color 240ms ease; } .ds-btn-secondary:hover { border-color: oklch(0.84 0.02 62); color: oklch(0.20 0.03 50); } .ds-btn-secondary:focus-visible { outline: none; box-shadow: 0 0 0 3px oklch(0.70 0.16 58 / 0.35); }"
+    },
+    {
+      "name": "Inline Link",
+      "kind": "custom",
+      "refersTo": "link",
+      "description": "Herb-deep green text with an underline that grows on hover. Readable on white at body size.",
+      "html": "<p class=\"ds-link-wrap\">Read the <a class=\"ds-link\" href=\"#\">latest post</a> over coffee.</p>",
+      "css": ".ds-link-wrap { font-family: 'Hanken Grotesk', system-ui, sans-serif; color: oklch(0.26 0.03 55); font-size: 1.0625rem; } .ds-link { color: oklch(0.46 0.12 142); text-decoration: none; background-image: linear-gradient(oklch(0.46 0.12 142), oklch(0.46 0.12 142)); background-size: 0% 1.5px; background-repeat: no-repeat; background-position: 0 100%; padding-bottom: 1px; transition: background-size 240ms cubic-bezier(0.25,1,0.5,1); } .ds-link:hover { background-size: 100% 1.5px; } @media (prefers-reduced-motion: reduce) { .ds-link { transition: none; } .ds-link:hover { text-decoration: underline; } }"
+    },
+    {
+      "name": "Tag Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Soft herb pill for topic tags; sentence case, no border.",
+      "html": "<span class=\"ds-chip\">rust</span>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; font-family: 'Hanken Grotesk', system-ui, sans-serif; font-weight: 600; font-size: 0.8125rem; color: oklch(0.46 0.12 142); background: oklch(0.95 0.03 140); border-radius: 999px; padding: 4px 12px; }"
+    },
+    {
+      "name": "Featured Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Brand variant of the tag: soft ginger bed with burnt-ginger text for 'featured'.",
+      "html": "<span class=\"ds-chip-ginger\">featured</span>",
+      "css": ".ds-chip-ginger { display: inline-flex; align-items: center; font-family: 'Hanken Grotesk', system-ui, sans-serif; font-weight: 600; font-size: 0.8125rem; color: oklch(0.56 0.16 50); background: oklch(0.95 0.035 65); border-radius: 999px; padding: 4px 12px; }"
+    },
+    {
+      "name": "Post Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Warm surface card, 14px corners, flat at rest, lifts with a warm shadow on hover. Title in Kreon.",
+      "html": "<a class=\"ds-card\" href=\"#\"><span class=\"ds-card-kicker\">Jun 2026 · 4 min</span><h3 class=\"ds-card-title\">Why I rewrote my site as a cat café</h3><p class=\"ds-card-body\">A warm little corner of the internet, one ginger cat at a time.</p></a>",
+      "css": ".ds-card { display: block; text-decoration: none; background: oklch(0.975 0.012 70); border: 1px solid oklch(0.91 0.012 65); border-radius: 14px; padding: 24px; transition: transform 240ms cubic-bezier(0.25,1,0.5,1), box-shadow 240ms ease, border-color 240ms ease; } .ds-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px oklch(0.40 0.03 55 / 0.10); border-color: transparent; } .ds-card-kicker { font-family: 'Hanken Grotesk', system-ui, sans-serif; font-size: 0.8125rem; font-weight: 600; color: oklch(0.50 0.025 55); } .ds-card-title { font-family: 'Kreon', Georgia, serif; font-weight: 600; font-size: 1.375rem; line-height: 1.2; letter-spacing: -0.01em; color: oklch(0.20 0.03 50); margin: 8px 0 6px; } .ds-card-body { font-family: 'Hanken Grotesk', system-ui, sans-serif; font-size: 1rem; line-height: 1.6; color: oklch(0.50 0.025 55); margin: 0; } @media (prefers-reduced-motion: reduce) { .ds-card { transition: box-shadow 240ms ease, border-color 240ms ease; } .ds-card:hover { transform: none; } }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "White field, hairline border, 8px corners. Border warms to ginger with a focus ring on focus; placeholder stays readable (muted, not faint).",
+      "html": "<input class=\"ds-input\" type=\"email\" placeholder=\"you@example.com\" />",
+      "css": ".ds-input { font-family: 'Hanken Grotesk', system-ui, sans-serif; font-size: 1rem; color: oklch(0.26 0.03 55); background: oklch(1 0 0); border: 1px solid oklch(0.91 0.012 65); border-radius: 8px; padding: 12px 16px; transition: border-color 200ms ease, box-shadow 200ms ease; } .ds-input::placeholder { color: oklch(0.50 0.025 55); } .ds-input:focus { outline: none; border-color: oklch(0.70 0.16 58); box-shadow: 0 0 0 3px oklch(0.70 0.16 58 / 0.35); }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "link",
+      "description": "Top-nav link in warm ink; grows a herb underline on hover. Active route is burnt ginger with a small paw-dot marker.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"#\">posts</a><a class=\"ds-nav-link ds-nav-link--active\" href=\"#\">projects</a></nav>",
+      "css": ".ds-nav { display: inline-flex; gap: 28px; font-family: 'Hanken Grotesk', system-ui, sans-serif; font-weight: 600; } .ds-nav-link { position: relative; color: oklch(0.26 0.03 55); text-decoration: none; padding-bottom: 4px; transition: color 200ms ease; } .ds-nav-link::after { content: ''; position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: oklch(0.55 0.13 140); border-radius: 2px; transition: width 240ms cubic-bezier(0.25,1,0.5,1); } .ds-nav-link:hover { color: oklch(0.20 0.03 50); } .ds-nav-link:hover::after { width: 100%; } .ds-nav-link--active { color: oklch(0.56 0.16 50); } .ds-nav-link--active::before { content: ''; position: absolute; left: 50%; bottom: -7px; width: 5px; height: 5px; border-radius: 999px; background: oklch(0.70 0.16 58); transform: translateX(-50%); } @media (prefers-reduced-motion: reduce) { .ds-nav-link::after { transition: none; } }"
+    },
+    {
+      "name": "Mascot Mark",
+      "kind": "custom",
+      "refersTo": "ginger",
+      "description": "The signature ginger cat as a clean geometric vector mark (crafted, not a doodle). Decorative: aria-hidden. Idle blink is disabled under reduced motion.",
+      "html": "<span class=\"ds-mascot\" role=\"img\" aria-label=\"Nirlep's ginger cat\"><svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\"><path d=\"M14 16 L24 30 L10 30 Z\" fill=\"oklch(0.70 0.16 58)\"/><path d=\"M50 16 L54 30 L40 30 Z\" fill=\"oklch(0.70 0.16 58)\"/><path d=\"M14 18 L22 28 L13 28 Z\" fill=\"oklch(0.56 0.16 50)\"/><path d=\"M50 18 L51 28 L42 28 Z\" fill=\"oklch(0.56 0.16 50)\"/><rect x=\"12\" y=\"26\" width=\"40\" height=\"30\" rx=\"15\" fill=\"oklch(0.70 0.16 58)\"/><circle class=\"ds-mascot-eye\" cx=\"25\" cy=\"40\" r=\"3\" fill=\"oklch(0.20 0.03 50)\"/><circle class=\"ds-mascot-eye\" cx=\"39\" cy=\"40\" r=\"3\" fill=\"oklch(0.20 0.03 50)\"/><path d=\"M30 46 Q32 48 34 46\" stroke=\"oklch(0.20 0.03 50)\" stroke-width=\"2\" fill=\"none\" stroke-linecap=\"round\"/></svg></span>",
+      "css": ".ds-mascot { display: inline-block; line-height: 0; filter: drop-shadow(0 6px 14px oklch(0.40 0.03 55 / 0.18)); } .ds-mascot .ds-mascot-eye { transform-box: fill-box; transform-origin: center; animation: ds-blink 5s ease-in-out infinite; } @keyframes ds-blink { 0%, 92%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } } @media (prefers-reduced-motion: reduce) { .ds-mascot .ds-mascot-eye { animation: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Cozy Cat Café",
+    "overview": "nirlep.dev is a warm little café that happens to love cats and code. You're welcomed in, handed something warm, and invited to stay a while: read a post, browse some work, watch the resident ginger cat stretch and blink at you from the corner. The personality is playful and witty with a soft, social warmth, and underneath it all is real craft. The whole system grows from one feline character: a signature ginger cat that watches the cursor, naps in empty states, and pads into 404s and loading moments. Warmth is carried by that character, by a burnt-ginger primary, by a deep warm-brown ink, and by friendly rounded type, never by a tinted 'cream' background. The reading surface is honest white so long posts and code stay crisp; the coziness lives in the brand colors, the soft corners, and the cat.",
+    "keyCharacteristics": [
+      "Warm, light, and unmistakably feline: ginger leads, herb-green answers, on honest white.",
+      "One reactive mascot carries the personality; cat references are concentrated in the character, not sprinkled everywhere.",
+      "Soft corners, gentle warm shadows, generous rhythm. Friendly, never childish.",
+      "Charm never costs clarity: posts stay at 4.5:1+ contrast and 65-75ch line length.",
+      "Delight rewards the curious without gating the basics."
+    ],
+    "rules": [
+      { "name": "The Honest-Wall Rule", "body": "The page background is pure white (oklch(1 0 0)), never a warm-cream tint. Warmth is the cat's job, not the wall's. Cream, sand, parchment, beige body backgrounds are forbidden.", "section": "colors" },
+      { "name": "The White-on-Warm Rule", "body": "Text on any saturated ginger or herb fill is white, never dark; dark text is allowed only on the pale *-soft washes.", "section": "colors" },
+      { "name": "The One Cat Rule", "body": "Ginger is concentrated in the mascot and a small set of brand moments; it never blankets the screen.", "section": "colors" },
+      { "name": "The No-Eyebrow Rule", "body": "No tiny uppercase tracked kicker and no 01/02/03 markers above every section; sections lead with their Kreon headline.", "section": "typography" },
+      { "name": "The Quiet-Caps Rule", "body": "Uppercase is reserved for short labels and badges; body and headings are sentence case.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest; shadow appears as feedback (hover, focus, float), then settles back.", "section": "elevation" },
+      { "name": "The One-Depth-Cue Rule", "body": "An element uses a hairline border or a soft shadow, never a 1px border plus a wide drop-shadow together.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep the page background pure white and carry warmth through Ginger, Ink, soft shadows, rounded shapes, and the cat.",
+      "Do put white text on saturated ginger/herb fills; reserve dark text for the pale *-soft washes.",
+      "Do concentrate cat personality in the one mascot; let copy be cat-flavored but always clear.",
+      "Do cap body text at 65-75ch and keep all body/placeholder text at 4.5:1 or better.",
+      "Do use full-pill buttons, 14-18px card corners, and soft warm-brown shadows that appear on interaction.",
+      "Do give every animation a prefers-reduced-motion fallback; the mascot rests, reveals become instant or crossfade."
+    ],
+    "donts": [
+      "Don't rebuild the generic dark developer portfolio: near-black background, emerald/cyan neon glow, floating particles, or animated gradient hero text.",
+      "Don't ship a soulless SaaS template, hero-metric stat grids, or endless identical icon-cards.",
+      "Don't use childish clip-art: cheap cartoon-cat stickers, Comic Sans, or hand-drawn/feTurbulence doodle SVGs.",
+      "Don't slip into editorial-magazine costume: high-contrast Didone display, italic drop caps, ruled broadsheet columns.",
+      "Don't use a warm-cream/sand/beige body background, gradient text, decorative glassmorphism, or colored side-stripe borders.",
+      "Don't pair a 1px border with a wide drop-shadow, round cards past 18px, or set display letter-spacing tighter than -0.04em."
+    ]
+  }
+}

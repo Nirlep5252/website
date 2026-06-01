@@ -1,8 +1,18 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
-import { motion } from "framer-motion";
-import { Mail, Github, Twitter, Linkedin, ArrowUpRight, MessageCircle, Check, Copy } from "lucide-react";
+import React, { useCallback, useState } from "react";
+import {
+  Mail,
+  Github,
+  Twitter,
+  Linkedin,
+  MessageCircle,
+  Check,
+  Copy,
+  ArrowUpRight,
+} from "lucide-react";
+import { Reveal } from "../Reveal";
+import { PawDivider } from "../ui/Paw";
 
 const EMAIL = "hello@nirlep.dev";
 
@@ -34,114 +44,103 @@ const links = [
 ];
 
 export const ConnectSection = () => {
-  const [emailCopied, setEmailCopied] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const handleEmailClick = useCallback(async () => {
+  const handleCopy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(EMAIL);
-      setEmailCopied(true);
-      setTimeout(() => setEmailCopied(false), 2000);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback: open mailto anyway
       window.location.href = `mailto:${EMAIL}`;
     }
   }, []);
 
   return (
-    <section id="connect" className="py-32 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <span className="text-emerald-500 font-mono text-sm mb-2 block">
-            {"// connect"}
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-zinc-100 mb-4">
-            Let&apos;s Work Together
+    <section id="connect" className="relative overflow-hidden bg-surface-warm">
+      {/* a warm pool of light to close the page on */}
+      <div className="cafe-sun-glow pointer-events-none absolute left-1/2 top-0 h-[420px] w-[620px] -translate-x-1/2 -translate-y-1/3 opacity-70" />
+
+      <div className="relative mx-auto max-w-3xl px-6 py-24 sm:py-32">
+        <Reveal className="text-center">
+          <h2 className="text-balance font-display text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.05] tracking-[-0.015em] text-ink-strong">
+            Pull up a chair
           </h2>
-          <p className="text-zinc-400 text-lg max-w-xl">
-            Have a project in mind? I&apos;m always open to discussing new
-            opportunities and interesting ideas.
+          <p className="mx-auto mt-4 max-w-[46ch] text-pretty text-lg leading-relaxed text-ink-muted">
+            Got a project in mind, a question, or just want to say hi? The
+            door&apos;s open and the coffee&apos;s on.
           </p>
-        </motion.div>
+        </Reveal>
 
-        {/* Links - Clean horizontal list */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="border-t border-zinc-800"
-        >
-          {/* Email - click to copy */}
-          <button
-            onClick={handleEmailClick}
-            className="group flex items-center justify-between py-5 border-b border-zinc-800 hover:bg-zinc-900/30 -mx-4 px-4 transition-colors w-[calc(100%+2rem)] text-left cursor-pointer"
-          >
-            <div className="flex items-center gap-4">
-              <Mail className="w-5 h-5 text-zinc-600 group-hover:text-emerald-500 transition-colors" />
-              <span className="text-zinc-400 group-hover:text-zinc-200 transition-colors">
-                Email
-              </span>
-            </div>
-            <div className="flex items-center gap-3">
-              {emailCopied ? (
-                <>
-                  <span className="text-emerald-400 font-medium">Copied!</span>
-                  <Check className="w-4 h-4 text-emerald-400" />
-                </>
-              ) : (
-                <>
-                  <span className="text-zinc-200 font-medium">{EMAIL}</span>
-                  <Copy className="w-4 h-4 text-zinc-600 group-hover:text-emerald-500 transition-all" />
-                </>
-              )}
-            </div>
-          </button>
-
-          {links.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center justify-between py-5 border-b border-zinc-800 hover:bg-zinc-900/30 -mx-4 px-4 transition-colors"
+        <Reveal className="mt-12" delay={0.08}>
+          <div className="overflow-hidden rounded-card-lg bg-paper shadow-cafe-lift">
+            {/* Email — click to copy */}
+            <button
+              type="button"
+              onClick={handleCopy}
+              className="group flex w-full items-center justify-between gap-4 px-5 py-5 text-left transition-colors duration-200 hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ginger sm:px-6"
             >
-              <div className="flex items-center gap-4">
-                <link.icon className="w-5 h-5 text-zinc-600 group-hover:text-emerald-500 transition-colors" />
-                <span className="text-zinc-400 group-hover:text-zinc-200 transition-colors">
-                  {link.name}
+              <span className="flex items-center gap-4">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ginger-soft text-ginger-deep">
+                  <Mail className="h-5 w-5" />
                 </span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-zinc-200 font-medium">{link.value}</span>
-                <ArrowUpRight className="w-4 h-4 text-zinc-600 group-hover:text-emerald-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-              </div>
-            </a>
-          ))}
-        </motion.div>
+                <span className="font-medium text-ink-strong">Email</span>
+              </span>
+              <span className="flex items-center gap-2.5 text-sm">
+                {copied ? (
+                  <>
+                    <span className="font-semibold text-herb-deep">Copied!</span>
+                    <Check className="h-4 w-4 text-herb-deep" />
+                  </>
+                ) : (
+                  <>
+                    <span className="hidden font-medium text-ink-muted sm:inline">
+                      {EMAIL}
+                    </span>
+                    <Copy className="h-4 w-4 text-ink-faint transition-colors duration-200 group-hover:text-ginger-deep" />
+                  </>
+                )}
+              </span>
+            </button>
 
-        {/* Location & Footer */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-16 pt-8 border-t border-zinc-800/50"
-        >
-          <p className="text-zinc-600 text-sm">
-            Based in <span className="text-zinc-400">India</span>{" "}
-            <span className="font-mono">(UTC +5:30)</span>
-          </p>
-          <p className="text-zinc-700 text-sm font-mono">
-            Built with Next.js & Tailwind
-          </p>
-        </motion.div>
+            {links.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between gap-4 border-t border-line px-5 py-5 transition-colors duration-200 hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ginger sm:px-6"
+              >
+                <span className="flex items-center gap-4">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-surface text-ink-muted transition-colors duration-200 group-hover:bg-ginger-soft group-hover:text-ginger-deep">
+                    <link.icon className="h-5 w-5" />
+                  </span>
+                  <span className="font-medium text-ink-strong">
+                    {link.name}
+                  </span>
+                </span>
+                <span className="flex items-center gap-2.5 text-sm">
+                  <span className="font-medium text-ink-muted">
+                    {link.value}
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 text-ink-faint transition-all duration-200 ease-out-quart group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ginger-deep" />
+                </span>
+              </a>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* Footer */}
+        <Reveal className="mt-14" delay={0.12}>
+          <PawDivider />
+          <div className="mt-8 flex flex-col items-center gap-2 text-center text-sm text-ink-muted sm:flex-row sm:justify-between sm:text-left">
+            <p>
+              Based in <span className="font-medium text-ink-strong">India</span>{" "}
+              <span className="font-mono text-ink-muted">(UTC +5:30)</span>
+            </p>
+            <p>Built with Next.js &amp; Tailwind, supervised by one orange cat.</p>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

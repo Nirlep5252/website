@@ -207,3 +207,177 @@ body {
 .animate-gradient-shift {
   animation: gradient-shift 8s linear infinite;
 }
+
+/* ============================================================
+   Cozy Cat Café — light theme helpers & mascot motion
+   ============================================================ */
+
+/* Soft sun-glow behind the hero mascot */
+.cafe-sun-glow {
+  background: radial-gradient(
+    closest-side,
+    oklch(0.7 0.16 58 / 0.22),
+    oklch(0.7 0.16 58 / 0.08) 55%,
+    transparent 75%
+  );
+}
+
+/* Hero entrance: CSS-driven so content is never gated on JS.
+   Runs in headless renderers; collapses to fully-visible under reduced motion. */
+.hero-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: hero-reveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s)
+    forwards;
+}
+@keyframes hero-reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.hero-pop {
+  opacity: 0;
+  transform: scale(0.93);
+  animation: hero-pop 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.12s forwards;
+}
+@keyframes hero-pop {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-reveal,
+  .hero-pop {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+/* Section scroll reveal — armed only by JS (see Reveal.tsx), so SSR / no-JS /
+   reduced-motion all render fully visible. Below-fold sections arm to "out"
+   while off-screen, so there's no flash before they transition to "in". */
+[data-reveal="out"] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+[data-reveal="in"] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal="out"],
+  [data-reveal="in"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Mascot eyes: pupils track the cursor (vars set in JS), with a smooth follow */
+.cat-pupil {
+  transform: translate(var(--eye-x, 0px), var(--eye-y, 0px));
+  transition: transform 140ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Slow, occasional blink */
+.cat-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cat-blink 6.5s ease-in-out infinite;
+}
+.cat-eye--lag {
+  animation-delay: 0.12s; /* eyes don't blink in perfect lockstep */
+}
+@keyframes cat-blink {
+  0%,
+  90%,
+  100% {
+    transform: scaleY(1);
+  }
+  94% {
+    transform: scaleY(0.08);
+  }
+}
+
+/* Lazy tail flick */
+.cat-tail {
+  transform-box: fill-box;
+  transform-origin: 16% 88%;
+  animation: cat-tail 5.5s ease-in-out infinite;
+}
+@keyframes cat-tail {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0deg);
+  }
+  72% {
+    transform: rotate(-5deg);
+  }
+  84% {
+    transform: rotate(4deg);
+  }
+}
+
+/* Ear perks up a touch when you hover the cat */
+.cat-scene .cat-ear {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cat-scene:hover .cat-ear--l {
+  transform: rotate(-5deg) translateY(-2px);
+}
+.cat-scene:hover .cat-ear--r {
+  transform: rotate(5deg) translateY(-2px);
+}
+
+/* Click-to-pet hearts */
+.cat-heart {
+  animation: heart-float 900ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes heart-float {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.4);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-64px) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cat-pupil {
+    transform: none;
+    transition: none;
+  }
+  .cat-eye,
+  .cat-tail {
+    animation: none;
+  }
+  .cat-scene:hover .cat-ear--l,
+  .cat-scene:hover .cat-ear--r {
+    transform: none;
+  }
+  .cat-heart {
+    animation: heart-fade 600ms linear forwards;
+  }
+  @keyframes heart-fade {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}

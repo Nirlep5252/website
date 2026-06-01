@@ -1,202 +1,67 @@
-"use client";
-
 import React from "react";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { Post } from "@/lib/mdx";
+import { Reveal } from "../Reveal";
+import { PawMark } from "../ui/Paw";
 
-interface AboutSectionProps {
-  recentPosts: Post[];
-}
-
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("en-US", {
-    month: "short",
-    year: "numeric",
-  });
-}
-
-const technologies = [
-  "Rust",
-  "TypeScript",
-  "Python",
-  "Go",
-  "React",
-  "Next.js",
-  "Node.js",
-  "PostgreSQL",
+const facts = [
+  { label: "Languages", value: "Rust · TypeScript · Python · Go" },
+  { label: "Building with", value: "React · Next.js · Node · Postgres" },
+  { label: "Based in", value: "India (UTC +5:30)" },
+  { label: "Writing about", value: "whatever I just learned" },
 ];
 
-export const AboutSection = ({ recentPosts }: AboutSectionProps) => {
+export const AboutSection = () => {
   return (
-    <section className="py-32 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="mb-20"
-        >
-          <span className="text-emerald-500 font-mono text-sm mb-2 block">
-            {"// about"}
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-zinc-100">
-            What I Do
-          </h2>
-        </motion.div>
-
-        {/* Main content - Two column layout */}
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
-          {/* Left column - About text */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
-          >
-            <p className="text-xl md:text-2xl text-zinc-300 leading-relaxed mb-8">
-              I build modern web applications with a focus on{" "}
-              <span className="text-emerald-400">performance</span>,{" "}
-              <span className="text-emerald-400">accessibility</span>, and{" "}
-              <span className="text-emerald-400">user experience</span>.
-            </p>
-            <p className="text-zinc-500 leading-relaxed mb-10">
-              With expertise spanning from low-level systems programming to modern
-              frontend frameworks, I bring ideas to life through clean, maintainable code.
-              I&apos;m passionate about solving complex problems and building tools that
-              make a difference.
-            </p>
-
-            {/* Technologies */}
-            <div className="flex flex-wrap gap-3">
-              {technologies.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-3 py-1.5 text-sm font-mono text-zinc-400 border border-zinc-800 rounded-full"
-                >
-                  {tech}
-                </span>
-              ))}
+    <section id="about" className="relative bg-surface-warm">
+      <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
+        <div className="grid items-start gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+          {/* The story */}
+          <Reveal>
+            <h2 className="text-balance font-display text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.05] tracking-[-0.015em] text-ink-strong">
+              Behind the counter
+            </h2>
+            <div className="mt-6 max-w-[60ch] space-y-5 text-pretty text-lg leading-relaxed text-ink">
+              <p>
+                I&apos;m a full-stack developer and competitive programmer from
+                India. I build things for the web end to end: the database
+                underneath, the API in the middle, and the interface people
+                actually touch.
+              </p>
+              <p>
+                Most days that&apos;s TypeScript and Next.js, with Rust or Go
+                when something needs to be fast or stubborn. The rest of the
+                time I&apos;m solving algorithm problems for the sport of it,
+                writing up what I learn, and contributing to open source, all of
+                it run under the close supervision of one very orange cat.
+              </p>
             </div>
-          </motion.div>
+          </Reveal>
 
-          {/* Right column - Cards */}
-          <div className="space-y-6">
-            {/* Problem Solving Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true }}
-            >
-              <Link
-                href="/adventures"
-                className="group block relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="relative p-6 border border-zinc-800 rounded-xl group-hover:border-emerald-500/30 transition-colors">
-                  <div className="flex items-start gap-4">
-                    <span className="text-5xl font-bold text-zinc-800 group-hover:text-emerald-500/20 transition-colors">
-                      01
-                    </span>
-                    <div className="flex-1 pt-1">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-lg font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors">
-                          Problem Solving
-                        </h3>
-                        <ArrowUpRight className="w-5 h-5 text-zinc-600 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                      </div>
-                      <p className="text-zinc-500 text-sm leading-relaxed">
-                        Competitive programming enthusiast. Solving algorithmic challenges.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-
-            {/* Recent Writing Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true }}
-            >
-              <div className="p-6 border border-zinc-800 rounded-xl">
-                <div className="flex items-start gap-4 mb-5">
-                  <span className="text-5xl font-bold text-zinc-800">
-                    02
-                  </span>
-                  <div className="flex-1 pt-1">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-semibold text-zinc-100">
-                        Recent Writing
-                      </h3>
-                      <Link
-                        href="/posts"
-                        className="text-sm text-zinc-500 hover:text-emerald-500 transition-colors flex items-center gap-1"
-                      >
-                        View all
-                        <ArrowUpRight className="w-3 h-3" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-                <div className="pl-[4.5rem]">
-                  {recentPosts.slice(0, 2).map((post) => (
-                    <Link
-                      key={post.slug}
-                      href={`/posts/${post.slug}`}
-                      className="group flex items-center justify-between gap-4 py-3 border-t border-zinc-800/50 first:border-0 first:pt-0"
-                    >
-                      <h4 className="text-zinc-400 group-hover:text-emerald-400 transition-colors text-sm line-clamp-1">
-                        {post.title}
-                      </h4>
-                      <span className="text-zinc-700 text-xs font-mono whitespace-nowrap">
-                        {formatDate(post.date)}
-                      </span>
-                    </Link>
-                  ))}
-                </div>
+          {/* The details */}
+          <Reveal delay={0.1}>
+            <div className="rounded-card-lg bg-paper p-7 shadow-cafe-lift sm:p-8">
+              <div className="flex items-center gap-2.5">
+                <PawMark className="h-5 w-5 fill-ginger" />
+                <span className="font-display text-base font-semibold text-ink-strong">
+                  the details
+                </span>
               </div>
-            </motion.div>
-
-            {/* Projects CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true }}
-            >
-              <Link
-                href="/projects"
-                className="group block relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 opacity-50 group-hover:opacity-100 transition-opacity" />
-                <div className="relative p-6 border border-emerald-500/20 rounded-xl group-hover:border-emerald-500/40 transition-colors">
-                  <div className="flex items-start gap-4">
-                    <span className="text-5xl font-bold text-emerald-500/20 group-hover:text-emerald-500/30 transition-colors">
-                      03
-                    </span>
-                    <div className="flex-1 pt-1">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-lg font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors">
-                          View My Work
-                        </h3>
-                        <ArrowUpRight className="w-5 h-5 text-emerald-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                      </div>
-                      <p className="text-zinc-500 text-sm">
-                        Projects I&apos;ve built and contributed to
-                      </p>
-                    </div>
+              <dl className="mt-5 divide-y divide-line">
+                {facts.map((f) => (
+                  <div
+                    key={f.label}
+                    className="flex items-baseline justify-between gap-5 py-3.5"
+                  >
+                    <dt className="shrink-0 text-sm font-semibold text-ink-muted">
+                      {f.label}
+                    </dt>
+                    <dd className="text-right font-medium text-ink-strong">
+                      {f.value}
+                    </dd>
                   </div>
-                </div>
-              </Link>
-            </motion.div>
-          </div>
+                ))}
+              </dl>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
