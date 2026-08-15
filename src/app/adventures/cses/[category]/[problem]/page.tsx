@@ -115,8 +115,8 @@ export default async function ProblemPage({ params }: Props) {
   const categoryName = formatCategoryName(category);
 
   return (
-    <main className="min-h-screen pt-24 pb-16 px-4">
-      <div className="max-w-3xl mx-auto">
+    <main className="surface-paper min-h-screen">
+      <article className="mx-auto max-w-[760px] px-5 sm:px-6 pt-32 pb-24">
         <CSESProblemContent
           category={category}
           categoryName={categoryName}
@@ -125,7 +125,7 @@ export default async function ProblemPage({ params }: Props) {
         >
           {content}
         </CSESProblemContent>
-      </div>
+      </article>
     </main>
   );
 }

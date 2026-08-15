@@ -1,6 +1,13 @@
 import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography";
 
+/**
+ * EMULSION design tokens.
+ * Two surfaces (ink / paper), one colormap (indigo → violet → pink → cream), one accent (signal).
+ */
+const ink = "#0b0a0e";
+const paper = "#f3efe4";
+
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,106 +17,87 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
-        mono: ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "monospace"],
+        sans: ["var(--font-geist-sans)", "Inter", "system-ui", "sans-serif"],
+        mono: ["var(--font-geist-mono)", "JetBrains Mono", "ui-monospace", "monospace"],
       },
       colors: {
-        bg: {
-          DEFAULT: "#0a0a0a",
-          secondary: "#111111",
-          tertiary: "#1a1a1a",
+        ink: {
+          DEFAULT: ink,
+          2: "#15121c",
+          3: "#221d2e",
         },
-        accent: {
-          DEFAULT: "#10b981",
-          dim: "rgba(16, 185, 129, 0.1)",
-          glow: "rgba(16, 185, 129, 0.15)",
+        paper: {
+          DEFAULT: paper,
+          2: "#e9e4d6",
+          3: "#d6cfbd",
         },
-        border: {
-          DEFAULT: "#27272a",
-          hover: "#3f3f46",
-        },
+        signal: "#b7de5e",
+        indigo: "#3a2fd6",
+        violet: "#7659ee",
+        pink: "#f394d6",
+        cream: "#f5f0d6",
       },
-      animation: {
-        "fade-in": "fadeIn 0.6s ease forwards",
-        "fade-up": "fadeUp 0.6s ease forwards",
-        blink: "blink 1s infinite",
-      },
-      keyframes: {
-        fadeIn: {
-          from: { opacity: "0" },
-          to: { opacity: "1" },
-        },
-        fadeUp: {
-          from: { opacity: "0", transform: "translateY(20px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
-        blink: {
-          "0%, 50%": { opacity: "1" },
-          "51%, 100%": { opacity: "0" },
-        },
+      letterSpacing: {
+        display: "-0.045em",
+        tight2: "-0.03em",
       },
       typography: {
         DEFAULT: {
           css: {
-            maxWidth: "100ch",
-            color: "#fafafa",
+            maxWidth: "70ch",
+            color: ink,
+            fontSize: "1.0625rem",
+            lineHeight: "1.65",
+            "--tw-prose-body": ink,
+            "--tw-prose-headings": ink,
+            "--tw-prose-lead": "rgba(11,10,14,.75)",
+            "--tw-prose-links": "#3a2fd6",
+            "--tw-prose-bold": ink,
+            "--tw-prose-counters": "rgba(11,10,14,.55)",
+            "--tw-prose-bullets": "rgba(11,10,14,.35)",
+            "--tw-prose-hr": "#d6cfbd",
+            "--tw-prose-quotes": "rgba(11,10,14,.8)",
+            "--tw-prose-quote-borders": "#3a2fd6",
+            "--tw-prose-captions": "rgba(11,10,14,.55)",
+            "--tw-prose-code": ink,
+            "--tw-prose-pre-code": "#f5f0d6",
+            "--tw-prose-pre-bg": ink,
+            "--tw-prose-th-borders": "#d6cfbd",
+            "--tw-prose-td-borders": "#e9e4d6",
             a: {
-              color: "#10b981",
               textDecoration: "none",
-              "&:hover": {
-                color: "#34d399",
-              },
+              borderBottom: "1px solid rgba(58,47,214,.45)",
+              fontWeight: "500",
+              "&:hover": { borderBottomColor: "#3a2fd6" },
             },
-            strong: {
-              color: "#fafafa",
+            "h1, h2, h3, h4": {
+              fontWeight: "500",
+              letterSpacing: "-0.03em",
             },
-            "ol > li::marker": {
-              color: "#a1a1aa",
-            },
-            "ul > li::marker": {
-              color: "#a1a1aa",
-            },
-            hr: {
-              borderColor: "#27272a",
-            },
-            blockquote: {
-              color: "#a1a1aa",
-              borderLeftColor: "#10b981",
-            },
-            h1: {
-              color: "#fafafa",
-            },
-            h2: {
-              color: "#fafafa",
-            },
-            h3: {
-              color: "#fafafa",
-            },
-            h4: {
-              color: "#fafafa",
-            },
+            h2: { fontSize: "1.65em", marginTop: "2em", marginBottom: "0.6em" },
+            h3: { fontSize: "1.25em" },
             code: {
-              color: "#10b981",
-              backgroundColor: "rgba(16, 185, 129, 0.1)",
-              borderRadius: "0.25rem",
-              padding: "0.2rem 0.4rem",
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: "var(--font-geist-mono)",
+              fontSize: "0.86em",
+              fontWeight: "400",
+              background: "#e9e4d6",
+              padding: "0.15em 0.4em",
+              borderRadius: "2px",
             },
-            "code::before": {
-              content: '""',
-            },
-            "code::after": {
-              content: '""',
-            },
+            "code::before": { content: "none" },
+            "code::after": { content: "none" },
             pre: {
-              backgroundColor: "#111111",
-              border: "1px solid #27272a",
-              code: {
-                backgroundColor: "transparent",
-                padding: "0",
-                color: "#fafafa",
-              },
+              borderRadius: "2px",
+              fontSize: "0.82em",
+              lineHeight: "1.6",
+              padding: "1.1rem 1.25rem",
             },
+            "pre code": { background: "transparent", padding: 0 },
+            blockquote: { fontStyle: "normal", fontWeight: "400" },
+            "blockquote p:first-of-type::before": { content: "none" },
+            "blockquote p:last-of-type::after": { content: "none" },
+            img: { borderRadius: "2px" },
+            hr: { marginTop: "2.5em", marginBottom: "2.5em" },
           },
         },
       },

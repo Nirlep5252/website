@@ -1,8 +1,4 @@
-"use client";
-
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView, animate } from "framer-motion";
-import { Check } from "lucide-react";
+import { Develop } from "@/components/emulsion/Develop";
 
 const tiers = [
   {
@@ -38,7 +34,7 @@ const tiers = [
       "Auth/database/APIs",
       "Admin dashboard",
       "Deployment & hosting setup",
-      "Delivery in ~4\u20136 weeks",
+      "Delivery in ~4–6 weeks",
     ],
   },
   {
@@ -55,165 +51,56 @@ const tiers = [
   },
 ];
 
-const CountUpPrice = ({ value }: { value: number }) => {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
-  const [display, setDisplay] = useState("$0");
-
-  useEffect(() => {
-    if (isInView) {
-      const controls = animate(0, value, {
-        duration: 1.5,
-        ease: [0.16, 1, 0.3, 1],
-        onUpdate: (latest) => {
-          setDisplay(`$${Math.round(latest).toLocaleString()}`);
-        },
-        onComplete: () => {
-          setDisplay(`$${value.toLocaleString()}`);
-        },
-      });
-      return () => controls.stop();
-    }
-  }, [isInView, value]);
-
-  return <span ref={ref}>{display}</span>;
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.97 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.6,
-      delay: i * 0.1,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  }),
-};
-
-export const PricingSection = () => {
+export function PricingSection() {
   return (
-    <section className="py-20 sm:py-32">
-      {/* Section header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        viewport={{ once: true }}
-        className="mb-16"
-      >
-        <span className="text-emerald-500 font-mono text-sm mb-2 block">
-          {"// pricing"}
-        </span>
-        <h2 className="text-3xl md:text-4xl font-bold text-zinc-100 mb-4">
-          Pricing
-        </h2>
-        <p className="text-zinc-400 text-lg max-w-xl">
-          Transparent pricing with no hidden fees. Every project includes source code and deployment.
-        </p>
-
-        {/* Animated divider */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="h-px bg-gradient-to-r from-emerald-500/40 via-zinc-700 to-transparent mt-6 origin-left max-w-sm"
-        />
-      </motion.div>
-
-      {/* Pricing cards */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-        {tiers.map((tier, index) => (
-          <motion.div
-            key={tier.name}
-            custom={index}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            whileHover={{
-              y: -6,
-              scale: 1.02,
-              transition: {
-                type: "spring",
-                stiffness: 300,
-                damping: 20,
-              },
-            }}
-            className={`group relative flex flex-col p-6 rounded-xl transition-[border-color,box-shadow] duration-300 ${
-              tier.popular
-                ? "border-2 border-emerald-500/40 hover:border-emerald-500/60 bg-emerald-500/[0.03] hover:shadow-lg hover:shadow-emerald-500/[0.08]"
-                : "border border-zinc-800 hover:border-emerald-500/30 hover:bg-zinc-900/30 hover:shadow-lg hover:shadow-black/20"
-            }`}
-          >
-            {/* Popular badge with glow pulse */}
-            {tier.popular && (
-              <motion.span
-                animate={{
-                  boxShadow: [
-                    "0 0 0 0 rgba(16, 185, 129, 0)",
-                    "0 0 10px 3px rgba(16, 185, 129, 0.25)",
-                    "0 0 0 0 rgba(16, 185, 129, 0)",
-                  ],
-                }}
-                transition={{
-                  duration: 2.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-emerald-500 text-zinc-900 text-xs font-bold rounded-full"
-              >
-                Most Popular
-              </motion.span>
-            )}
-
-            {/* Tier name */}
-            <h3 className="text-lg font-bold text-zinc-100 mb-3">
-              {tier.name}
-            </h3>
-
-            {/* Price with count-up */}
-            <div className="mb-3">
-              <span className="text-3xl sm:text-4xl font-bold text-emerald-400 font-mono">
-                <CountUpPrice value={tier.price} />
-              </span>
-              <span className="text-zinc-500 text-sm ml-1">starting</span>
-            </div>
-
-            {/* Description */}
-            <p className="text-zinc-400 text-sm leading-relaxed mb-6">
-              {tier.description}
+    <section className="surface-paper border-t hairline" id="pricing">
+      <div className="mx-auto max-w-[1120px] px-5 sm:px-8 py-20 sm:py-28">
+        <div className="mb-10">
+          <Develop className="eyebrow text-ink/70 mb-4">Pricing</Develop>
+          <Develop delay={80}>
+            <h2 className="display text-[clamp(1.9rem,4.2vw,3.4rem)] max-w-[20ch]">Transparent pricing.</h2>
+          </Develop>
+          <Develop delay={160}>
+            <p className="lede text-ink/70 max-w-[52ch] mt-4">
+              No hidden fees. Every project includes source code and deployment.
             </p>
+          </Develop>
+        </div>
 
-            {/* Features */}
-            <ul className="space-y-3 mb-8 flex-1">
-              {tier.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                  <span className="text-zinc-300 text-sm">{feature}</span>
-                </li>
-              ))}
-            </ul>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {tiers.map((t, i) => (
+            <Develop key={t.name} delay={i * 60}>
+              <div className={`card p-6 h-full flex flex-col ${t.popular ? "border-ink" : ""}`}>
+                <div className="meta text-ink/55 flex justify-between gap-3 mb-5">
+                  <span>{String(i + 1).padStart(2, "0")}</span>
+                  {t.popular ? <span className="text-ink">Popular</span> : null}
+                </div>
 
-            {/* CTA button */}
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className={`block text-center px-6 py-3 text-sm font-medium rounded-full transition-all ${
-                tier.popular
-                  ? "bg-emerald-500 text-zinc-900 hover:bg-emerald-400 hover:shadow-md hover:shadow-emerald-500/20"
-                  : "text-zinc-200 border border-zinc-600 hover:border-emerald-500/40 hover:text-white"
-              }`}
-            >
-              Get Started
-            </motion.a>
-          </motion.div>
-        ))}
+                <h3 className="text-[1.15rem] tracking-tight2 font-medium">{t.name}</h3>
+                <p className="font-mono text-[12.5px] leading-[1.55] text-ink/70 mt-1.5 mb-6">{t.description}</p>
+
+                <div className="mb-1">
+                  <span className="display text-[2.4rem]">${t.price.toLocaleString("en-US")}</span>
+                </div>
+                <div className="meta text-ink/45 mb-6">Starting</div>
+
+                <ul className="font-mono text-[12.5px] leading-[1.55] text-ink/70 space-y-2 mb-8 flex-1">
+                  {t.features.map((f) => (
+                    <li key={f} className="grid grid-cols-[1.25rem_1fr]">
+                      <span className="text-ink/45">—</span>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <a href="#contact" className={`${t.popular ? "btn-ink" : "btn-outline"} justify-center`}>
+                  Get started →
+                </a>
+              </div>
+            </Develop>
+          ))}
+        </div>
       </div>
     </section>
   );
-};
+}

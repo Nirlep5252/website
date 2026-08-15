@@ -5,7 +5,8 @@ import path from "path";
 import { compileMDX } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import { Metadata } from "next";
-import { ArrowLeft, ArrowRight, Code } from "lucide-react";
+import { Develop } from "@/components/emulsion/Develop";
+import { SolutionListItem } from "@/app/components/ui/SolutionListItem";
 
 export const metadata: Metadata = {
   title: "CSES Solutions | Nirlep Gohil",
@@ -127,69 +128,74 @@ export default async function CSESSolutions() {
   );
 
   return (
-    <main className="min-h-screen pt-24 pb-16 px-4">
-      <div className="max-w-4xl mx-auto">
-        {/* Back link */}
-        <Link
-          href="/adventures"
-          className="inline-flex items-center gap-2 text-zinc-400 hover:text-emerald-500 mb-8 group transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          Back to Adventures
+    <main className="surface-paper min-h-screen">
+      <div className="mx-auto max-w-[1120px] px-5 sm:px-8 pt-32 pb-24">
+        <Link href="/adventures" className="meta text-ink/55 hover:text-indigo transition-colors">
+          ← Adventures
         </Link>
 
-        {/* Header */}
-        <div className="mb-12">
-          <span className="text-emerald-500 font-mono text-sm mb-2 block">
-            {"// cses"}
-          </span>
-          <div className="flex items-center justify-between">
-            <h1 className="text-4xl font-bold text-zinc-100">CSES Solutions</h1>
-            <span className="text-sm font-mono text-emerald-500">
-              {stats.solved}/{stats.total}
-            </span>
-          </div>
-          <p className="text-zinc-400 mt-4">
-            My approaches, solutions, and explanations to problems from the CSES
-            Problem Set.
-          </p>
-        </div>
+        <header className="mt-8">
+          <Develop className="eyebrow text-ink/70 mb-4" inView={false}>
+            CSES Problem Set
+          </Develop>
+          <Develop delay={80} inView={false}>
+            <h1 className="display text-[clamp(2.4rem,5.5vw,4.5rem)]">Solutions, by category.</h1>
+          </Develop>
+          <Develop delay={160} inView={false}>
+            <p className="lede text-ink/65 mt-4 max-w-[52ch]">
+              My approaches, solutions and explanations to problems from the CSES Problem Set.{" "}
+              {stats.solved} of {stats.total} solved.
+            </p>
+          </Develop>
+        </header>
 
         {solutions.length === 0 ? (
-          <div className="text-center py-16">
-            <Code className="w-12 h-12 text-zinc-700 mx-auto mb-4" />
-            <p className="text-zinc-500 font-mono">No solutions yet.</p>
-            <p className="text-zinc-600 text-sm mt-2">
-              Solutions will appear here as they are added.
-            </p>
+          <div className="mt-16 py-20 border-t border-b hairline text-center">
+            <p className="font-mono text-ink/50">No solutions yet.</p>
+            <p className="meta text-ink/45 mt-3">Solutions will appear here as they are added.</p>
           </div>
         ) : (
-          <div className="space-y-10">
-            {sortedCategories.map((category) => (
-              <div key={category.name}>
-                <h2 className="text-xl font-semibold text-zinc-200 mb-4 flex items-center gap-3">
-                  <span className="text-emerald-500 font-mono text-sm">
-                    {category.solutions.length}
-                  </span>
-                  {formatCategoryName(category.name)}
-                </h2>
-                <div className="grid gap-2">
+          <div className="mt-12">
+            {sortedCategories.map((category, ci) => (
+              <Develop
+                key={category.name}
+                as="section"
+                delay={ci * 60}
+                className="grid gap-x-12 gap-y-6 lg:grid-cols-[minmax(0,16rem)_1fr] border-t hairline pt-8 pb-14"
+              >
+                <div>
+                  <h2 className="text-[1.4rem] leading-[1.1] tracking-tight2 font-medium">
+                    <Link
+                      href={`/adventures/cses/${category.slug}`}
+                      className="hover:underline decoration-1 underline-offset-4"
+                    >
+                      {formatCategoryName(category.name)}
+                    </Link>
+                  </h2>
+                  <p className="meta text-ink/55 mt-3">
+                    {category.solutions.length} solved
+                  </p>
+                  <Link
+                    href={`/adventures/cses/${category.slug}`}
+                    className="meta text-ink/55 hover:text-indigo transition-colors inline-block mt-6"
+                  >
+                    Open category →
+                  </Link>
+                </div>
+
+                <div className="border-t hairline lg:border-t-0">
                   {category.solutions
                     .sort((a, b) => a.time - b.time)
-                    .map((solution) => (
-                      <Link
+                    .map((solution, i) => (
+                      <SolutionListItem
                         key={solution.name}
-                        href={`/adventures/cses/${category.slug}/${solution.name}`}
-                        className="group flex items-center justify-between p-4 bg-bg-secondary/50 border border-border rounded-lg hover:border-border-hover hover:bg-bg-secondary transition-all"
-                      >
-                        <span className="text-zinc-300 group-hover:text-emerald-500 transition-colors">
-                          {solution.title}
-                        </span>
-                        <ArrowRight className="w-4 h-4 text-zinc-600 group-hover:text-emerald-500 group-hover:translate-x-1 transition-all" />
-                      </Link>
+                        solution={solution}
+                        category={category.slug}
+                        index={i}
+                      />
                     ))}
                 </div>
-              </div>
+              </Develop>
             ))}
           </div>
         )}

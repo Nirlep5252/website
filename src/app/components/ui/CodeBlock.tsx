@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Prism from "prismjs";
-import "prismjs/themes/prism-tomorrow.css";
 import "prismjs/components/prism-typescript";
 import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-jsx";
@@ -19,32 +18,46 @@ import "prismjs/components/prism-rust";
 interface CodeBlockProps {
   children: string;
   language: string;
+  /** optional filename / label shown in the header bar */
+  label?: string;
 }
 
-export function CodeBlock({ children, language }: CodeBlockProps) {
+/** Ink code block with LUT syntax colours (theme lives in globals.css `.code-block`). */
+export function CodeBlock({ children, language, label }: CodeBlockProps) {
   const codeRef = useRef<HTMLElement>(null);
+  const [copied, setCopied] = useState(false);
+  const content = (children || "").trim();
 
   useEffect(() => {
     if (codeRef.current) {
       codeRef.current.className = `language-${language}`;
       Prism.highlightElement(codeRef.current);
     }
-  }, [children, language]);
+  }, [content, language]);
 
-  const content = children || "";
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1200);
+    } catch {}
+  };
 
   return (
-    <div className="relative group">
-      <div className="absolute right-4 top-4 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+    <div className="code-block not-prose my-7 overflow-hidden">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-paper/10">
+        <span className="meta text-paper/50">{label ?? language}</span>
         <button
-          onClick={() => navigator.clipboard.writeText(content)}
-          className="bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-zinc-200 px-3 py-1.5 rounded-md text-xs font-mono transition-colors border border-zinc-700"
+          type="button"
+          onClick={copy}
+          className="meta text-paper/60 hover:text-signal transition-colors"
+          aria-label="Copy code"
         >
-          Copy
+          {copied ? "copied ✓" : "copy"}
         </button>
       </div>
-      <pre className="!bg-zinc-900 !p-4 !m-0 rounded-none">
-        <code ref={codeRef} className="!text-sm">{content.trim()}</code>
+      <pre className="!m-0 !p-4 overflow-x-auto text-[13px] leading-[1.6]">
+        <code ref={codeRef}>{content}</code>
       </pre>
     </div>
   );

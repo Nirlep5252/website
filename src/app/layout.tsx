@@ -1,80 +1,50 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import { SITE } from "@/lib/site";
+import { DevPanel } from "@/components/emulsion/DevPanel";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE.url),
   title: "Nirlep Gohil | Software Engineer",
   description:
     "Full-stack developer crafting elegant solutions with modern technologies. Building open source tools and exploring the art of code.",
-  authors: [{ name: "Nirlep Gohil", url: "https://github.com/nirlep5252" }],
-  creator: "Nirlep Gohil",
-  keywords: [
-    "software engineer",
-    "full-stack developer",
-    "rust",
-    "typescript",
-    "react",
-    "open source",
-  ],
+  authors: [{ name: SITE.name, url: "https://github.com/nirlep5252" }],
+  creator: SITE.name,
+  keywords: ["software engineer", "full-stack developer", "rust", "typescript", "react", "open source"],
   openGraph: {
     title: "Nirlep Gohil | Software Engineer",
-    description:
-      "Full-stack developer crafting elegant solutions with modern technologies.",
+    description: "Full-stack developer crafting elegant solutions with modern technologies.",
     type: "website",
-    url: "https://nirlep.dev",
+    url: SITE.url,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "nirlep.dev" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nirlep Gohil | Software Engineer",
-    description:
-      "Full-stack developer crafting elegant solutions with modern technologies.",
-    creator: "@nirlep_5252_",
+    description: "Full-stack developer crafting elegant solutions with modern technologies.",
+    creator: SITE.handle,
+    images: ["/og.png"],
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en" data-scroll-behavior="smooth" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <head>
-        {/* Load fonts from Google Fonts CDN */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-          rel="stylesheet"
-        />
-        <script
-          defer
-          src="https://cloud.umami.is/script.js"
-          data-website-id="65115862-88b5-4b2a-8768-11b2a06702f6"
-        ></script>
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="65115862-88b5-4b2a-8768-11b2a06702f6"></script>
       </head>
       <body className="font-sans antialiased">
-        {/* Subtle grain texture */}
-        <div className="grain" />
-
-        {/* Dot grid background */}
-        <div className="fixed inset-0 dot-grid opacity-30 pointer-events-none" />
-
-        {/* Gradient orbs */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
-        </div>
-
         <Suspense>
           <Navbar />
-          <div className="relative z-10">{children}</div>
         </Suspense>
+        {children}
+        <Footer />
+        {process.env.NODE_ENV !== "production" && <DevPanel />}
       </body>
     </html>
   );

@@ -1,173 +1,58 @@
-"use client";
-
-import React from "react";
-import { motion } from "framer-motion";
+import { Develop } from "@/components/emulsion/Develop";
 
 const steps = [
   {
-    number: "01",
+    n: "01",
     title: "Discovery",
-    description:
-      "Tell me about your project — what you need, your timeline, and your budget. We'll hop on a quick call or chat over email.",
+    body: "Tell me about your project — what you need, your timeline and your budget. A quick call or a thread over email.",
   },
   {
-    number: "02",
+    n: "02",
     title: "Proposal",
-    description:
-      "I'll put together a clear scope, timeline, and quote. No surprises — you'll know exactly what you're getting.",
+    body: "A clear scope, timeline and quote. No surprises — you know exactly what you are getting.",
   },
   {
-    number: "03",
+    n: "03",
     title: "Build",
-    description:
-      "I get to work. You'll get regular updates and can give feedback along the way.",
+    body: "I get to work. Regular updates, and room for feedback along the way.",
   },
   {
-    number: "04",
+    n: "04",
     title: "Deliver",
-    description:
-      "Final product, deployed and handed off. I'll make sure everything runs smoothly.",
+    body: "Final product, deployed and handed off. I make sure everything runs smoothly.",
   },
 ];
 
-const stepVariants = {
-  hidden: { opacity: 0 },
-  visible: (i: number) => ({
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-      delay: i * 0.12,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  }),
-};
-
-const numberVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.6,
-      delay: i * 0.12,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  }),
-};
-
-const titleVariants = {
-  hidden: { opacity: 0, x: -12 },
-  visible: (i: number) => ({
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.5,
-      delay: i * 0.12 + 0.1,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  }),
-};
-
-const descVariants = {
-  hidden: { opacity: 0, y: 8 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      delay: i * 0.12 + 0.2,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  }),
-};
-
-export const ProcessSection = () => {
+export function ProcessSection() {
   return (
-    <section className="py-20 sm:py-32">
-      {/* Section header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        viewport={{ once: true }}
-        className="mb-16"
-      >
-        <span className="text-emerald-500 font-mono text-sm mb-2 block">
-          {"// process"}
-        </span>
-        <h2 className="text-3xl md:text-4xl font-bold text-zinc-100 mb-3">
-          How It Works
-        </h2>
-        <p className="text-zinc-400 text-lg">
-          Simple, transparent, and collaborative.
-        </p>
+    <section className="surface-paper border-t hairline" id="process">
+      <div className="mx-auto max-w-[1120px] px-5 sm:px-8 py-20 sm:py-28">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
+          <div>
+            <Develop className="eyebrow text-ink/70 mb-4">Process</Develop>
+            <Develop delay={80}>
+              <h2 className="display text-[clamp(1.9rem,4.2vw,3.4rem)] max-w-[14ch]">How it works.</h2>
+            </Develop>
+            <Develop delay={160}>
+              <p className="lede text-ink/70 max-w-[40ch] mt-4">Simple, transparent and collaborative.</p>
+            </Develop>
+          </div>
 
-        {/* Animated divider */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="h-px bg-gradient-to-r from-emerald-500/40 via-zinc-700 to-transparent mt-6 origin-left max-w-sm"
-        />
-      </motion.div>
-
-      {/* Steps */}
-      <div className="relative">
-        {steps.map((step, index) => (
-          <motion.div
-            key={step.number}
-            custom={index}
-            variants={stepVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            whileHover={{
-              backgroundColor: "rgba(24, 24, 27, 0.3)",
-              transition: { duration: 0.3 },
-            }}
-            className="flex items-start gap-4 sm:gap-6 md:gap-10 py-5 sm:py-6 border-b border-zinc-800 first:border-t px-3 -mx-3 sm:px-4 sm:-mx-4 rounded-lg transition-colors"
-          >
-            {/* Number — slides in from left */}
-            <motion.span
-              custom={index}
-              variants={numberVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="text-3xl sm:text-4xl md:text-5xl font-bold text-emerald-500/35 font-mono shrink-0 relative z-10"
-            >
-              {step.number}
-            </motion.span>
-
-            {/* Content */}
-            <div className="flex-1 pt-1.5">
-              {/* Title — slides in from left with delay */}
-              <motion.h3
-                custom={index}
-                variants={titleVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="text-xl font-semibold text-zinc-100 mb-1.5"
-              >
-                {step.title}
-              </motion.h3>
-              {/* Description — fades up after title */}
-              <motion.p
-                custom={index}
-                variants={descVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="text-zinc-400 leading-relaxed max-w-xl"
-              >
-                {step.description}
-              </motion.p>
-            </div>
-          </motion.div>
-        ))}
+          <Develop delay={200} as="ol" className="border-t hairline">
+            {steps.map((s) => (
+              <li key={s.n} className="grid grid-cols-[3rem_1fr] gap-4 py-5 border-b hairline">
+                <span className="meta text-ink/45 pt-1.5">{s.n}</span>
+                <span>
+                  <span className="block text-[1.15rem] tracking-tight2 font-medium">{s.title}</span>
+                  <span className="block font-mono text-[12.5px] leading-[1.55] text-ink/70 mt-1 max-w-[52ch]">
+                    {s.body}
+                  </span>
+                </span>
+              </li>
+            ))}
+          </Develop>
+        </div>
       </div>
     </section>
   );
-};
+}
