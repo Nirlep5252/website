@@ -1,146 +1,70 @@
-"use client";
+import Link from "next/link";
+import { Poster } from "@/components/emulsion/Poster";
 
-import React from "react";
-import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const contentVariants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0 },
-};
-
-interface Adventure {
+export interface Adventure {
   title: string;
-  date: string;
   description: string;
-  progress: string;
-  solvedPercentage: number;
+  /** internal route the card leads to */
+  href: string;
+  /** stable seed for the poster (defaults to href) */
+  seed?: string;
+  solved: number;
+  total: number;
   tags: string[];
-  link?: string;
+  cta?: string;
+  /** optional outbound profile / source link */
+  external?: { label: string; href: string };
 }
 
+/** Featured "adventure" — a wide paper card with a seeded poster, progress meter and CTA. */
 export function AdventureCard({ adventure }: { adventure: Adventure }) {
-  const router = useRouter();
-
-  const handleClick = () => {
-    if (adventure.title === "CSES Problem Set") {
-      router.push("/adventures/cses");
-    }
-  };
+  const { title, description, href, seed, solved, total, tags, cta, external } = adventure;
+  const pct = total > 0 ? Math.min(100, Math.round((solved / total) * 100)) : 0;
 
   return (
-    <motion.article
-      onClick={handleClick}
-      initial="hidden"
-      animate="visible"
-      whileHover={{ scale: 1.01, y: -2 }}
-      variants={cardVariants}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-      className="relative group overflow-hidden rounded-xl backdrop-blur-xl p-[1px] cursor-pointer"
-    >
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 group-hover:from-blue-500/10 group-hover:to-purple-500/10 transition-all duration-500"
-        animate={{ opacity: [0, 1] }}
-        transition={{ duration: 0.5 }}
-      />
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.05),transparent_50%)] transition-opacity duration-700" />
-      <div className="relative h-full bg-gray-900/30 backdrop-blur-xl border border-white/5 rounded-xl p-7 flex flex-col gap-4">
-        <motion.div
-          variants={contentVariants}
-          transition={{ delay: 0.1 }}
-          className="flex justify-between items-start"
-        >
-          <motion.h2
-            variants={contentVariants}
-            transition={{ delay: 0.2 }}
-            className="text-2xl font-bold text-white/95 group-hover:text-white transition-colors duration-300"
-          >
-            {adventure.title}
-          </motion.h2>
-          <motion.span
-            variants={contentVariants}
-            transition={{ delay: 0.2 }}
-            className="text-sm text-blue-400/90"
-          >
-            {adventure.date}
-          </motion.span>
-        </motion.div>
-        <motion.p
-          variants={contentVariants}
-          transition={{ delay: 0.3 }}
-          className="text-gray-300/70 leading-relaxed"
-        >
-          {adventure.description}
-        </motion.p>
-        <motion.div
-          variants={contentVariants}
-          transition={{ delay: 0.4 }}
-          className="flex items-center gap-2 text-sm text-blue-400/90"
-        >
-          <div className="w-full bg-blue-500/10 rounded-full h-2 overflow-hidden">
-            <motion.div
-              className="bg-blue-500/30 h-2 rounded-full"
-              initial={{ width: "0%" }}
-              animate={{ width: `${adventure.solvedPercentage}%` }}
-              transition={{ duration: 1, delay: 0.5 }}
-            />
+    <article className="card grid grid-cols-[minmax(0,1fr)] sm:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+      <Link href={href} aria-label={title} className="block border-b sm:border-b-0 sm:border-r hairline">
+        <Poster seed={seed ?? href} ratio={4 / 3} className="h-full" />
+      </Link>
+
+      <div className="p-5 sm:p-7 flex flex-col">
+        <div className="meta text-ink/55 flex justify-between gap-4">
+          <span className="truncate min-w-0">{tags.join(" · ")}</span>
+          <span className="shrink-0">
+            {solved} / {total} solved
+          </span>
+        </div>
+
+        <h2 className="mt-4 text-[clamp(1.6rem,3vw,2.3rem)] leading-[1.05] tracking-tight2 font-medium">
+          <Link href={href} className="hover:underline decoration-1 underline-offset-4">
+            {title}
+          </Link>
+        </h2>
+        <p className="lede text-ink/70 mt-3 max-w-[52ch]">{description}</p>
+
+        <div className="mt-6 flex items-center gap-4" aria-label={`${pct}% complete`}>
+          <div className="h-[3px] flex-1 bg-paper-3">
+            <div className="h-full bg-ink" style={{ width: `${pct}%` }} />
           </div>
-          <span className="whitespace-nowrap">{adventure.progress}</span>
-        </motion.div>
-        <motion.div
-          variants={contentVariants}
-          transition={{ delay: 0.4 }}
-          className="flex flex-wrap gap-1.5"
-        >
-          {adventure.tags.map((tag, tagIndex) => (
-            <motion.span
-              key={tag}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 + tagIndex * 0.1 }}
-              className="inline-flex items-center px-2.5 py-0.5 text-xs font-medium bg-blue-500/10 text-blue-300/90 rounded-md border border-blue-500/20 hover:bg-blue-500/15 transition-colors duration-200"
+          <span className="meta text-ink/55 shrink-0">{pct}%</span>
+        </div>
+
+        <div className="mt-auto pt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <Link href={href} className="btn-ink">
+            {cta ?? "Browse solutions"} →
+          </Link>
+          {external ? (
+            <a
+              href={external.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link font-mono text-[12.5px]"
             >
-              {tag}
-            </motion.span>
-          ))}
-        </motion.div>
-        {adventure.link && (
-          <motion.a
-            href={adventure.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            variants={contentVariants}
-            transition={{ delay: 0.5 }}
-            className="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center gap-1 mt-2"
-          >
-            View Progress
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-              />
-            </svg>
-          </motion.a>
-        )}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ delay: 0.6, duration: 0.4 }}
-          className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent"
-        />
+              {external.label} ↗
+            </a>
+          ) : null}
+        </div>
       </div>
-    </motion.article>
+    </article>
   );
 }

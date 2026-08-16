@@ -1,156 +1,83 @@
-"use client";
-
-import React from "react";
-import { motion } from "framer-motion";
+import { Develop } from "@/components/emulsion/Develop";
+import { Poster } from "@/components/emulsion/Poster";
 
 const services = [
   {
     title: "Full-Stack Web Apps",
     description:
-      "Interactive applications with authentication, databases, and APIs. From idea to production-ready — I handle the full stack so you get a complete product, not just a frontend.",
+      "Interactive applications with authentication, databases and APIs — SaaS products, dashboards, user management. From idea to production, the whole stack, so you get a complete product and not just a frontend.",
     tag: "Most requested",
-    large: true,
+    wide: true,
   },
   {
     title: "Landing Pages",
-    description:
-      "Single-page marketing sites, product launches, and event pages. Fast turnaround.",
+    description: "Single-page marketing sites, product launches and event pages. Fast turnaround.",
     tag: "From 1 week",
   },
   {
-    title: "SaaS Applications",
-    description:
-      "Subscription products, dashboards, and user management. Built to scale.",
-    tag: "End-to-end",
-  },
-  {
     title: "Static Websites",
-    description:
-      "Multi-page sites, portfolios, and documentation. SEO-optimized and blazing fast.",
+    description: "Multi-page sites, portfolios and documentation. SEO-optimised and fast.",
     tag: "Performance",
   },
   {
     title: "Custom Tools",
-    description:
-      "Discord bots, CLI tools, automation scripts, and internal tools.",
+    description: "Discord bots, CLI tools, automation scripts and internal tools.",
     tag: "Anything goes",
   },
   {
     title: "Consulting",
-    description:
-      "Architecture reviews, tech stack advice, and code audits. Expert eyes on your project.",
+    description: "Architecture reviews, tech-stack advice and code audits. Expert eyes on your project.",
     tag: "Hourly",
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.97 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.6,
-      delay: i * 0.08,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  }),
-};
-
-export const ServicesSection = () => {
+function ServiceCard({ s, i }: { s: (typeof services)[number]; i: number }) {
+  const n = String(i + 1).padStart(2, "0");
   return (
-    <section className="pt-12 pb-20 sm:pt-16 sm:pb-32">
-      {/* Section header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        viewport={{ once: true }}
-        className="mb-10"
-      >
-        <span className="text-emerald-500 font-mono text-sm mb-2 block">
-          {"// services"}
-        </span>
-        <h2 className="text-3xl md:text-4xl font-bold text-zinc-100 mb-3">
-          What I Do
-        </h2>
-        <p className="text-zinc-400 text-lg">
-          From concept to deployment — here&apos;s where I can help.
-        </p>
+    <div className={`card h-full flex flex-col ${s.wide ? "sm:col-span-2" : ""}`}>
+      <div className="relative border-b hairline">
+        {s.wide ? (
+          <>
+            {/* wide card spans two columns from sm up; keep the banner height in step with the others */}
+            <Poster seed={`service:${s.title}`} ratio={21 / 9} className="sm:hidden" />
+            <Poster seed={`service:${s.title}`} ratio={42 / 9} className="hidden sm:block" />
+          </>
+        ) : (
+          <Poster seed={`service:${s.title}`} ratio={21 / 9} />
+        )}
+        <span className="absolute left-2.5 bottom-2.5 meta bg-ink text-paper px-1.5 py-1 leading-none">{n}</span>
+        <span className="absolute right-2.5 bottom-2.5 meta bg-ink text-paper/80 px-1.5 py-1 leading-none">{s.tag}</span>
+      </div>
+      <div className="p-5 flex-1 flex flex-col">
+        <h3 className="text-[1.15rem] tracking-tight2 font-medium mb-2">{s.title}</h3>
+        <p className="font-mono text-[12.5px] leading-[1.55] text-ink/70">{s.description}</p>
+      </div>
+    </div>
+  );
+}
 
-        {/* Animated divider */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="h-px bg-gradient-to-r from-emerald-500/40 via-zinc-700 to-transparent mt-6 origin-left max-w-sm"
-        />
-      </motion.div>
+export function ServicesSection() {
+  return (
+    <section className="surface-paper border-t hairline" id="services">
+      <div className="mx-auto max-w-[1120px] px-5 sm:px-8 py-20 sm:py-28">
+        <div className="mb-10">
+          <Develop className="eyebrow text-ink/70 mb-4">Services</Develop>
+          <Develop delay={80}>
+            <h2 className="display text-[clamp(1.9rem,4.2vw,3.4rem)] max-w-[20ch]">What I do.</h2>
+          </Develop>
+          <Develop delay={160}>
+            <p className="lede text-ink/70 max-w-[52ch] mt-4">From concept to deployment — here is where I can help.</p>
+          </Develop>
+        </div>
 
-      {/* Bento grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 auto-rows-fr">
-        {services.map((service, index) => (
-          <motion.div
-            key={service.title}
-            custom={index}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            whileHover={{
-              y: -4,
-              scale: 1.015,
-              transition: {
-                type: "spring",
-                stiffness: 300,
-                damping: 20,
-              },
-            }}
-            className={`group relative border border-zinc-800 rounded-xl transition-[border-color,box-shadow] duration-300 hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/[0.04] ${
-              service.large
-                ? "md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2"
-                : ""
-            }`}
-          >
-            {/* Subtle gradient overlay for the large card */}
-            {service.large && (
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-emerald-500/[0.04] via-transparent to-cyan-500/[0.03] pointer-events-none" />
-            )}
-
-            <div
-              className={`relative ${
-                service.large ? "p-8 md:p-10" : "p-6"
-              }`}
-            >
-              {/* Tag */}
-              <span className="text-emerald-500/60 font-mono text-[11px] tracking-wider uppercase block mb-4">
-                {service.tag}
-              </span>
-
-              {/* Content — top-aligned */}
-              <h3
-                className={`font-bold text-zinc-100 group-hover:text-emerald-400 transition-colors duration-300 mb-2 ${
-                  service.large
-                    ? "text-2xl md:text-3xl"
-                    : "text-lg"
-                }`}
-              >
-                {service.title}
-              </h3>
-              <p
-                className={`text-zinc-500 leading-relaxed ${
-                  service.large
-                    ? "text-base max-w-md"
-                    : "text-sm"
-                }`}
-              >
-                {service.description}
-              </p>
-            </div>
-          </motion.div>
-        ))}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((s, i) => (
+            <Develop key={s.title} delay={i * 60} className={s.wide ? "sm:col-span-2" : ""}>
+              <ServiceCard s={s} i={i} />
+            </Develop>
+          ))}
+        </div>
       </div>
     </section>
   );
-};
+}

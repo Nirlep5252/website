@@ -1,114 +1,40 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { EmulsionField } from "@/components/emulsion/EmulsionField";
+import { Develop } from "@/components/emulsion/Develop";
+import { HERO_PARAMS } from "@/lib/emulsion/renderer";
 
-const MotionLink = motion.create(Link);
-
-// Floating particles component
-const FloatingParticles = () => {
-  const particles = [
-    { size: 4, x: "10%", y: "20%", duration: 20, delay: 0 },
-    { size: 3, x: "20%", y: "80%", duration: 25, delay: 2 },
-    { size: 5, x: "80%", y: "30%", duration: 22, delay: 1 },
-    { size: 3, x: "70%", y: "70%", duration: 28, delay: 3 },
-    { size: 4, x: "90%", y: "50%", duration: 24, delay: 0.5 },
-    { size: 2, x: "30%", y: "40%", duration: 26, delay: 1.5 },
-    { size: 3, x: "50%", y: "90%", duration: 21, delay: 2.5 },
-    { size: 4, x: "15%", y: "60%", duration: 23, delay: 0.8 },
-  ];
-
+export function HeroSection() {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map((particle, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full bg-emerald-500/20"
-          style={{
-            width: particle.size,
-            height: particle.size,
-            left: particle.x,
-            top: particle.y,
-          }}
-          animate={{
-            y: [0, -30, 0],
-            x: [0, 10, 0],
-            opacity: [0.2, 0.5, 0.2],
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            delay: particle.delay,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </div>
-  );
-};
+    <section className="relative min-h-[100svh] surface-ink overflow-hidden" aria-label="Intro">
+      <EmulsionField params={HERO_PARAMS} developOnMount={1400} style={{ position: "absolute", inset: 0 }} />
 
-export const HeroSection = () => {
-  return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
-      {/* Floating particles */}
-      <FloatingParticles />
+      <div className="relative z-10 mx-auto max-w-[1120px] min-h-[100svh] px-5 sm:px-8 pt-32 pb-12 sm:pb-20 grid content-end gap-5">
+        <Develop delay={700} duration={700} inView={false} className="eyebrow text-paper">
+          Software engineer
+        </Develop>
 
-      <div className="max-w-6xl w-full text-center relative z-10">
-        {/* Glow effect behind text */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[200px] bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-emerald-500/20 blur-[120px] pointer-events-none" />
-
-        {/* Main heading - MASSIVE with animated gradient */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="relative"
-        >
-          <h1 className="text-[clamp(2.5rem,10vw,9rem)] font-bold leading-none tracking-tighter">
-            <span className="hero-gradient-text bg-[length:200%_auto] animate-gradient-shift bg-clip-text text-transparent">
-              Nirlep Gohil
-            </span>
+        <Develop delay={900} duration={1100} inView={false}>
+          <h1 className="display text-paper text-[clamp(2.75rem,8.4vw,8rem)] max-w-[13ch]">
+            Nirlep Gohil builds software <span className="whitespace-nowrap">you can</span> tell apart.
           </h1>
-        </motion.div>
+        </Develop>
 
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto font-light"
-        >
-          Full-stack developer building products that matter.
-        </motion.p>
+        <Develop delay={1300} duration={800} inView={false}>
+          <p className="lede text-paper/85 max-w-[min(56ch,100%)] mt-1">
+            Shipping is cheap now. Anyone with an agent can generate a plausible app by lunch, and most of it
+            is slop. I use the same tools. What&apos;s left is the part that always mattered: knowing what to
+            build, what to cut, and when it&apos;s actually done.
+          </p>
+        </Develop>
 
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center justify-center gap-4 mt-12"
-        >
-          <MotionLink
-            href="/projects"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="group flex items-center gap-2 px-8 py-4 bg-zinc-100 text-zinc-900 font-medium rounded-full hover:bg-white transition-colors"
-          >
-            View Work
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </MotionLink>
-
-          <a
-            href="#connect"
-            className="px-8 py-4 text-zinc-400 font-medium rounded-full border border-zinc-800 hover:border-zinc-600 hover:text-zinc-200 transition-all hover:scale-[1.02] active:scale-[0.98]"
-          >
-            Get in Touch
-          </a>
-        </motion.div>
+        <Develop delay={1500} duration={600} inView={false} className="flex items-center gap-4 mt-2">
+          <Link href="/projects" className="btn-solid">View work →</Link>
+          <Link href="/posts" className="btn-ghost">Read the writing</Link>
+        </Develop>
 
       </div>
     </section>
   );
-};
+}

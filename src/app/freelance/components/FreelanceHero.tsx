@@ -1,265 +1,103 @@
-"use client";
+import { EmulsionField } from "@/components/emulsion/EmulsionField";
+import { Develop } from "@/components/emulsion/Develop";
+import { HERO_PARAMS } from "@/lib/emulsion/renderer";
+import { SITE } from "@/lib/site";
 
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Calendar, ChevronDown } from "lucide-react";
-
-const MotionLink = motion.create(Link);
-
-const projects = [
-  {
-    title: "bondbot.gg",
-    description: "Discord AI agent for server management via natural language.",
-    tags: ["Next.js", "Discord API", "AI"],
-    href: "https://bondbot.gg",
-  },
-  {
-    title: "ashishgohil.com",
-    description: "Professional portfolio for a professor with 34+ years of experience.",
-    tags: ["Next.js", "Tailwind CSS"],
-    href: "https://ashishgohil.com",
-  },
-  {
-    title: "formality.life",
-    description: "Modern image hosting platform for uploading and sharing.",
-    tags: ["Next.js", "Tailwind CSS", "React Query"],
-    href: "https://formality.life",
-  },
+const recentWork = [
+  { title: "new.sunren.in", note: "Manufacturer site", href: "https://new.sunren.in", img: "/work/sunren.jpg" },
+  { title: "bondbot.gg", note: "Discord AI agent", href: "https://bondbot.gg", img: "/work/bondbot.jpg" },
+  { title: "ashishgohil.com", note: "Academic portfolio", href: "https://ashishgohil.com", img: "/work/ashishgohil.jpg" },
 ];
 
-const desktopRotations = [-2, 1, -1.5];
+// Fanned "prints" on desktop: each one is rotated a touch and overlaps the previous; hover straightens + lifts.
+const FAN = ["rotate-[-4deg] translate-y-[8px]", "rotate-[1deg]", "rotate-[4.5deg] translate-y-[10px]"];
 
-const useIsLg = () => {
-  const [isLg, setIsLg] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    setIsLg(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsLg(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-  return isLg;
-};
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 25 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
-export const FreelanceHero = () => {
-  const isLg = useIsLg();
-
+function Print({ w, className, style }: { w: (typeof recentWork)[number]; className?: string; style?: React.CSSProperties }) {
   return (
-    <section className="lg:min-h-screen flex flex-col justify-center pt-28 pb-16 lg:pt-24 lg:pb-12 px-4 sm:px-6 relative">
-      {/* Atmospheric glow — positioned behind headline */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-[35%] left-[25%] w-[500px] h-[250px] bg-gradient-to-r from-emerald-500/12 via-cyan-500/8 to-emerald-500/12 blur-[120px] rounded-full"
-          animate={{ scale: [1, 1.06, 1], opacity: [0.5, 0.8, 0.5] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </div>
+    <a
+      href={w.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      title={`${w.title} — ${w.note}`}
+      className={`block bg-paper p-1.5 pb-2 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)] transition-[transform,filter] duration-300 ease-out ${className ?? ""}`}
+      style={style}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={w.img} alt={`${w.title} — ${w.note}`} width={800} height={500} className="block w-full aspect-[8/5] object-cover" />
+      <span className="mt-1.5 flex items-baseline justify-between gap-2 font-mono text-[10px] leading-none text-ink">
+        <span>{w.title}</span>
+        <span className="text-ink/55 truncate">{w.note}</span>
+      </span>
+    </a>
+  );
+}
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="max-w-6xl w-full mx-auto relative z-10"
-      >
-        {/* Available badge */}
-        <motion.div variants={itemVariants} className="mb-8 sm:mb-12 lg:mb-16">
-          <span className="inline-flex items-center gap-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-            </span>
-            <span className="text-zinc-400 text-xs font-mono tracking-wide">
-              Available for projects
-            </span>
-          </span>
-        </motion.div>
+export function FreelanceHero() {
+  return (
+    <section className="relative min-h-[100svh] surface-ink overflow-hidden" aria-label="Freelance intro">
+      <EmulsionField
+        params={{ ...HERO_PARAMS, seed: 0.37 }}
+        developOnMount={1400}
+        style={{ position: "absolute", inset: 0 }}
+      />
 
-        {/* Main layout */}
-        <div className="flex flex-col lg:flex-row lg:items-center lg:gap-16 xl:gap-20">
-          {/* Left column — dramatic typography */}
-          <div className="lg:flex-[3]">
-            {/* Small intro line */}
-            <motion.p
-              variants={itemVariants}
-              className="text-zinc-500 text-base sm:text-lg md:text-xl font-light tracking-wide mb-2 sm:mb-3"
-            >
-              I design &amp; build
-            </motion.p>
+      <div className="relative z-10 mx-auto max-w-[1120px] min-h-[100svh] px-5 sm:px-8 pt-32 pb-12 sm:pb-20 grid content-end gap-5">
+        <Develop delay={700} duration={700} inView={false} className="eyebrow text-paper">
+          Freelance · Available for projects
+        </Develop>
 
-            {/* MASSIVE headline — scaled for mobile */}
-            <motion.h1
-              variants={itemVariants}
-              className="text-[2.5rem] leading-[0.95] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight"
-            >
-              <span className="text-zinc-100">websites people</span>
-              <br />
-              <span className="text-emerald-400">enjoy using.</span>
-            </motion.h1>
+        <Develop delay={900} duration={1100} inView={false}>
+          <h1 className="display text-paper text-[clamp(2.75rem,8.4vw,8rem)] max-w-[11ch]">
+            I design and build websites people enjoy using.
+          </h1>
+        </Develop>
 
-            {/* Animated divider line */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{
-                duration: 1.2,
-                delay: 0.9,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="h-px bg-gradient-to-r from-emerald-500/40 via-zinc-700 to-transparent mt-6 sm:mt-8 mb-4 sm:mb-6 origin-left max-w-md"
-            />
+        <Develop delay={1300} duration={800} inView={false}>
+          <p className="lede text-paper/85 max-w-[min(52ch,100%)] mt-1">
+            Full-stack developer for the modern web — from pixel-perfect landing pages to complex SaaS
+            applications. Clear scope, honest quotes, shipped on time.
+          </p>
+        </Develop>
 
-            {/* Subtext */}
-            <motion.p
-              variants={itemVariants}
-              className="text-zinc-400 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-lg mb-8 sm:mb-10"
-            >
-              Full-stack developer specializing in modern web — from
-              pixel-perfect landing pages to complex SaaS applications.
-            </motion.p>
-
-            {/* CTAs — stack on mobile, row on sm+ */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
-            >
-              <MotionLink
-                href="/projects"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="group flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-zinc-100 text-zinc-900 text-sm sm:text-base font-medium rounded-full hover:bg-white transition-colors"
-              >
-                View My Work
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </MotionLink>
-
-              <motion.a
-                href="https://calendar.app.google/SUgGEw1nzd7vvA188"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 text-zinc-200 text-sm sm:text-base font-medium rounded-full border border-zinc-600 hover:border-zinc-400 hover:text-white transition-all"
-              >
-                <Calendar className="w-4 h-4" />
-                Book a Call
-              </motion.a>
-            </motion.div>
-          </div>
-
-          {/* Right column — project cards (no rotation on mobile) */}
-          <motion.div
-            variants={itemVariants}
-            className="lg:flex-[2] mt-12 sm:mt-16 lg:mt-0 lg:flex lg:items-center"
+        <Develop delay={1500} duration={600} inView={false} className="flex flex-wrap items-center gap-4 mt-2">
+          <a href={`mailto:${SITE.email}`} className="btn-solid">
+            Start a project →
+          </a>
+          <a
+            href="https://calendar.app.google/SUgGEw1nzd7vvA188"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-ghost"
           >
-            <div className="relative w-full lg:max-w-xs lg:ml-auto">
-              <div className="space-y-3">
-                {projects.map((project, index) => {
-                  const rotation = isLg ? desktopRotations[index] : 0;
-                  return (
-                    <motion.a
-                      key={project.title}
-                      href={project.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      initial={{ opacity: 0, x: 30, rotate: rotation }}
-                      animate={{ opacity: 1, x: 0, rotate: rotation }}
-                      transition={{
-                        duration: 0.7,
-                        delay: 0.7 + index * 0.12,
-                        ease: [0.16, 1, 0.3, 1],
-                      }}
-                      whileHover={
-                        isLg
-                          ? {
-                              rotate: 0,
-                              scale: 1.03,
-                              y: -3,
-                              transition: { duration: 0.25 },
-                            }
-                          : undefined
-                      }
-                      className="group block px-4 py-3 sm:px-5 sm:py-4 bg-zinc-900/80 backdrop-blur-sm border border-zinc-800 rounded-lg hover:border-emerald-500/30 transition-colors shadow-lg shadow-black/20"
-                    >
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm font-medium text-zinc-100 group-hover:text-emerald-400 transition-colors">
-                          {project.title}
-                        </span>
-                        <ArrowUpRight className="w-3.5 h-3.5 text-zinc-700 group-hover:text-emerald-400 transition-colors" />
-                      </div>
-                      <p className="text-xs text-zinc-500 leading-relaxed mb-2 line-clamp-1">
-                        {project.description}
-                      </p>
-                      <div className="flex gap-2">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-[10px] font-mono text-zinc-500"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </motion.a>
-                  );
-                })}
-              </div>
+            Book a call ↗
+          </a>
+        </Develop>
 
-              {/* View all link */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 1.3 }}
-                className="mt-4 pl-1"
-              >
-                <Link
-                  href="/projects"
-                  className="group inline-flex items-center gap-1.5 text-xs text-zinc-600 hover:text-zinc-300 transition-colors"
-                >
-                  View all projects
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                </Link>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </motion.div>
+        {/* Recent work — prints from the darkroom. Fanned stack on desktop, scroll row below lg. */}
+        <Develop delay={1700} duration={700} inView={false} className="lg:hidden mt-6 min-w-0">
+          <div className="meta text-paper/60 mb-3">Recent work</div>
+          <div className="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5 sm:-mx-8 sm:px-8 [scrollbar-width:none]">
+            {recentWork.map((w) => (
+              <Print key={w.title} w={w} className="w-[168px] shrink-0" />
+            ))}
+          </div>
+        </Develop>
 
-      {/* Scroll indicator — desktop only */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2"
-      >
-        <span className="text-zinc-600 text-xs font-mono tracking-widest uppercase">
-          scroll
-        </span>
-        <motion.div
-          animate={{ y: [0, 4, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ChevronDown className="w-4 h-4 text-zinc-600" />
-        </motion.div>
-      </motion.div>
+        <Develop delay={1700} duration={700} inView={false} className="hidden lg:block absolute right-8 bottom-16 w-[24rem]">
+          <div className="meta text-paper/60 mb-4 text-right">Recent work</div>
+          <div className="relative h-[168px]">
+            {/* first item is the most prominent: rightmost and on top of the stack */}
+            {[...recentWork].reverse().map((w, i) => (
+              <Print
+                key={w.title}
+                w={w}
+                className={`absolute bottom-0 w-[196px] origin-bottom hover:z-10 hover:!rotate-0 hover:!-translate-y-3 hover:scale-[1.04] ${FAN[i]}`}
+                style={{ left: `${i * 86}px`, zIndex: i }}
+              />
+            ))}
+          </div>
+        </Develop>
+      </div>
     </section>
   );
-};
+}

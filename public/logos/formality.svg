@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <rect width="256" height="256" fill="#0b0a0e"/>
+  <text x="44" y="200" font-family="Geist, Inter, system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="216" font-weight="700" fill="#fafafa">f</text>
+  <circle cx="190" cy="188" r="30" fill="#D946EF"/>
+</svg>

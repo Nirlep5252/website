@@ -100,8 +100,8 @@ export default async function CategoryPage({ params }: Props) {
   const categoryName = formatCategoryName(category);
 
   return (
-    <main className="min-h-screen pt-24 pb-16 px-4">
-      <div className="max-w-6xl mx-auto">
+    <main className="surface-paper min-h-screen">
+      <div className="mx-auto max-w-[1120px] px-5 sm:px-8 pt-32 pb-24">
         <CSESSolutionsList
           category={category}
           categoryName={categoryName}

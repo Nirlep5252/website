@@ -1,9 +1,7 @@
-"use client";
-
-import React from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { Develop } from "@/components/emulsion/Develop";
+import { Poster } from "@/components/emulsion/Poster";
+import { SolutionListItem } from "@/app/components/ui/SolutionListItem";
 
 interface Solution {
   name: string;
@@ -17,71 +15,34 @@ interface CSESSolutionsListProps {
   solutions: Solution[];
 }
 
-export function CSESSolutionsList({
-  category,
-  categoryName,
-  solutions,
-}: CSESSolutionsListProps) {
+export function CSESSolutionsList({ category, categoryName, solutions }: CSESSolutionsListProps) {
   return (
     <>
-      {/* Back link */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4 }}
-      >
-        <Link
-          href="/adventures"
-          className="inline-flex items-center gap-2 text-zinc-500 hover:text-zinc-300 mb-12 group transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          Adventures
-        </Link>
-      </motion.div>
+      <Link href="/adventures/cses" className="meta text-ink/55 hover:text-indigo transition-colors">
+        ← CSES solutions
+      </Link>
 
-      {/* Header */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="mb-16"
-      >
-        <h1 className="text-4xl md:text-6xl font-bold text-zinc-100 tracking-tight">
-          {categoryName}
-        </h1>
-        <p className="text-zinc-500 mt-4">
-          {solutions.length} problem{solutions.length !== 1 ? "s" : ""} solved
-        </p>
-      </motion.div>
+      <header className="mt-8">
+        {/* same seed as the category card on /adventures, so the poster carries over */}
+        <Poster seed={category} ratio={21 / 6} className="rounded-[2px] mb-9" />
+        <Develop className="eyebrow text-ink/70 mb-4" inView={false}>
+          CSES Problem Set
+        </Develop>
+        <Develop delay={80} inView={false}>
+          <h1 className="display text-[clamp(2.4rem,5.5vw,4.5rem)]">{categoryName}</h1>
+        </Develop>
+        <Develop delay={160} inView={false}>
+          <p className="lede text-ink/65 mt-4 max-w-[52ch]">
+            {solutions.length} problem{solutions.length !== 1 ? "s" : ""} solved, in the order I got to them.
+          </p>
+        </Develop>
+      </header>
 
-      {/* Solutions list */}
-      <div>
+      <Develop as="div" delay={240} inView={false} className="mt-12 border-t hairline">
         {solutions.map((solution, index) => (
-          <motion.div
-            key={solution.name}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.05 }}
-          >
-            <Link
-              href={`/adventures/cses/${category}/${solution.name}`}
-              className="group block py-5 border-b border-zinc-800 first:border-t"
-            >
-              <div className="flex items-center justify-between gap-8">
-                <div className="flex items-center gap-6 md:gap-10">
-                  <span className="text-zinc-700 font-mono text-sm">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h2 className="text-lg md:text-xl font-medium text-zinc-200 group-hover:text-emerald-400 transition-colors">
-                    {solution.title}
-                  </h2>
-                </div>
-                <ArrowUpRight className="w-5 h-5 text-zinc-700 group-hover:text-emerald-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
-              </div>
-            </Link>
-          </motion.div>
+          <SolutionListItem key={solution.name} solution={solution} category={category} index={index} />
         ))}
-      </div>
+      </Develop>
     </>
   );
 }
