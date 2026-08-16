@@ -1,6 +1,6 @@
 import { Develop } from "@/components/emulsion/Develop";
-import { ProjectCard, ProjectRow } from "@/components/Cards";
-import { featuredProjects, otherProjects } from "@/lib/projects";
+import { ProjectCard } from "@/components/Cards";
+import { projects } from "@/lib/projects";
 
 export default function ProjectsPage() {
   return (
@@ -17,29 +17,21 @@ export default function ProjectsPage() {
         </Develop>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-12">
-          {featuredProjects.map((p, i) => (
-            <Develop key={p.title} delay={i * 50}>
+          {projects.map((p, i) => (
+            <Develop key={p.title} delay={(i % 3) * 50}>
               <ProjectCard project={p} />
             </Develop>
           ))}
         </div>
 
-        <section className="mt-24">
-          <Develop className="eyebrow text-ink/70 mb-6">Other experiments</Develop>
-          <Develop as="div" delay={80} className="border-t hairline">
-            {otherProjects.map((p) => (
-              <ProjectRow key={p.title} project={p} />
-            ))}
-          </Develop>
-          <a
-            href="https://github.com/nirlep5252"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline mt-8"
-          >
-            More on GitHub ↗
-          </a>
-        </section>
+        <a
+          href="https://github.com/nirlep5252"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-outline mt-12"
+        >
+          More on GitHub ↗
+        </a>
       </div>
     </main>
   );

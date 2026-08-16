@@ -3,6 +3,58 @@ import { Poster } from "@/components/emulsion/Poster";
 import { formatDate } from "@/lib/site";
 import type { Project } from "@/lib/projects";
 
+/**
+ * Superellipse ("squircle") outline as an SVG path, in px. n≈5 is close to the iOS icon curve.
+ * Pure + deterministic, so it's computed once at module load.
+ */
+function squirclePath(size: number, n = 5, steps = 64): string {
+  const r = size / 2;
+  const pts: string[] = [];
+  for (let i = 0; i < steps; i++) {
+    const t = (i / steps) * Math.PI * 2;
+    const c = Math.cos(t);
+    const s = Math.sin(t);
+    const x = r + Math.sign(c) * Math.pow(Math.abs(c), 2 / n) * r;
+    const y = r + Math.sign(s) * Math.pow(Math.abs(s), 2 / n) * r;
+    pts.push(`${i === 0 ? "M" : "L"}${x.toFixed(2)} ${y.toFixed(2)}`);
+  }
+  return pts.join(" ") + " Z";
+}
+const LOGO = 56;
+const RING = 2;
+const CLIP_LOGO = `path('${squirclePath(LOGO)}')`;
+const CLIP_RING = `path('${squirclePath(LOGO + RING * 2)}')`;
+
+/** Project mark centred on the poster: squircled logo, or an ink monogram when there is none. */
+function ProjectMark({ project }: { project: Project }) {
+  return (
+    <span
+      aria-hidden
+      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block bg-paper/25 transition-transform duration-300 group-hover:scale-[1.04]"
+      style={{ width: LOGO + RING * 2, height: LOGO + RING * 2, clipPath: CLIP_RING, padding: RING }}
+    >
+      {project.logo ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={project.logo}
+          alt=""
+          width={LOGO}
+          height={LOGO}
+          className="block h-full w-full object-cover"
+          style={{ clipPath: CLIP_LOGO }}
+        />
+      ) : (
+        <span
+          className="grid h-full w-full place-items-center bg-ink text-paper font-medium tracking-tight2 text-[24px] leading-none"
+          style={{ clipPath: CLIP_LOGO }}
+        >
+          {project.title.trim().charAt(0).toUpperCase()}
+        </span>
+      )}
+    </span>
+  );
+}
+
 export type PostLite = {
   slug: string;
   title: string;
@@ -40,7 +92,10 @@ export function ProjectCard({ project }: { project: Project }) {
       rel={external ? "noopener noreferrer" : undefined}
       className="card group"
     >
-      <Poster seed={project.title} className="border-b hairline" />
+      <div className="relative border-b hairline">
+        <Poster seed={project.title} />
+        <ProjectMark project={project} />
+      </div>
       <div className="p-4 pb-5">
         <div className="meta text-ink/55 flex justify-between gap-3 mb-2.5">
           <span className="truncate">{project.tags.slice(0, 3).join(" · ")}</span>

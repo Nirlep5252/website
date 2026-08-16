@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <rect width="256" height="256" fill="#0b0a0e"/>
+  <!-- Codeforces bars -->
+  <g transform="translate(34 78)">
+    <rect x="0" y="40" width="22" height="60" rx="5" fill="#FFD400"/>
+    <rect x="30" y="0" width="22" height="100" rx="5" fill="#1F8ACB"/>
+    <rect x="60" y="24" width="22" height="76" rx="5" fill="#E14E3E"/>
+  </g>
+  <!-- plus -->
+  <g fill="#f3efe4">
+    <rect x="128" y="120" width="26" height="6" rx="1.5"/>
+    <rect x="138" y="110" width="6" height="26" rx="1.5"/>
+  </g>
+  <!-- terminal >_ -->
+  <g fill="none" stroke="#f3efe4" stroke-width="12" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M170 98 L192 118 L170 138"/>
+    <path d="M198 158 L226 158"/>
+  </g>
+</svg>

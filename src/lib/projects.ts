@@ -5,6 +5,8 @@ export type Project = {
   github?: string;
   preview?: string;
   featured?: boolean;
+  /** /public path to a square (256px) logo; cards fall back to a monogram when absent */
+  logo?: string;
 };
 
 export const projects: Project[] = [
@@ -14,6 +16,7 @@ export const projects: Project[] = [
       "AI agent for Discord. Mention @Bond and describe what you want — 166 tools across channels, roles, moderation and automation do the rest.",
     tags: ["TypeScript", "AI agents", "Discord"],
     preview: "https://bondbot.gg",
+    logo: "/logos/bond.png",
     featured: true,
   },
   {
@@ -23,6 +26,7 @@ export const projects: Project[] = [
     tags: ["Cloudflare Workers", "Hono", "R2"],
     preview: "https://formality.life",
     github: "https://github.com/nirlep5252/host",
+    logo: "/logos/formality.svg",
     featured: true,
   },
   {
@@ -31,6 +35,7 @@ export const projects: Project[] = [
       "Tray app that shows usage limits for Codex, Claude Code, Grok, Cursor and OpenCode at a glance — with reset timers and local history charts.",
     tags: ["C#", ".NET", "Windows"],
     github: "https://github.com/nirlep5252/CodexBarWindows",
+    logo: "/logos/codexbar.png",
     featured: true,
   },
   {
@@ -39,6 +44,7 @@ export const projects: Project[] = [
       "Marketing site for an IATF-certified brake components manufacturer — interactive 3D product inspection, smooth scroll, built to convert quotes.",
     tags: ["Next.js", "React Three Fiber", "GSAP"],
     preview: "https://sunren.vercel.app",
+    logo: "/logos/sunren.png",
     featured: true,
   },
   {
@@ -55,6 +61,7 @@ export const projects: Project[] = [
       "Move your competitive programming workflow to the terminal — parse problems, test, submit and watch standings. On PyPI as `codeforces`.",
     tags: ["Python", "CLI", "PyPI"],
     github: "https://github.com/nirlep5252/codeforces-cli",
+    logo: "/logos/codeforces-cli.svg",
     featured: true,
   },
   {
@@ -62,18 +69,21 @@ export const projects: Project[] = [
     description: "Keyboard-first quick launcher for Windows: apps, files, calculations, currency, system commands.",
     tags: ["C#", "WPF"],
     github: "https://github.com/nirlep5252/walk",
+    logo: "/logos/walk.png",
   },
   {
     title: "EpicBot",
     description: "Multipurpose Discord bot — moderation, utilities, chat. My most-starred repo.",
     tags: ["Python", "discord.py"],
     github: "https://github.com/nirlep5252/epicbot",
+    logo: "/logos/epicbot.png",
   },
   {
     title: "EpicVim",
     description: "Neovim distribution as a Nix flake — `nix run github:nirlep5252/epicvim` and you're in.",
     tags: ["Nix", "Neovim"],
     github: "https://github.com/nirlep5252/epicvim",
+    logo: "/logos/epicvim.png",
   },
   {
     title: "Fun",
