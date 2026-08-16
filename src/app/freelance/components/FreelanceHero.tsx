@@ -4,19 +4,13 @@ import { HERO_PARAMS } from "@/lib/emulsion/renderer";
 import { SITE } from "@/lib/site";
 
 const recentWork = [
-  { title: "bondbot.gg", note: "Discord AI agent", href: "https://bondbot.gg", img: "/work/bondbot.jpg" },
   { title: "new.sunren.in", note: "Manufacturer site", href: "https://new.sunren.in", img: "/work/sunren.jpg" },
+  { title: "bondbot.gg", note: "Discord AI agent", href: "https://bondbot.gg", img: "/work/bondbot.jpg" },
   { title: "ashishgohil.com", note: "Academic portfolio", href: "https://ashishgohil.com", img: "/work/ashishgohil.jpg" },
-  { title: "formality.life", note: "Image hosting", href: "https://formality.life", img: "/work/formality.jpg" },
 ];
 
 // Fanned "prints" on desktop: each one is rotated a touch and overlaps the previous; hover straightens + lifts.
-const FAN = [
-  "rotate-[-5deg] translate-y-[10px]",
-  "rotate-[-1.5deg] translate-y-[2px]",
-  "rotate-[2deg] translate-y-[4px]",
-  "rotate-[5.5deg] translate-y-[12px]",
-];
+const FAN = ["rotate-[-4deg] translate-y-[8px]", "rotate-[1deg]", "rotate-[4.5deg] translate-y-[10px]"];
 
 function Print({ w, className, style }: { w: (typeof recentWork)[number]; className?: string; style?: React.CSSProperties }) {
   return (
@@ -89,7 +83,7 @@ export function FreelanceHero() {
           </div>
         </Develop>
 
-        <Develop delay={1700} duration={700} inView={false} className="hidden lg:block absolute right-8 bottom-16 w-[29rem]">
+        <Develop delay={1700} duration={700} inView={false} className="hidden lg:block absolute right-8 bottom-16 w-[24rem]">
           <div className="meta text-paper/60 mb-4 text-right">Recent work</div>
           <div className="relative h-[168px]">
             {recentWork.map((w, i) => (
