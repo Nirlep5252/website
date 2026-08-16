@@ -81,12 +81,13 @@ export default async function ProblemPage({ params }: Props) {
   }
 
   const source = await fs.promises.readFile(filePath, "utf-8");
-  const frontmatterMatch = source.match(/^---\n([\s\S]*?)\n---/);
+  // tolerate CRLF checkouts (Windows) as well as LF
+  const frontmatterMatch = source.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   const frontmatterRaw = frontmatterMatch ? frontmatterMatch[1] : "";
   const time = frontmatterRaw.match(/time:\s*(\d+)/)?.[1];
 
   const cleanedSource = source
-    .replace(/^---\n[\s\S]*?\n---/, "")
+    .replace(/^---\r?\n[\s\S]*?\r?\n---/, "")
     .replace(/^\s*[-_*]{3,}\s*$/gm, "");
 
   const { content } = await compileMDX({

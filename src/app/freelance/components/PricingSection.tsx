@@ -77,7 +77,7 @@ export function PricingSection() {
                 </div>
 
                 <h3 className="text-[1.15rem] tracking-tight2 font-medium">{t.name}</h3>
-                <p className="font-mono text-[12.5px] leading-[1.55] text-ink/70 mt-1.5 mb-6">{t.description}</p>
+                <p className="font-mono text-[12.5px] leading-[1.55] text-ink/70 mt-1.5 mb-6 lg:min-h-[4.65em]">{t.description}</p>
 
                 <div className="mb-1">
                   <span className="display text-[2.4rem]">${t.price.toLocaleString("en-US")}</span>

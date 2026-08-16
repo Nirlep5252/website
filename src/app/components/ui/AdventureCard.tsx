@@ -22,14 +22,14 @@ export function AdventureCard({ adventure }: { adventure: Adventure }) {
   const pct = total > 0 ? Math.min(100, Math.round((solved / total) * 100)) : 0;
 
   return (
-    <article className="card grid sm:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+    <article className="card grid grid-cols-[minmax(0,1fr)] sm:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
       <Link href={href} aria-label={title} className="block border-b sm:border-b-0 sm:border-r hairline">
         <Poster seed={seed ?? href} ratio={4 / 3} className="h-full" />
       </Link>
 
       <div className="p-5 sm:p-7 flex flex-col">
         <div className="meta text-ink/55 flex justify-between gap-4">
-          <span className="truncate">{tags.join(" · ")}</span>
+          <span className="truncate min-w-0">{tags.join(" · ")}</span>
           <span className="shrink-0">
             {solved} / {total} solved
           </span>
