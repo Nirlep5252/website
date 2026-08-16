@@ -86,7 +86,8 @@ export function FreelanceHero() {
         <Develop delay={1700} duration={700} inView={false} className="hidden lg:block absolute right-8 bottom-16 w-[24rem]">
           <div className="meta text-paper/60 mb-4 text-right">Recent work</div>
           <div className="relative h-[168px]">
-            {recentWork.map((w, i) => (
+            {/* first item is the most prominent: rightmost and on top of the stack */}
+            {[...recentWork].reverse().map((w, i) => (
               <Print
                 key={w.title}
                 w={w}
