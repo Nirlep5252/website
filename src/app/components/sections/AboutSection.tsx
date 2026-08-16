@@ -14,9 +14,7 @@ const LEDGER: [string, React.ReactNode][] = [
       </a>
     </>,
   ],
-  ["Editor", "Neovim (epicvim)"],
   ["Agents", "Claude Code · Codex"],
-  ["OS", "NixOS · Windows 11"],
   ["Cat", "yes"],
 ];
 
@@ -45,8 +43,8 @@ export function AboutSection() {
                 the fun of it.
               </p>
               <p className="lede text-ink/70 max-w-[58ch] mt-4">
-                I like a small surface area, a finished feel, and code that&apos;s still readable a year later.
-                Open source when it&apos;s useful to someone else; a product when it needs to be.
+                I like a small surface area and a finished feel. Open source when it&apos;s useful to someone
+                else; a product when it needs to be.
               </p>
             </Develop>
 
