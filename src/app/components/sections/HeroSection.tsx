@@ -4,8 +4,6 @@ import Link from "next/link";
 import { EmulsionField } from "@/components/emulsion/EmulsionField";
 import { Develop } from "@/components/emulsion/Develop";
 import { HERO_PARAMS } from "@/lib/emulsion/renderer";
-import { SITE } from "@/lib/site";
-import { Year } from "@/components/Year";
 
 export function HeroSection() {
   return (
@@ -19,14 +17,15 @@ export function HeroSection() {
 
         <Develop delay={900} duration={1100} inView={false}>
           <h1 className="display text-paper text-[clamp(2.75rem,8.4vw,8rem)] max-w-[13ch]">
-            Nirlep Gohil builds real software in&nbsp;the era of slop.
+            Nirlep Gohil builds software <span className="whitespace-nowrap">you can</span> tell apart.
           </h1>
         </Develop>
 
         <Develop delay={1300} duration={800} inView={false}>
           <p className="lede text-paper/85 max-w-[min(56ch,100%)] mt-1">
-            Shipping got cheap, and most of what ships is slop. I make the other kind — considered,
-            well-built products and tools you can tell apart. Systems to interfaces, Rust to React.
+            Shipping is cheap now. Anyone with an agent can generate a plausible app by lunch, and most of it
+            is slop. I use the same tools. What&apos;s left is the part that always mattered: knowing what to
+            build, what to cut, and when it&apos;s actually done.
           </p>
         </Develop>
 
@@ -35,10 +34,6 @@ export function HeroSection() {
           <Link href="/posts" className="btn-ghost">Read the writing</Link>
         </Develop>
 
-        <div className="hidden md:block absolute right-8 bottom-20 meta text-paper/60 text-right leading-[1.8]">
-          <div><Year /> · {SITE.location}</div>
-          <div>{SITE.handle}</div>
-        </div>
       </div>
     </section>
   );
