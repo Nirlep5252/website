@@ -2,12 +2,28 @@ import Link from "next/link";
 import { Poster } from "@/components/emulsion/Poster";
 import { formatDate } from "@/lib/site";
 import type { Project } from "@/lib/projects";
-import { squircleClip } from "@/lib/squircle";
 
+/**
+ * Superellipse ("squircle") outline as an SVG path, in px. n≈5 is close to the iOS icon curve.
+ * Pure + deterministic, so it's computed once at module load.
+ */
+function squirclePath(size: number, n = 5, steps = 64): string {
+  const r = size / 2;
+  const pts: string[] = [];
+  for (let i = 0; i < steps; i++) {
+    const t = (i / steps) * Math.PI * 2;
+    const c = Math.cos(t);
+    const s = Math.sin(t);
+    const x = r + Math.sign(c) * Math.pow(Math.abs(c), 2 / n) * r;
+    const y = r + Math.sign(s) * Math.pow(Math.abs(s), 2 / n) * r;
+    pts.push(`${i === 0 ? "M" : "L"}${x.toFixed(2)} ${y.toFixed(2)}`);
+  }
+  return pts.join(" ") + " Z";
+}
 const LOGO = 72;
 const RING = 2;
-const CLIP_LOGO = squircleClip(LOGO, LOGO);
-const CLIP_RING = squircleClip(LOGO + RING * 2, LOGO + RING * 2);
+const CLIP_LOGO = `path('${squirclePath(LOGO)}')`;
+const CLIP_RING = `path('${squirclePath(LOGO + RING * 2)}')`;
 
 /** One squircle tile: a logo image, or an ink monogram. */
 function Tile({ src, letter }: { src?: string; letter?: string }) {
