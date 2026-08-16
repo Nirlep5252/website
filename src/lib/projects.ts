@@ -5,8 +5,8 @@ export type Project = {
   github?: string;
   preview?: string;
   featured?: boolean;
-  /** /public path to a square (256px) logo; cards fall back to a monogram when absent */
-  logo?: string;
+  /** /public path(s) to square (256px) logos; several = shown side by side joined with "+"; none = monogram */
+  logo?: string | string[];
 };
 
 export const projects: Project[] = [
@@ -61,7 +61,7 @@ export const projects: Project[] = [
       "Move your competitive programming workflow to the terminal — parse problems, test, submit and watch standings. On PyPI as `codeforces`.",
     tags: ["Python", "CLI", "PyPI"],
     github: "https://github.com/nirlep5252/codeforces-cli",
-    logo: "/logos/codeforces-cli.svg",
+    logo: ["/logos/codeforces.svg", "/logos/terminal.svg"],
     featured: true,
   },
   {

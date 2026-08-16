@@ -20,36 +20,57 @@ function squirclePath(size: number, n = 5, steps = 64): string {
   }
   return pts.join(" ") + " Z";
 }
-const LOGO = 56;
+const LOGO = 72;
 const RING = 2;
 const CLIP_LOGO = `path('${squirclePath(LOGO)}')`;
 const CLIP_RING = `path('${squirclePath(LOGO + RING * 2)}')`;
 
-/** Project mark centred on the poster: squircled logo, or an ink monogram when there is none. */
+/** One squircle tile: a logo image, or an ink monogram. */
+function Tile({ src, letter }: { src?: string; letter?: string }) {
+  return (
+    <span
+      className="block bg-paper/25"
+      style={{ width: LOGO + RING * 2, height: LOGO + RING * 2, clipPath: CLIP_RING, padding: RING }}
+    >
+      {src ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={src} alt="" width={LOGO} height={LOGO} className="block h-full w-full object-cover" style={{ clipPath: CLIP_LOGO }} />
+      ) : (
+        <span
+          className="grid h-full w-full place-items-center bg-ink text-paper font-medium tracking-tight2 text-[30px] leading-none"
+          style={{ clipPath: CLIP_LOGO }}
+        >
+          {letter}
+        </span>
+      )}
+    </span>
+  );
+}
+
+/** Project mark centred on the poster: one or more squircled logos (joined with "+"), or a monogram. */
 function ProjectMark({ project }: { project: Project }) {
+  const logos = project.logo ? (Array.isArray(project.logo) ? project.logo : [project.logo]) : [];
   return (
     <span
       aria-hidden
-      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block bg-paper/25 transition-transform duration-300 group-hover:scale-[1.04]"
-      style={{ width: LOGO + RING * 2, height: LOGO + RING * 2, clipPath: CLIP_RING, padding: RING }}
+      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-3 transition-transform duration-300 group-hover:scale-[1.04]"
     >
-      {project.logo ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={project.logo}
-          alt=""
-          width={LOGO}
-          height={LOGO}
-          className="block h-full w-full object-cover"
-          style={{ clipPath: CLIP_LOGO }}
-        />
+      {logos.length === 0 ? (
+        <Tile letter={project.title.trim().charAt(0).toUpperCase()} />
       ) : (
-        <span
-          className="grid h-full w-full place-items-center bg-ink text-paper font-medium tracking-tight2 text-[24px] leading-none"
-          style={{ clipPath: CLIP_LOGO }}
-        >
-          {project.title.trim().charAt(0).toUpperCase()}
-        </span>
+        logos.map((src, i) => (
+          <span key={src} className="flex items-center gap-3">
+            {i > 0 && (
+              <span
+                className="text-paper font-medium text-[28px] leading-none"
+                style={{ filter: "drop-shadow(0 0 3px rgba(11,10,14,0.7))" }}
+              >
+                +
+              </span>
+            )}
+            <Tile src={src} />
+          </span>
+        ))
       )}
     </span>
   );
