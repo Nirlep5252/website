@@ -43,7 +43,7 @@ export const projects: Project[] = [
     description:
       "Marketing site for an IATF-certified brake components manufacturer — interactive 3D product inspection, smooth scroll, built to convert quotes.",
     tags: ["Next.js", "React Three Fiber", "GSAP"],
-    preview: "https://sunren.vercel.app",
+    preview: "https://new.sunren.in",
     logo: "/logos/sunren.png",
     featured: true,
   },

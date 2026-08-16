@@ -1,21 +1,18 @@
 import { Develop } from "@/components/emulsion/Develop";
+import { Poster } from "@/components/emulsion/Poster";
 
 const services = [
   {
     title: "Full-Stack Web Apps",
     description:
-      "Interactive applications with authentication, databases and APIs. From idea to production — the whole stack, so you get a complete product, not just a frontend.",
+      "Interactive applications with authentication, databases and APIs — SaaS products, dashboards, user management. From idea to production, the whole stack, so you get a complete product and not just a frontend.",
     tag: "Most requested",
+    wide: true,
   },
   {
     title: "Landing Pages",
     description: "Single-page marketing sites, product launches and event pages. Fast turnaround.",
     tag: "From 1 week",
-  },
-  {
-    title: "SaaS Applications",
-    description: "Subscription products, dashboards and user management. Built to scale.",
-    tag: "End-to-end",
   },
   {
     title: "Static Websites",
@@ -34,6 +31,31 @@ const services = [
   },
 ];
 
+function ServiceCard({ s, i }: { s: (typeof services)[number]; i: number }) {
+  const n = String(i + 1).padStart(2, "0");
+  return (
+    <div className={`card h-full flex flex-col ${s.wide ? "sm:col-span-2" : ""}`}>
+      <div className="relative border-b hairline">
+        {s.wide ? (
+          <>
+            {/* wide card spans two columns from sm up; keep the banner height in step with the others */}
+            <Poster seed={`service:${s.title}`} ratio={21 / 9} className="sm:hidden" />
+            <Poster seed={`service:${s.title}`} ratio={42 / 9} className="hidden sm:block" />
+          </>
+        ) : (
+          <Poster seed={`service:${s.title}`} ratio={21 / 9} />
+        )}
+        <span className="absolute left-2.5 bottom-2.5 meta bg-ink text-paper px-1.5 py-1 leading-none">{n}</span>
+        <span className="absolute right-2.5 bottom-2.5 meta bg-ink text-paper/80 px-1.5 py-1 leading-none">{s.tag}</span>
+      </div>
+      <div className="p-5 flex-1 flex flex-col">
+        <h3 className="text-[1.15rem] tracking-tight2 font-medium mb-2">{s.title}</h3>
+        <p className="font-mono text-[12.5px] leading-[1.55] text-ink/70">{s.description}</p>
+      </div>
+    </div>
+  );
+}
+
 export function ServicesSection() {
   return (
     <section className="surface-paper border-t hairline" id="services">
@@ -50,15 +72,8 @@ export function ServicesSection() {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s, i) => (
-            <Develop key={s.title} delay={i * 60}>
-              <div className="card p-5 h-full flex flex-col">
-                <div className="meta text-ink/45 mb-6">{String(i + 1).padStart(2, "0")}</div>
-                <h3 className="text-[1.15rem] tracking-tight2 font-medium mb-2">{s.title}</h3>
-                <p className="font-mono text-[12.5px] leading-[1.55] text-ink/70 mb-5 flex-1">{s.description}</p>
-                <div>
-                  <span className="chip">{s.tag}</span>
-                </div>
-              </div>
+            <Develop key={s.title} delay={i * 60} className={s.wide ? "sm:col-span-2" : ""}>
+              <ServiceCard s={s} i={i} />
             </Develop>
           ))}
         </div>
