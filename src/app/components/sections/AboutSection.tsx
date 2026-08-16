@@ -1,12 +1,29 @@
 import Link from "next/link";
 import { Develop } from "@/components/emulsion/Develop";
 
-const technologies = ["Rust", "TypeScript", "Go", "Python", "C#", "React", "Next.js", "PostgreSQL", "Cloudflare"];
+/** Frame-data readout, in place of a technology tag cloud. */
+const LEDGER: [string, React.ReactNode][] = [
+  ["Based", "India"],
+  ["Since", "2020"],
+  [
+    "Now",
+    <>
+      Bond ·{" "}
+      <a href="https://bondbot.gg" target="_blank" rel="noopener noreferrer" className="link">
+        bondbot.gg
+      </a>
+    </>,
+  ],
+  ["Editor", "Neovim (epicvim)"],
+  ["Agents", "Claude Code · Codex"],
+  ["OS", "NixOS · Windows 11"],
+  ["Cat", "yes"],
+];
 
 const INDEX = [
-  { n: "01", title: "Problem solving", body: "Competitive programming, CSES solutions, algorithmic write-ups.", href: "/adventures", cta: "Adventures" },
+  { n: "01", title: "Work", body: "Products, tools and open source.", href: "/projects", cta: "See projects" },
   { n: "02", title: "Writing", body: "Notes on tools, systems and the occasional hackathon.", href: "/posts", cta: "Read" },
-  { n: "03", title: "Work", body: "Products, tools and open source — things people actually use.", href: "/projects", cta: "See projects" },
+  { n: "03", title: "Adventures", body: "Competitive programming and CSES solutions, from the early years.", href: "/adventures", cta: "Explore" },
 ];
 
 export function AboutSection() {
@@ -18,20 +35,27 @@ export function AboutSection() {
             <Develop className="eyebrow text-ink/70 mb-6">About</Develop>
             <Develop delay={80}>
               <h2 className="display text-[clamp(1.9rem,4.2vw,3.4rem)] max-w-[18ch]">
-                Anyone can generate a passable app in an afternoon. What is scarce now is care.
+                Curious by default, careful by habit.
               </h2>
             </Develop>
             <Develop delay={160}>
               <p className="lede text-ink/70 max-w-[58ch] mt-6">
-                Knowing what to build, what to leave out, and finishing properly — that is the part no agent does for
-                you. I work across the stack: window managers and CLIs in Rust, backends in Go and TypeScript,
-                interfaces in React, and the occasional Windows tray app. Open source where it makes sense; products
-                people actually use where it counts.
+                Tools I want to use, products people keep using. Lately that means an AI agent for Discord, small
+                native Windows apps, a self-hosted image host, and the occasional CLI or programming language for
+                the fun of it.
+              </p>
+              <p className="lede text-ink/70 max-w-[58ch] mt-4">
+                I like a small surface area, a finished feel, and code that&apos;s still readable a year later.
+                Open source when it&apos;s useful to someone else; a product when it needs to be.
               </p>
             </Develop>
-            <Develop delay={240} className="flex flex-wrap gap-2 mt-8">
-              {technologies.map((t) => (
-                <span key={t} className="chip">{t}</span>
+
+            <Develop delay={240} as="dl" className="mt-10 max-w-[30rem] border-t hairline font-mono text-[12.5px]">
+              {LEDGER.map(([k, v]) => (
+                <div key={k} className="grid grid-cols-[6.5rem_1fr] items-baseline gap-4 py-2.5 border-b hairline">
+                  <dt className="meta text-ink/45">{k}</dt>
+                  <dd className="text-ink/85">{v}</dd>
+                </div>
               ))}
             </Develop>
           </div>

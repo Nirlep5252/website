@@ -120,7 +120,11 @@ export function Develop({
 
     let raf = 0;
     let stop = false;
+    // Guarantees the content is never left behind a mask if the frame loop is cancelled
+    // mid-run (tab throttling, HMR re-running the effect, etc.).
+    let safety = 0;
     const run = () => {
+      safety = window.setTimeout(reveal, delay + duration + 400);
       const start = performance.now() + delay;
       const tick = (now: number) => {
         if (stop) return;
@@ -139,6 +143,8 @@ export function Develop({
       return () => {
         stop = true;
         cancelAnimationFrame(raf);
+        clearTimeout(safety);
+        reveal();
       };
     }
     const io = new IntersectionObserver(
@@ -155,6 +161,8 @@ export function Develop({
       stop = true;
       io.disconnect();
       cancelAnimationFrame(raf);
+      clearTimeout(safety);
+      reveal();
     };
   }, [pattern, cell, delay, duration, inView]);
 
