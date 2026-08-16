@@ -13,24 +13,21 @@ export function HeroSection() {
       <EmulsionField params={HERO_PARAMS} developOnMount={1400} style={{ position: "absolute", inset: 0 }} />
 
       <div className="relative z-10 mx-auto max-w-[1120px] min-h-[100svh] px-5 sm:px-8 pt-32 pb-12 sm:pb-20 grid content-end gap-5">
-        <Develop delay={700} duration={700} inView={false} className="eyebrow text-paper">
-          Software engineer · open source
-        </Develop>
-
-        <Develop delay={900} duration={1100} inView={false}>
-          <h1 className="display text-paper text-[clamp(2.75rem,8.4vw,8rem)] max-w-[11ch]">
-            Nirlep Gohil builds software that holds up.
+        <Develop delay={800} duration={1100} inView={false}>
+          <h1 className="display text-paper text-[clamp(2.75rem,8.4vw,8rem)] max-w-[15ch]">
+            Nirlep Gohil builds distinguishable software <span className="sm:whitespace-nowrap">in the era of slop.</span>
           </h1>
         </Develop>
 
-        <Develop delay={1300} duration={800} inView={false}>
-          <p className="lede text-paper/85 max-w-[min(52ch,100%)] mt-1">
-            Full-stack developer working across systems and the web — from low-level programming to fast,
-            accessible interfaces. Open-source tools, careful code, products that matter.
+        <Develop delay={1250} duration={800} inView={false}>
+          <p className="lede text-paper/85 max-w-[min(56ch,100%)] mt-1">
+            Shipping got cheap, and most of what ships now is slop — generic, half-working, forgotten in a
+            week. I make the other kind: considered, well-built products and tools you can tell apart.
+            Systems to interfaces, Rust to React.
           </p>
         </Develop>
 
-        <Develop delay={1500} duration={600} inView={false} className="flex items-center gap-4 mt-2">
+        <Develop delay={1450} duration={600} inView={false} className="flex items-center gap-4 mt-2">
           <Link href="/projects" className="btn-solid">View work →</Link>
           <Link href="/posts" className="btn-ghost">Read the writing</Link>
         </Develop>

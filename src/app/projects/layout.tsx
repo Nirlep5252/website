@@ -3,7 +3,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Projects | Nirlep Gohil",
   description:
-    "Explore my portfolio of projects including web applications, CLI tools, and open source contributions built with React, Rust, Python, and more.",
+    "Products, tools and open source by Nirlep Gohil — Discord AI agent, image hosting, a Windows tiling window manager, CLIs and more.",
   keywords: [
     "projects",
     "portfolio",
@@ -16,14 +16,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Projects | Nirlep Gohil",
     description:
-      "Explore my portfolio of projects including web applications, CLI tools, and open source contributions.",
+      "Products, tools and open source by Nirlep Gohil.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Projects | Nirlep Gohil",
     description:
-      "Explore my portfolio of projects including web applications, CLI tools, and open source contributions.",
+      "Products, tools and open source by Nirlep Gohil.",
   },
 };
 

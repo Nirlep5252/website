@@ -47,9 +47,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 pt-6 border-t hairline-ink flex flex-wrap items-center justify-between gap-3 meta text-paper/45">
+        <div className="mt-14 pt-6 border-t hairline-ink meta text-paper/45">
           <span>© <Year /> {SITE.name} · {SITE.location}</span>
-          <span>Emulsion · Next.js · one shader</span>
         </div>
       </div>
     </footer>

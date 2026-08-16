@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: "Nirlep Gohil | Software Engineer",
   description:
-    "Full-stack developer crafting elegant solutions with modern technologies. Building open source tools and exploring the art of code.",
+    "Nirlep Gohil builds distinguishable software in the era of slop — considered products, tools and open source across Rust, TypeScript, Go and the web.",
   authors: [{ name: SITE.name, url: "https://github.com/nirlep5252" }],
   creator: SITE.name,
   keywords: ["software engineer", "full-stack developer", "rust", "typescript", "react", "open source"],
   openGraph: {
     title: "Nirlep Gohil | Software Engineer",
-    description: "Full-stack developer crafting elegant solutions with modern technologies.",
+    description: "Distinguishable software in the era of slop — considered products, tools and open source.",
     type: "website",
     url: SITE.url,
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "nirlep.dev" }],
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Nirlep Gohil | Software Engineer",
-    description: "Full-stack developer crafting elegant solutions with modern technologies.",
+    description: "Distinguishable software in the era of slop — considered products, tools and open source.",
     creator: SITE.handle,
     images: ["/og.png"],
   },

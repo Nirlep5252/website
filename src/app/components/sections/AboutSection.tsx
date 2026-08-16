@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { Develop } from "@/components/emulsion/Develop";
 
-const technologies = ["Rust", "TypeScript", "Python", "Go", "React", "Next.js", "Node.js", "PostgreSQL"];
+const technologies = ["Rust", "TypeScript", "Go", "Python", "C#", "React", "Next.js", "PostgreSQL", "Cloudflare"];
 
 const INDEX = [
   { n: "01", title: "Problem solving", body: "Competitive programming, CSES solutions, algorithmic write-ups.", href: "/adventures", cta: "Adventures" },
   { n: "02", title: "Writing", body: "Notes on tools, systems and the occasional hackathon.", href: "/posts", cta: "Read" },
-  { n: "03", title: "Work", body: "Products, CLIs and open-source things I have built.", href: "/projects", cta: "See projects" },
+  { n: "03", title: "Work", body: "Products, tools and open source — things people actually use.", href: "/projects", cta: "See projects" },
 ];
 
 export function AboutSection() {
@@ -18,14 +18,15 @@ export function AboutSection() {
             <Develop className="eyebrow text-ink/70 mb-6">About</Develop>
             <Develop delay={80}>
               <h2 className="display text-[clamp(1.9rem,4.2vw,3.4rem)] max-w-[18ch]">
-                I build modern web applications with a focus on performance, accessibility and user experience.
+                Anyone can generate a passable app in an afternoon. What is scarce now is care.
               </h2>
             </Develop>
             <Develop delay={160}>
               <p className="lede text-ink/70 max-w-[58ch] mt-6">
-                With expertise spanning from low-level systems programming to modern frontend frameworks, I bring
-                ideas to life through clean, maintainable code. I&apos;m passionate about solving complex problems and
-                building tools that make a difference.
+                Knowing what to build, what to leave out, and finishing properly — that is the part no agent does for
+                you. I work across the stack: window managers and CLIs in Rust, backends in Go and TypeScript,
+                interfaces in React, and the occasional Windows tray app. Open source where it makes sense; products
+                people actually use where it counts.
               </p>
             </Develop>
             <Develop delay={240} className="flex flex-wrap gap-2 mt-8">

@@ -12,7 +12,7 @@ export default function ProjectsPage() {
         </Develop>
         <Develop delay={160} inView={false}>
           <p className="lede text-ink/65 mt-4 max-w-[52ch]">
-            Products, CLIs and open-source tools — built with React, Rust, Python and whatever the problem needed.
+            Products, tools and open source — built with whatever the problem needed, and finished properly.
           </p>
         </Develop>
 
