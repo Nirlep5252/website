@@ -3,7 +3,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Projects | Nirlep Gohil",
   description:
-    "Products, tools and open source by Nirlep Gohil — Discord AI agent, image hosting, a Windows tiling window manager, CLIs and more.",
+    "Products, tools and open source by Nirlep Gohil — Discord AI agent, image hosting, Windows tray apps, competitive programming platforms, CLIs and more.",
   keywords: [
     "projects",
     "portfolio",

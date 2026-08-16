@@ -26,14 +26,6 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: "Winri",
-    description:
-      "A Niri-inspired scrollable tiling window manager for Windows 11. Columns, workspaces, animations and hotkeys on top of DWM via Win32.",
-    tags: ["Rust", "Win32", "Window manager"],
-    github: "https://github.com/nirlep5252/winri",
-    featured: true,
-  },
-  {
     title: "CodexBar for Windows",
     description:
       "Tray app that shows usage limits for Codex, Claude Code, Grok, Cursor and OpenCode at a glance — with reset timers and local history charts.",
@@ -42,10 +34,18 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: "MashCode",
+    title: "SunRen Automotive",
     description:
-      "Competitive programming platform built around live, rating-based 1v1 matches. 30 languages, backed by MashJudge for sandboxed execution.",
-    tags: ["TypeScript", "Go", "WebSockets"],
+      "Marketing site for an IATF-certified brake components manufacturer — interactive 3D product inspection, smooth scroll, built to convert quotes.",
+    tags: ["Next.js", "React Three Fiber", "GSAP"],
+    preview: "https://sunren.vercel.app",
+    featured: true,
+  },
+  {
+    title: "MashCode + MashJudge",
+    description:
+      "Live, rating-based 1v1 competitive programming in 30 languages, on top of MashJudge — a Docker-sandboxed code execution engine built as a Judge0 alternative.",
+    tags: ["TypeScript", "Go", "Docker"],
     github: "https://github.com/nirlep5252/mashcode",
     featured: true,
   },
@@ -64,22 +64,16 @@ export const projects: Project[] = [
     github: "https://github.com/nirlep5252/walk",
   },
   {
-    title: "Agent Drop",
-    description: "Private, phone-friendly file drops for AI agents — Cloudflare Access, R2 and D1 with a strict sandboxed preview model.",
-    tags: ["Cloudflare", "Preact"],
-    github: "https://github.com/nirlep5252/agent-drop",
-  },
-  {
-    title: "MashJudge",
-    description: "Secure code execution engine, a Judge0 alternative. Docker isolation, resource limits, batch and webhook modes.",
-    tags: ["Go", "Docker"],
-    github: "https://github.com/nirlep5252/mashjudge",
-  },
-  {
     title: "EpicBot",
     description: "Multipurpose Discord bot — moderation, utilities, chat. My most-starred repo.",
     tags: ["Python", "discord.py"],
     github: "https://github.com/nirlep5252/epicbot",
+  },
+  {
+    title: "EpicVim",
+    description: "Neovim distribution as a Nix flake — `nix run github:nirlep5252/epicvim` and you're in.",
+    tags: ["Nix", "Neovim"],
+    github: "https://github.com/nirlep5252/epicvim",
   },
   {
     title: "Fun",
@@ -88,23 +82,10 @@ export const projects: Project[] = [
     github: "https://github.com/nirlep5252/fun",
   },
   {
-    title: "Doggytype",
-    description: "Monkeytype, but in your terminal.",
-    tags: ["Rust", "TUI"],
-    github: "https://github.com/nirlep5252/doggytype",
-  },
-  {
     title: "EpicShot",
     description: "Lightweight screenshot tool for Linux, on crates.io.",
     tags: ["Rust", "X11"],
     github: "https://github.com/nirlep5252/epicshot",
-  },
-  {
-    title: "Scheduling Algorithms",
-    description: "Interactive simulation of OS CPU scheduling algorithms.",
-    tags: ["React"],
-    github: "https://github.com/nirlep5252/scheduling-algorithms",
-    preview: "https://scheduling.nirlep.dev",
   },
 ];
 
