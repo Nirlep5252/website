@@ -48,14 +48,6 @@ export function AboutSection() {
               </p>
             </Develop>
 
-            <Develop delay={240} as="dl" className="mt-10 max-w-[30rem] border-t hairline font-mono text-[12.5px]">
-              {LEDGER.map(([k, v]) => (
-                <div key={k} className="grid grid-cols-[6.5rem_1fr] items-baseline gap-4 py-2.5 border-b hairline">
-                  <dt className="meta text-ink/45">{k}</dt>
-                  <dd className="text-ink/85">{v}</dd>
-                </div>
-              ))}
-            </Develop>
           </div>
 
           <Develop delay={200} as="ul" className="border-t hairline">
@@ -73,6 +65,16 @@ export function AboutSection() {
             ))}
           </Develop>
         </div>
+
+        {/* Frame-data strip: the readout printed along the edge of the sheet. */}
+        <Develop delay={240} as="dl" className="mt-14 sm:mt-16 border-y hairline grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 font-mono text-[12.5px]">
+          {LEDGER.map(([k, v], i) => (
+            <div key={k} className={`py-4 pr-4 ${i > 0 ? "lg:border-l hairline lg:pl-5" : ""}`}>
+              <dt className="meta text-ink/45 mb-1.5">{k}</dt>
+              <dd className="text-ink/85 whitespace-nowrap">{v}</dd>
+            </div>
+          ))}
+        </Develop>
       </div>
     </section>
   );
