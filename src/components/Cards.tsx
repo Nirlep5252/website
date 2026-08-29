@@ -48,7 +48,7 @@ function Tile({ src, letter }: { src?: string; letter?: string }) {
 }
 
 /** Project mark centred on the poster: one or more squircled logos (joined with "+"), or a monogram. */
-function ProjectMark({ project }: { project: Project }) {
+export function ProjectMark({ project }: { project: Project }) {
   const logos = project.logo ? (Array.isArray(project.logo) ? project.logo : [project.logo]) : [];
   return (
     <span
