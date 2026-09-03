@@ -19,7 +19,7 @@ export function WorkSection() {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {picks.map((p, i) => (
-            <Develop key={p.title} delay={i * 70}>
+            <Develop key={p.title} delay={i * 70} className="min-w-0">
               <ProjectCard project={p} />
             </Develop>
           ))}

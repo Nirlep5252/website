@@ -17,7 +17,7 @@ export function WritingSection({ posts }: { posts: PostLite[] }) {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((p, i) => (
-            <Develop key={p.slug} delay={i * 70}>
+            <Develop key={p.slug} delay={i * 70} className="min-w-0">
               <PostCard post={p} />
             </Develop>
           ))}

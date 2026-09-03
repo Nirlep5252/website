@@ -119,7 +119,7 @@ export function ProjectCard({ project }: { project: Project }) {
       </div>
       <div className="p-4 pb-5">
         <div className="meta text-ink/55 flex justify-between gap-3 mb-2.5">
-          <span className="truncate">{project.tags.slice(0, 3).join(" · ")}</span>
+          <span className="min-w-0 truncate">{project.tags.slice(0, 3).join(" · ")}</span>
           <span className="shrink-0">{project.preview ? "live ↗" : "github ↗"}</span>
         </div>
         <h3 className="text-[1.2rem] leading-[1.15] tracking-tight2 font-medium mb-2 group-hover:underline decoration-1 underline-offset-4">
