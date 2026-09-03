@@ -18,7 +18,7 @@ export default function ProjectsPage() {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-12">
           {projects.map((p, i) => (
-            <Develop key={p.title} delay={(i % 3) * 50}>
+            <Develop key={p.title} delay={(i % 3) * 50} className="min-w-0">
               <ProjectCard project={p} />
             </Develop>
           ))}

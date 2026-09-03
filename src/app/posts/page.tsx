@@ -33,7 +33,7 @@ export default async function Posts() {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-12">
           {posts.map((p, i) => (
-            <Develop key={p.slug} delay={i * 50}>
+            <Develop key={p.slug} delay={i * 50} className="min-w-0">
               <PostCard post={p} index={i} />
             </Develop>
           ))}

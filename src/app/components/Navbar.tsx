@@ -9,7 +9,6 @@ const NAV = [
   { name: "Work", path: "/projects" },
   { name: "Writing", path: "/posts" },
   { name: "Adventures", path: "/adventures" },
-  { name: "Freelance", path: "/freelance" },
 ] as const;
 
 export default function Navbar() {

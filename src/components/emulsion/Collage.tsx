@@ -43,15 +43,28 @@ function jitter(i: number, k: number) {
   return (v - Math.floor(v)) * 2 - 1;
 }
 
+/** max tilt of a print, degrees */
+const TILT = 8;
+
 function pile(n: number, width: number): { items: Placement[]; height: number } {
   const cols = width < 380 ? 2 : 3;
   const rows = Math.ceil(n / cols);
-  const pitchX = width / cols;
+  // A print is 1.03 pitches wide, jitters ±0.08 of its width and tilts up to ±TILT°. The widest
+  // bounding box of a tilted 4:5 print is w·cos + h·sin ≈ 1.16w, so the pile spans about
+  // (cols + 0.37) pitches. Size the pitch from that, then inset the whole pile by the slack so
+  // nothing pokes out of the container (on a phone that is the viewport, and any overflow there
+  // makes the browser zoom the whole page out).
+  const pitchX = width / (cols + 0.37);
   const w = Math.round(pitchX * 1.03);
   const frameH = w / RATIO + PAD_Y;
   const pitchY = frameH * 0.79;
   const jx = w * 0.08;
   const jy = w * 0.07;
+  const rad = (TILT * Math.PI) / 180;
+  const tiltX = (w * Math.cos(rad) + frameH * Math.sin(rad) - w) / 2;
+  const tiltY = (frameH * Math.cos(rad) + w * Math.sin(rad) - frameH) / 2;
+  const insetX = jx + tiltX;
+  const insetY = jy + tiltY;
   const items: Placement[] = [];
   for (let i = 0; i < n; i++) {
     const col = i % cols;
@@ -60,13 +73,13 @@ function pile(n: number, width: number): { items: Placement[]; height: number } 
     const indent = ((cols - inRow) * pitchX) / 2;
     const r = (v: number) => Math.round(v * 10) / 10;
     items.push({
-      x: r(indent + col * pitchX + jitter(i, 1) * jx),
-      y: r(row * pitchY + jitter(i, 2) * jy),
-      rotate: r(jitter(i, 3) * 8),
+      x: r(insetX + indent + col * pitchX + jitter(i, 1) * jx),
+      y: r(insetY + row * pitchY + jitter(i, 2) * jy),
+      rotate: r(jitter(i, 3) * TILT),
       w,
     });
   }
-  return { items, height: Math.round((rows - 1) * pitchY + frameH + jy * 2) };
+  return { items, height: Math.round((rows - 1) * pitchY + frameH + insetY * 2) };
 }
 
 function Lightbox({ photos, index, onClose, onStep }: { photos: CollagePhoto[]; index: number; onClose: () => void; onStep: (d: number) => void }) {

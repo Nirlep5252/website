@@ -35,9 +35,11 @@ export function ProjectMention({ name, children }: { name: string; children?: Re
           {children ?? project.title}
         </span>
       </a>
+      {/* hidden (not just transparent) on phones: an invisible 272px card still widens the page
+          and makes mobile browsers zoom out, and there is no hover on touch anyway */}
       <span
         role="tooltip"
-        className="pointer-events-none absolute left-0 top-full z-30 mt-2 w-[272px] opacity-0 translate-y-1 transition-[opacity,transform] duration-200 group-hover/mention:opacity-100 group-hover/mention:translate-y-0 group-hover/mention:pointer-events-auto"
+        className="pointer-events-none absolute left-0 top-full z-30 mt-2 hidden w-[272px] opacity-0 translate-y-1 transition-[opacity,transform] duration-200 md:block group-hover/mention:opacity-100 group-hover/mention:translate-y-0 group-hover/mention:pointer-events-auto"
       >
         <span className="card group block overflow-hidden shadow-[0_24px_50px_-24px_rgba(11,10,14,0.5)]">
           <span className="relative block border-b hairline">
